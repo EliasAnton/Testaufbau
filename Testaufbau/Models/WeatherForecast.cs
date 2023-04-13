@@ -1,4 +1,4 @@
-﻿namespace Testaufbau;
+﻿namespace Testaufbau.Models;
 
 public class WeatherForecast
 {
