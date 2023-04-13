@@ -9,6 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+        <PackageReference Include="AutoFixture" Version="4.18.0" />
     </ItemGroup>
 
     <ItemGroup>
