@@ -22,3 +22,7 @@ Wichtig:
 Ich hatte irgendwelche Zertifikat-Probleme
 Um aus der Web-Api auf den SQL-Server zugreifen zu können, muss noch im Connection String "TrustServerCertificate=true" eingefügt werden.
 Und Anpassungen im MMC: https://learn.microsoft.com/de-de/troubleshoot/sql/database-engine/connect/error-message-when-you-connect
+
+Docker-Compose um alles in den Container zu bringen:
+Tutorial:
+https://www.twilio.com/blog/containerize-your-aspdotnet-core-application-and-sql-server-with-docker
