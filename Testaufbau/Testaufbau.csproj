@@ -8,9 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MySqlConnector" Version="2.2.5" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
         <PackageReference Include="AutoFixture" Version="4.18.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\SharedModels\Product.cs">
+        <Link>SharedModels\Product.cs</Link>
+      </Compile>
+      <Compile Include="..\SharedModels\ProductCategory.cs">
+        <Link>SharedModels\ProductCategory.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

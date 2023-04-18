@@ -1,19 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Testaufbau.TestDBStuff.Models;
+using MySqlConnector;
+using Testaufbau.DataAccess;
+using Testaufbau.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Database Context settings
-builder.Services.AddDbContext<SalesContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SalesDb")));
+builder.Services.AddTransient<MySqlConnection>(_ =>
+    new MySqlConnection(builder.Configuration.GetConnectionString("MariaDb")));
+builder.Services.AddDbContext<MariaDbContext>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -27,12 +30,12 @@ if (app.Environment.IsDevelopment())
 //Seed Database
 using (var scope = app.Services.CreateScope())
 {
-    var salesContext = scope.ServiceProvider.GetRequiredService<SalesContext>();
-    salesContext.Database.EnsureCreated();
-    salesContext.Seed();
+    var mariaDbContext = scope.ServiceProvider.GetRequiredService<MariaDbContext>();
+    mariaDbContext.Database.EnsureCreated();
+    mariaDbContext.Seed();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
