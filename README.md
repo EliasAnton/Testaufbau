@@ -26,3 +26,9 @@ Und Anpassungen im MMC: https://learn.microsoft.com/de-de/troubleshoot/sql/datab
 Docker-Compose um alles in den Container zu bringen:
 Tutorial:
 https://www.twilio.com/blog/containerize-your-aspdotnet-core-application-and-sql-server-with-docker
+
+---------------------------------------------
+Man kann bei MariaDb auch volumes zwischen neustarts persistieren
+in yaml reinkopieren:
+volumes:
+  - data:/var/lib/mysql

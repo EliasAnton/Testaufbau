@@ -4,11 +4,14 @@
     container_name: testaufbau_application
     ports:
       - "5000:80"
-  sql:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
-    container_name: sql_server2022
-    ports: # not actually needed, because the two services are on the same network
-      - "1433:1433"
+  database:
+    image: "mariadb"
+    container_name: maria_db
     environment:
-      - ACCEPT_EULA=y
-      - SA_PASSWORD=SuperSecretPassword1234
+      MYSQL_ROOT_PASSWORD: SuperSecretRootPassword1234
+      MYSQL_DATABASE: TestaufbauDB
+      MYSQL_USER: Elias
+      MYSQL_PASSWORD: SuperSecretPassword1234
+    restart: always
+    ports:
+      - "3306:3306"

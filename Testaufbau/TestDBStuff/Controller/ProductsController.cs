@@ -7,16 +7,16 @@ namespace Testaufbau.TestDBStuff.Controller;
 [Route("[controller]")]
 public class ProductsController : ControllerBase
 {
-    private readonly SalesContext _salesContext;
+    private readonly MariaDbContext _mariaDbContext;
 
-    public ProductsController(SalesContext salesContext)
+    public ProductsController(MariaDbContext mariaDbContext)
     {
-        _salesContext = salesContext;
+        _mariaDbContext = mariaDbContext;
     }
 
     [HttpGet]
     public ActionResult Get(int take = 10, int skip = 0)
     {
-        return Ok(_salesContext.Products.OrderBy(p => p.ProductId).Skip(skip).Take(take));
+        return Ok(_mariaDbContext.Products!.OrderBy(p => p.ProductId).Skip(skip).Take(take));
     }
 }
