@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Testaufbau.Models;
 
-namespace Testaufbau.Models;
+namespace Testaufbau.DataAccess;
 
 public class MariaDbContext : DbContext
 {

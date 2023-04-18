@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
+using Testaufbau.Models;
 
-namespace Testaufbau.Models;
+namespace Testaufbau.DataAccess;
 
 public static class Seeder
 {
