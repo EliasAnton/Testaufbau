@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Testaufbau.TestDBStuff.Models;
+using Testaufbau.Models;
 
-namespace Testaufbau.TestDBStuff.Controller;
+namespace Testaufbau.Controllers;
 
 [ApiController]
 [Route("[controller]")]

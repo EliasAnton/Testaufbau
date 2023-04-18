@@ -1,4 +1,4 @@
-﻿namespace Testaufbau.TestDBStuff.Models;
+﻿namespace Testaufbau.Models;
 
 public enum ProductCategory
 {

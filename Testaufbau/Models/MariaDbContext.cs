@@ -1,7 +1,6 @@
-﻿using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Testaufbau.TestDBStuff.Models;
+namespace Testaufbau.Models;
 
 public class MariaDbContext : DbContext
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
-using Testaufbau.TestDBStuff.Models;
+using Testaufbau.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
