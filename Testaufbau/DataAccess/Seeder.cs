@@ -7,14 +7,15 @@ public static class Seeder
 {
     public static void Seed(this MariaDbContext mariaDbContext)
     {
-        if (!mariaDbContext.Products!.Any())
+        if (!mariaDbContext.Articles!.Any())
         {
             Fixture fixture = new Fixture();
-            fixture.Customize<Product>(product => product.Without(p => p.ProductId));
+            fixture.Customize<Article>(article => article.Without(a => a.ArticleId));
             //--- The next two lines add 100 rows to your database
-            List<Product> products = fixture.CreateMany<Product>(100).ToList();
+            List<Article> products = fixture.CreateMany<Article>(100).ToList();
             mariaDbContext.AddRange(products);
             mariaDbContext.SaveChanges();
+            Console.WriteLine("Database seeded");
         }
     }
 }

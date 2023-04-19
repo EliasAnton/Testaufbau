@@ -15,11 +15,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\SharedModels\Product.cs">
-        <Link>SharedModels\Product.cs</Link>
+      <Compile Include="..\SharedModels\Address.cs">
+        <Link>SharedModels\Address.cs</Link>
       </Compile>
-      <Compile Include="..\SharedModels\ProductCategory.cs">
-        <Link>SharedModels\ProductCategory.cs</Link>
+      <Compile Include="..\SharedModels\Article.cs">
+        <Link>SharedModels\Article.cs</Link>
+      </Compile>
+      <Compile Include="..\SharedModels\ArticleCategory.cs">
+        <Link>SharedModels\ArticleCategory.cs</Link>
+      </Compile>
+      <Compile Include="..\SharedModels\Order.cs">
+        <Link>SharedModels\Order.cs</Link>
+      </Compile>
+      <Compile Include="..\SharedModels\OrderItem.cs">
+        <Link>SharedModels\OrderItem.cs</Link>
       </Compile>
     </ItemGroup>
 

@@ -1,9 +1,9 @@
 ﻿services:
-  testaufbau:
-    build: . # build the Docker image
-    container_name: testaufbau_application
-    ports:
-      - "5000:80"
+#  testaufbau:
+#    build: . # build the Docker image
+#    container_name: testaufbau_application
+#    ports:
+#      - "5000:80"
   database:
     image: "mariadb"
     container_name: maria_db

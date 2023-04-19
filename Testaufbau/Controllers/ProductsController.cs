@@ -18,6 +18,13 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public ActionResult Get(int take = 10, int skip = 0)
     {
-        return Ok(_mariaDbContext.Products!.OrderBy(p => p.ProductId).Skip(skip).Take(take));
+        return Ok(_mariaDbContext.Articles!.OrderBy(a => a.ArticleId).Skip(skip).Take(take));
     }
+
+    [HttpGet("all")]
+    public ActionResult GetAllProducts()
+    {
+        return Ok(_mariaDbContext.Articles!.ToList());
+    }
+
 }

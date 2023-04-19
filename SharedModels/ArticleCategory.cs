@@ -1,6 +1,6 @@
 ﻿namespace Testaufbau.Models;
 
-public enum ProductCategory
+public enum ArticleCategory
 {
     Clothing = 1,
     Footware = 2,
