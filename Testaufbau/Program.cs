@@ -1,12 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using Testaufbau.DataAccess;
-using Testaufbau.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
+{
+    jsonOptions.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    jsonOptions.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    jsonOptions.JsonSerializerOptions.WriteIndented = true;
+});
 
 // Database Context settings
 builder.Services.AddTransient<MySqlConnection>(_ =>
