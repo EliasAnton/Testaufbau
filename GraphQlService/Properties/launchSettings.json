@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "GraphQlService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "ui/altair",
+      "applicationUrl": "https://localhost:7052",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

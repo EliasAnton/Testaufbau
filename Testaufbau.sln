@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLClient", "GraphQLClient\GraphQLClient.csproj", "{8ED4AC79-9241-4EEC-AE66-4EADFA9ED0B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FB103A1E-B86F-4BCC-8A32-85E5D1A8DF89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQlService", "GraphQlService\GraphQlService.csproj", "{4F230009-5FD9-4C72-8564-D7A52889CFCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +30,14 @@ Global
 		{8ED4AC79-9241-4EEC-AE66-4EADFA9ED0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ED4AC79-9241-4EEC-AE66-4EADFA9ED0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ED4AC79-9241-4EEC-AE66-4EADFA9ED0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F230009-5FD9-4C72-8564-D7A52889CFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F230009-5FD9-4C72-8564-D7A52889CFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F230009-5FD9-4C72-8564-D7A52889CFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F230009-5FD9-4C72-8564-D7A52889CFCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5D0CB724-67EA-4574-9DE3-62FD7FD902A1} = {2A4D2E39-7BD0-432C-9D8A-B4EED1EFF634}
 		{8ED4AC79-9241-4EEC-AE66-4EADFA9ED0B9} = {2A4D2E39-7BD0-432C-9D8A-B4EED1EFF634}
+		{4F230009-5FD9-4C72-8564-D7A52889CFCB} = {FB103A1E-B86F-4BCC-8A32-85E5D1A8DF89}
 	EndGlobalSection
 EndGlobal
