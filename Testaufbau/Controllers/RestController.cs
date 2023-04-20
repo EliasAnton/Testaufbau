@@ -31,8 +31,13 @@ public class RestController : ControllerBase
     [HttpGet("orders")]
     public ActionResult GetOrders()
     {
-        return Ok(_mariaDbContext.Orders!.Include(o => o.OrderItems).ThenInclude(o => o.Article).ToList());
+        return Ok(_mariaDbContext.Orders!
+            .Include(o => o.OrderItems)!
+            .ThenInclude(oi => oi.Article)
+            .Include(o => o.CustomerAddress)
+            .ToList());
     }
+    
 
     [HttpPost("articles/update")]
     public ActionResult UpdateArticle(Article article)

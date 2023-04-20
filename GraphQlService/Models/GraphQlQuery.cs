@@ -19,6 +19,18 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             "allArticles",
             resolve: async context => await _dbContext.Articles!.ToListAsync()
         );
+        FieldAsync<ListGraphType<OrderType>>(
+            "allOrders",
+            resolve: async context => await _dbContext.Orders!.ToListAsync()
+        );
+        FieldAsync<ListGraphType<OrderItemType>>(
+            "allOrderItems",
+            resolve: async context => await _dbContext.OrderItems!.ToListAsync()
+        );
+        FieldAsync<ListGraphType<AddressType>>(
+            "allAddresses",
+            resolve: async context => await _dbContext.Addresses!.ToListAsync()
+        );
     }
 
 }

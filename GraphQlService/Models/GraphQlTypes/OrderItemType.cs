@@ -1,11 +1,12 @@
 using GraphQL.Types;
+using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
 
 namespace GraphQlService.Models.GraphQlTypes;
 
 public sealed class OrderItemType : ObjectGraphType<OrderItem>
 {
-    public OrderItemType()
+    public OrderItemType(MariaDbContext dbContext)
     {
         Field(x => x.Id);
         Field(x => x.OrderId);
@@ -13,11 +14,13 @@ public sealed class OrderItemType : ObjectGraphType<OrderItem>
         Field(x => x.Quantity);
         Field<OrderType>(
             name: "order",
-            resolve: context => context.Source.Order
+            resolve: context => dbContext.Orders!
+                .FirstOrDefault(x => x.Id == context.Source.OrderId)
         );
         Field<ArticleType>(
             name: "article",
-            resolve: context => context.Source.Article
+            resolve: context => dbContext.Articles!
+                .FirstOrDefault(x => x.Id == context.Source.ArticleId)
         );
     }
 }

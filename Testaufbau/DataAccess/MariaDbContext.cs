@@ -13,6 +13,12 @@ public class MariaDbContext : DbContext, IMariaDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(x => x.Order)
+            .WithMany(x => x.OrderItems)
+            .HasForeignKey(x => x.OrderId);
+
         modelBuilder.Entity<Article>().HasData(
             new Article { Id = 1, Name = "Test1", Price = 1.0m, SKU = "Test1", ArticleCategory = ArticleCategory.Clothing},
             new Article { Id = 2, Name = "Test2", Price = 2.0m, SKU = "Test2", ArticleCategory = ArticleCategory.Clothing },
@@ -29,7 +35,7 @@ public class MariaDbContext : DbContext, IMariaDbContext
         );
 
         modelBuilder.Entity<OrderItem>().HasData(
-            new OrderItem { Id = 1, OrderId = 1, ArticleId = 1, Quantity = 1 }
+            new OrderItem { Id = 1, OrderId = 1, ArticleId = 5, Quantity = 2 }
         );
 
         modelBuilder.Entity<Address>().HasData(
