@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Testaufbau.DataAccess.SharedModels;
+namespace Testaufbau.DataAccess.Models;
 
 public class Order
 {
@@ -11,7 +11,8 @@ public class Order
     public decimal TotalPrice { get; set; }
     public string CustomerName { get; set; }
     public int CustomerAddressId { get; set; }
-    public string CustomerEmail { get; set; }
+    public Address? CustomerAddress { get; set; }
+    public string? CustomerEmail { get; set; }
     public string? CustomerPhone { get; set; }
 
 }

@@ -1,4 +1,4 @@
-﻿namespace Testaufbau.DataAccess.SharedModels;
+﻿namespace Testaufbau.DataAccess.Models;
 
 public enum ArticleCategory
 {

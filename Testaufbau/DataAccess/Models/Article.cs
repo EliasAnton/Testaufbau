@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Testaufbau.DataAccess.SharedModels;
+namespace Testaufbau.DataAccess.Models;
 
 public class Article
 {

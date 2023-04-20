@@ -1,5 +1,5 @@
 using GraphQL.Types;
-using Testaufbau.DataAccess.SharedModels;
+using Testaufbau.DataAccess.Models;
 
 namespace GraphQlService.Models.GraphQlTypes;
 
@@ -10,7 +10,7 @@ public sealed class ArticleType : ObjectGraphType<Article>
         Field(x => x.Id);
         Field(x => x.Name);
         Field(x => x.ArticleCategory);
-        Field(x => x.Description);
+        Field(x => x.Description, nullable:true);
         Field(x => x.Price);
         Field(x => x.SKU);
     }

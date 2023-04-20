@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Testaufbau.DataAccess.SharedModels;
+using Testaufbau.DataAccess.Models;
 
 namespace Testaufbau.DataAccess;
 
@@ -33,7 +33,7 @@ public class MariaDbContext : DbContext, IMariaDbContext
         );
 
         modelBuilder.Entity<Address>().HasData(
-            new Address { Id = 1, Street = "Test1", HouseNumber = 1, City = "Test1", ZipCode = "Test1", Country = "Test1" }
+            new Address { Id = 1, Street = "Hauptstr.", HouseNumber = 1, City = "Leipzig", ZipCode = "04107", Country = "Germany" }
         );
     }
 

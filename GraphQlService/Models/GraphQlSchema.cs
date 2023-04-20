@@ -1,6 +1,5 @@
 ﻿using GraphQL.Instrumentation;
 using GraphQL.Types;
-using Testaufbau.DataAccess.SharedModels;
 
 namespace GraphQlService.Models;
 

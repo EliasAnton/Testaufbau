@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Testaufbau.DataAccess.SharedModels;
+using Testaufbau.DataAccess.Models;
 
 namespace Testaufbau.DataAccess;
 
