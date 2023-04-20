@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using Testaufbau.Models;
+using Testaufbau.DataAccess.Models;
 
 namespace RestClient;
 
@@ -19,14 +19,14 @@ public class LocalClient
             var skip = int.Parse(Console.ReadLine());
 
             // Send REST request and receive response
-            List<Product> response = await CallService(take, skip);
+            List<Article> response = await CallService(take, skip);
 
             Console.WriteLine("Found " + response.Count + " results");
 
         } while (true);
     }
 
-    private async Task<List<Product>> CallService(int take, int skip)
+    private async Task<List<Article>> CallService(int take, int skip)
     {
         using HttpClient client = new();
         client.DefaultRequestHeaders.Accept.Clear();
@@ -37,7 +37,7 @@ public class LocalClient
         var response = await client.GetAsync(requestUri);
         response.EnsureSuccessStatusCode();
 
-        var responseObject = await response.Content.ReadAsAsync<List<Product>>();
+        var responseObject = await response.Content.ReadAsAsync<List<Article>>();
         return responseObject;
     }
 

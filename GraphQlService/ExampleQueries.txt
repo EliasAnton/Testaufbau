@@ -1,0 +1,10 @@
+query{
+  allArticles{
+    id
+    name
+    articleCategory
+    description
+    price
+    sKU
+  }
+}
