@@ -14,4 +14,12 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="StrawberryShake" Version="13.0.5" />
+    </ItemGroup>
+
 </Project>
