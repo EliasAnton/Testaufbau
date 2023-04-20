@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using Testaufbau.Models;
 
 namespace Testaufbau.DataAccess;
 

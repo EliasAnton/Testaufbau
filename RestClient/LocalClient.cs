@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using Testaufbau.Models;
+using Testaufbau.DataAccess.SharedModels;
 
 namespace RestClient;
 

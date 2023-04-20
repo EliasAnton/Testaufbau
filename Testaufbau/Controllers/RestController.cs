@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Testaufbau.DataAccess;
-using Testaufbau.Models;
+using Testaufbau.DataAccess.SharedModels;
 
 namespace Testaufbau.Controllers;
 

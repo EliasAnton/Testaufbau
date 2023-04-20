@@ -12,6 +12,7 @@
         <PackageReference Include="GraphQL.MicrosoftDI" Version="5.4.0" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="6.0.0" />
         <PackageReference Include="GraphQL.Server.Ui.Altair" Version="6.1.1" />
+        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.1" />
         <PackageReference Include="GraphQL.SystemTextJson" Version="5.1.1" />
         <PackageReference Include="MySqlConnector" Version="2.2.5" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
@@ -22,6 +23,10 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
     </ItemGroup>
 
 </Project>

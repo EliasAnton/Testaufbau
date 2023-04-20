@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Testaufbau;
+namespace Testaufbau.DataAccess.SharedModels;
 
 public class Order
 {

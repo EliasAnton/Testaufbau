@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Testaufbau.Models;
+using Testaufbau.DataAccess.SharedModels;
 
 namespace Testaufbau.DataAccess;
 
-public class MariaDbContext : DbContext
+public class MariaDbContext : DbContext, IMariaDbContext
 {
     private readonly IConfiguration _configuration;
     public MariaDbContext(IConfiguration configuration)
@@ -14,14 +14,14 @@ public class MariaDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>().HasData(
-            new Article { Id = 1, Name = "Test1", Price = 1.0m, SKU = "Test1" },
-            new Article { Id = 2, Name = "Test2", Price = 2.0m, SKU = "Test2" },
-            new Article { Id = 3, Name = "Test3", Price = 3.0m, SKU = "Test3" },
-            new Article { Id = 4, Name = "Test4", Price = 4.0m, SKU = "Test4" },
-            new Article { Id = 5, Name = "Test5", Price = 5.0m, SKU = "Test5" },
-            new Article { Id = 6, Name = "Test6", Price = 6.0m, SKU = "Test6" },
-            new Article { Id = 7, Name = "Test7", Price = 7.0m, SKU = "Test7" },
-            new Article { Id = 8, Name = "Test8", Price = 8.0m, SKU = "Test8" }
+            new Article { Id = 1, Name = "Test1", Price = 1.0m, SKU = "Test1", ArticleCategory = ArticleCategory.Clothing},
+            new Article { Id = 2, Name = "Test2", Price = 2.0m, SKU = "Test2", ArticleCategory = ArticleCategory.Clothing },
+            new Article { Id = 3, Name = "Test3", Price = 3.0m, SKU = "Test3", ArticleCategory = ArticleCategory.Electronics },
+            new Article { Id = 4, Name = "Test4", Price = 4.0m, SKU = "Test4", ArticleCategory = ArticleCategory.Electronics },
+            new Article { Id = 5, Name = "Test5", Price = 5.0m, SKU = "Test5", ArticleCategory = ArticleCategory.Footware },
+            new Article { Id = 6, Name = "Test6", Price = 6.0m, SKU = "Test6", ArticleCategory = ArticleCategory.Footware },
+            new Article { Id = 7, Name = "Test7", Price = 7.0m, SKU = "Test7", ArticleCategory = ArticleCategory.Footware },
+            new Article { Id = 8, Name = "Test8", Price = 8.0m, SKU = "Test8", ArticleCategory = ArticleCategory.Household }
         );
 
         modelBuilder.Entity<Order>().HasData(

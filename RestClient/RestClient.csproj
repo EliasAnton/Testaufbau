@@ -15,24 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\SharedModels\Address.cs">
-        <Link>SharedModels\Address.cs</Link>
-      </Compile>
-      <Compile Include="..\SharedModels\Article.cs">
-        <Link>SharedModels\Article.cs</Link>
-      </Compile>
-      <Compile Include="..\SharedModels\ArticleCategory.cs">
-        <Link>SharedModels\ArticleCategory.cs</Link>
-      </Compile>
-      <Compile Include="..\SharedModels\Order.cs">
-        <Link>SharedModels\Order.cs</Link>
-      </Compile>
-      <Compile Include="..\SharedModels\OrderItem.cs">
-        <Link>SharedModels\OrderItem.cs</Link>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Include="Microsoft.AspNetCore.Mvc.Core">
         <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.5\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
       </Reference>
@@ -40,6 +22,10 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
     </ItemGroup>
 
 </Project>

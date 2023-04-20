@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Testaufbau.Models;
 
-namespace Testaufbau;
+namespace Testaufbau.DataAccess.SharedModels;
 
 public class OrderItem
 {

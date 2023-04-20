@@ -3,7 +3,7 @@
     "GraphQlService": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "ui/altair",
+      "launchUrl": "ui/playground",
       "applicationUrl": "https://localhost:7052",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

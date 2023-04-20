@@ -1,4 +1,4 @@
-﻿namespace Testaufbau;
+﻿namespace Testaufbau.DataAccess.SharedModels;
 
 public class Address
 {

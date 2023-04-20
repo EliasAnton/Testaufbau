@@ -15,21 +15,34 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\SharedModels\Address.cs">
+      <Compile Update="DataAccess\SharedModels\Address.cs">
         <Link>SharedModels\Address.cs</Link>
       </Compile>
-      <Compile Include="..\SharedModels\Article.cs">
+      <Compile Update="DataAccess\SharedModels\Article.cs">
         <Link>SharedModels\Article.cs</Link>
       </Compile>
-      <Compile Include="..\SharedModels\ArticleCategory.cs">
+      <Compile Update="DataAccess\SharedModels\ArticleCategory.cs">
         <Link>SharedModels\ArticleCategory.cs</Link>
       </Compile>
-      <Compile Include="..\SharedModels\Order.cs">
+      <Compile Update="DataAccess\SharedModels\Order.cs">
         <Link>SharedModels\Order.cs</Link>
       </Compile>
-      <Compile Include="..\SharedModels\OrderItem.cs">
+      <Compile Update="DataAccess\SharedModels\OrderItem.cs">
         <Link>SharedModels\OrderItem.cs</Link>
       </Compile>
+      <Compile Remove="DataAccess\SharedModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="DataAccess\SharedModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="DataAccess\SharedModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="DataAccess\SharedModels\**" />
     </ItemGroup>
 
 </Project>
