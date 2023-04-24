@@ -12,6 +12,6 @@ public sealed class ArticleType : ObjectGraphType<Article>
         Field(x => x.ArticleCategory);
         Field(x => x.Description, nullable:true);
         Field(x => x.Price);
-        Field(x => x.SKU);
+        Field(x => x.Sku);
     }
 }

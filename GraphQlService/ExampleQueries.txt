@@ -5,6 +5,33 @@ query{
     articleCategory
     description
     price
-    sKU
+    sku
+  }
+}
+
+query{
+  allOrderItems{
+    id
+    orderId
+    order{
+      id
+      customerName
+      customerAddress{
+        id
+        street
+        houseNumber
+        zipCode
+        city
+        country
+      }
+    }
+  	articleId
+    article{
+      id
+      name
+      articleCategory
+      price
+    }
+    quantity
   }
 }

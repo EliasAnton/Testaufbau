@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Testaufbau.DataAccess.Models;
 
@@ -15,5 +16,5 @@ public class Article
 
     public decimal Price { get; set; }
 
-    public string SKU { get; set; }
+    public string Sku { get; set; }
 }
