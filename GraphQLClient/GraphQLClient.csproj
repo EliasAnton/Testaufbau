@@ -15,11 +15,16 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GraphQlService\GraphQlService.csproj" />
       <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="StrawberryShake" Version="13.0.5" />
+      <PackageReference Include="GraphQL.Client" Version="6.0.0" />
+      <PackageReference Include="GraphQL.Client.Abstractions" Version="6.0.0" />
+      <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.0" />
+      <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
