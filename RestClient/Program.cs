@@ -1,4 +1,4 @@
 ﻿using RestClient;
 
 var client = new LocalClient();
-await client.RunUserPrompts();
+await LocalClient.RunUserPrompts();

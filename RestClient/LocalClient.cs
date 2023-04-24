@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Globalization;
+using System.Net.Http.Headers;
 using Testaufbau.DataAccess.Models;
 
 namespace RestClient;
@@ -6,17 +7,17 @@ namespace RestClient;
 public class LocalClient
 {
 
-    public async Task RunUserPrompts()
+    public static async Task RunUserPrompts()
     {
         do
         {
             Console.WriteLine("Welcome to the REST client");
 
             Console.WriteLine("Take:");
-            var take = int.Parse(Console.ReadLine());
+            var take = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
 
             Console.WriteLine("Skip:");
-            var skip = int.Parse(Console.ReadLine());
+            var skip = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
 
             // Send REST request and receive response
             List<Article> response = await CallService(take, skip);
@@ -26,7 +27,7 @@ public class LocalClient
         } while (true);
     }
 
-    private async Task<List<Article>> CallService(int take, int skip)
+    private static async Task<List<Article>> CallService(int take, int skip)
     {
         using HttpClient client = new();
         client.DefaultRequestHeaders.Accept.Clear();

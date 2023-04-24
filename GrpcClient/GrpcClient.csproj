@@ -17,13 +17,8 @@
     <ItemGroup>
       <ProjectReference Include="..\GrpcService\GrpcService.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Protobuf Include="..\GrpcService\Protos\*.proto" GrpcServices="Client" />
-    </ItemGroup>
     
     <ItemGroup>
-      <PackageReference Include="Google.Protobuf" Version="3.22.3" />
       <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
       <PackageReference Include="Grpc.Tools" Version="2.54.0">
         <PrivateAssets>all</PrivateAssets>

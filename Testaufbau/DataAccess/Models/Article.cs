@@ -5,6 +5,7 @@ using ProtoBuf;
 namespace Testaufbau.DataAccess.Models;
 
 [ProtoContract]
+[ProtoInclude(3, typeof(ArticleCategory))]
 public class Article
 {
     [Key]
