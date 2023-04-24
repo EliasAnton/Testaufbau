@@ -1,13 +1,11 @@
+using Newtonsoft.Json;
 using Testaufbau.DataAccess.Models;
 
 namespace GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
 
-public class ArticleListResponseType
+public class AllArticlesQueryResponse
 {
+    [JsonProperty("allArticles")]
     public List<Article> Articles { get; set; }
-}
 
-public class ArticleResponseType
-{
-    public Article Article { get; set; }
 }

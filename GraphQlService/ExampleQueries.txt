@@ -5,7 +5,7 @@ query{
     articleCategory
     description
     price
-    sKU
+    sku
   }
 }
 

@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace Testaufbau.DataAccess.Models;
 
-//[JsonSerializable(typeof(Article))]
 public class Article
 {
     [Key]
