@@ -1,11 +1,8 @@
 ﻿using GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
-using GraphQL.Types;
 using GraphQL.SystemTextJson;
-using GraphQlService;
 using GraphQlService.Models;
-using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using Testaufbau.DataAccess;
 

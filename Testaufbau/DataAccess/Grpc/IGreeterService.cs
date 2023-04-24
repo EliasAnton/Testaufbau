@@ -1,7 +1,6 @@
-﻿using GrpcService.Protos;
-using ProtoBuf.Grpc.Configuration;
+﻿using ProtoBuf.Grpc.Configuration;
 
-namespace GrpcService.Services;
+namespace Testaufbau.DataAccess.Grpc;
 
 [Service]
 public interface IGreeterService

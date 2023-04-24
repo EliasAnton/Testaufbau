@@ -1,6 +1,4 @@
-﻿using AutoFixture;
-
-namespace Testaufbau.DataAccess;
+﻿namespace Testaufbau.DataAccess;
 
 public static class Seeder
 {

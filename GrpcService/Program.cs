@@ -1,9 +1,9 @@
 ﻿using GrpcService.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MySqlConnector;
-using ProtoBuf.Grpc.Configuration;
 using Testaufbau.DataAccess;
 using ProtoBuf.Grpc.Server;
+using Testaufbau.DataAccess.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,7 @@ builder.Services.AddCodeFirstGrpc(config =>
 builder.Services.AddCodeFirstGrpcReflection();
 
 builder.Services.TryAddTransient<IGreeterService, GreeterService>();
+builder.Services.TryAddTransient<IGrpcService, GrpcService.Services.GrpcService>();
 
 
 var app = builder.Build();
@@ -30,6 +31,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<IGreeterService>();
+    endpoints.MapGrpcService<IGrpcService>();
     endpoints.MapCodeFirstGrpcReflectionService();
 });
 

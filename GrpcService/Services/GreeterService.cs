@@ -1,4 +1,4 @@
-﻿using GrpcService.Protos;
+﻿using Testaufbau.DataAccess.Grpc;
 
 namespace GrpcService.Services;
 

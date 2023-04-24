@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using ProtoBuf;
 
 namespace Testaufbau.DataAccess.Models;

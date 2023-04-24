@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace GrpcService.Protos;
+namespace Testaufbau.DataAccess.Grpc;
 
 [ProtoContract]
 public class HelloRequest
