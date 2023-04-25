@@ -18,7 +18,7 @@ builder.Services.AddCodeFirstGrpc(config =>
 
 builder.Services.AddCodeFirstGrpcReflection();
 
-builder.Services.TryAddTransient<IGrpcService, GrpcService.Services.GrpcService>();
+builder.Services.TryAddTransient<IGrpcService, GrpcService.GrpcService>();
 
 
 var app = builder.Build();

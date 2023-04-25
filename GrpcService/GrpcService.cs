@@ -3,7 +3,7 @@ using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Grpc;
 using Testaufbau.DataAccess.Models;
 
-namespace GrpcService.Services;
+namespace GrpcService;
 
 public class GrpcService : IGrpcService
 {

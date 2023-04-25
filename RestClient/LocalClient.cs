@@ -9,6 +9,7 @@ public class LocalClient
 
     public static async Task RunUserPrompts()
     {
+        string continuePrompt;
         do
         {
             Console.WriteLine("Welcome to the REST client");
@@ -22,9 +23,17 @@ public class LocalClient
             // Send REST request and receive response
             List<Article> response = await CallService(take, skip);
 
-            Console.WriteLine("Found " + response.Count + " results");
-
-        } while (true);
+            Console.WriteLine("Found " + response.Count + " results:");
+            foreach (var article in response)
+            {
+                Console.WriteLine(article.Id);
+                Console.WriteLine(article.Name);
+                Console.WriteLine("--------------------");
+            }
+            
+            Console.WriteLine("Continue? (y/n)");
+            continuePrompt = Console.ReadLine()!;
+        } while (continuePrompt == "y");
     }
 
     private static async Task<List<Article>> CallService(int take, int skip)
@@ -34,7 +43,7 @@ public class LocalClient
         client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-        var requestUri = $"https://localhost:7273/Products?take={take}&skip={skip}";
+        var requestUri = $"https://localhost:7123/Rest/Articles?take={take}&skip={skip}";
         var response = await client.GetAsync(requestUri);
         response.EnsureSuccessStatusCode();
 

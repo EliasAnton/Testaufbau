@@ -4,7 +4,7 @@ using ProtoBuf;
 using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
 
-namespace Testaufbau.Controllers;
+namespace RestService;
 
 [ApiController]
 [Route("[controller]")]
