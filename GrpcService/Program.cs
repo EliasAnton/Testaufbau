@@ -1,5 +1,4 @@
-﻿using GrpcService.Services;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using MySqlConnector;
 using Testaufbau.DataAccess;
 using ProtoBuf.Grpc.Server;
@@ -19,7 +18,6 @@ builder.Services.AddCodeFirstGrpc(config =>
 
 builder.Services.AddCodeFirstGrpcReflection();
 
-builder.Services.TryAddTransient<IGreeterService, GreeterService>();
 builder.Services.TryAddTransient<IGrpcService, GrpcService.Services.GrpcService>();
 
 
@@ -28,9 +26,17 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseRouting();
 
+//Seed Database
+using (var scope = app.Services.CreateScope())
+{
+    var mariaDbContext = scope.ServiceProvider.GetRequiredService<MariaDbContext>();
+    mariaDbContext.Database.EnsureCreated();
+    //mariaDbContext.Seed();
+}
+
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGrpcService<IGreeterService>();
+    //endpoints.MapGrpcService<IGreeterService>();
     endpoints.MapGrpcService<IGrpcService>();
     endpoints.MapCodeFirstGrpcReflectionService();
 });

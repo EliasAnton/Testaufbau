@@ -3,7 +3,7 @@ using ProtoBuf.Grpc.Client;
 using Testaufbau.DataAccess.Grpc;
 
 using var channel = GrpcChannel.ForAddress("https://localhost:7214");
-var greeterService = channel.CreateGrpcService<IGreeterService>();
+//var greeterService = channel.CreateGrpcService<IGreeterService>();
 var grpcService = channel.CreateGrpcService<IGrpcService>();
 
 // Console.WriteLine("Wie heist du?");
@@ -16,8 +16,10 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 //
 // Console.WriteLine("Greeting: " + reply.Message);
 
-var article = await grpcService.GetAddressByIdAsync(new GrpcRequest() { Id = 1 });
-Console.WriteLine("Land von Adresse 1: " + article!.Country);
+Console.WriteLine("Moin");
+
+var address = await grpcService.GetAddressByIdAsync(new GrpcIdRequest() { Id = 1 });
+Console.WriteLine("Land von Adresse 1: " + address!.Country);
 
 var response = await grpcService.GetAllOrdersAsync();
 foreach (var order in response.Orders)
@@ -29,6 +31,14 @@ foreach (var order in response.Orders)
     Console.WriteLine("--------------------------------");
 }
 
+var article = await grpcService.GetArticleByIdAsync(new GrpcIdRequest() { Id = 1 });
+Console.WriteLine("Artikel 1: " + article!.Name);
+
+var articles = await grpcService.GetAllArticlesAsync();
+foreach (var art in articles.Articles)
+{
+    Console.WriteLine("Artikel " + art.Id + ": " + art.Name);
+}
 
 Console.WriteLine("Shutting down");
 Console.WriteLine("Press any key to exit...");

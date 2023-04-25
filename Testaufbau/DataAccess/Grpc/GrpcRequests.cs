@@ -1,10 +1,10 @@
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Testaufbau.DataAccess.Grpc;
 
 [ProtoContract]
-public class HelloReply
+public class GrpcIdRequest
 {
     [ProtoMember(1)]
-    public string Message { get; set; }
+    public int Id { get; set; }
 }
