@@ -15,11 +15,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+      <ProjectReference Include="..\GrpcService\GrpcService.csproj" />
     </ItemGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.54.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 </Project>

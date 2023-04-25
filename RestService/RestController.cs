@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProtoBuf;
 using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
 
-namespace Testaufbau.Controllers;
+namespace RestService;
 
 [ApiController]
 [Route("[controller]")]
@@ -37,13 +38,40 @@ public class RestController : ControllerBase
             .Include(o => o.CustomerAddress)
             .ToList());
     }
-    
+
 
     [HttpPost("articles/update")]
     public ActionResult UpdateArticle(Article article)
     {
         _mariaDbContext.Articles!.Update(article);
         _mariaDbContext.SaveChanges();
+        return Ok();
+    }
+
+    [HttpGet("grpc/test")]
+    public ActionResult GrpcTest()
+    {
+        using (var file = System.IO.File.Create("test.buf"))
+        {
+            Serializer.Serialize(file,
+                new Article
+                {
+                    Id = 1,
+                    Name = "Rankobelisk",
+                    ArticleCategory = ArticleCategory.Clothing,
+                    Description = "Test",
+                    Price = 1,
+                    Sku = "Test"
+                });
+            Console.WriteLine("Serialized");
+        }
+
+        using (var fileStream = System.IO.File.OpenRead("test.buf"))
+        {
+            var article = Serializer.Deserialize<Article>(fileStream);
+            Console.WriteLine("Deserialized " + article.Name);
+        }
+
         return Ok();
     }
 }

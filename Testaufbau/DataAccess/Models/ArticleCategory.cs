@@ -1,5 +1,8 @@
-﻿namespace Testaufbau.DataAccess.Models;
+﻿using ProtoBuf;
 
+namespace Testaufbau.DataAccess.Models;
+
+[ProtoContract]
 public enum ArticleCategory
 {
     Clothing = 1,

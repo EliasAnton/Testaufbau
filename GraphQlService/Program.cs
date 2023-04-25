@@ -1,11 +1,8 @@
 ﻿using GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
-using GraphQL.Types;
 using GraphQL.SystemTextJson;
-using GraphQlService;
 using GraphQlService.Models;
-using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using Testaufbau.DataAccess;
 
@@ -21,7 +18,7 @@ builder.Services.AddDbContext<MariaDbContext>(ServiceLifetime.Transient);
 // Add GraphQL-services to the container.
 builder.Services.AddGraphQL(b => b
     .AddHttpMiddleware<GraphQlSchema>()
-    .AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User })
+    .AddUserContextBuilder(httpContext => new GraphQlUserContext { User = httpContext.User })
     .AddSystemTextJson()
     .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
     .AddSchema<GraphQlSchema>()
@@ -47,7 +44,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseGraphQL<GraphQlSchema>();
-//app.UseGraphQLAltair();
 app.UseGraphQLPlayground();
 
 app.Run();
