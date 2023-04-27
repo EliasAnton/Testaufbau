@@ -32,13 +32,13 @@ public class JsonSerialDeserialBenchmark
 
 
     [Benchmark]
-    public void SerializeJsonSTJ()
+    public void SerializeJsonStj()
     {
         System.Text.Json.JsonSerializer.Serialize(_person);
     }
 
     [Benchmark]
-    public void SerializeJsonNSJ()
+    public void SerializeJsonNsj()
     {
         JsonConvert.SerializeObject(_person);
     }

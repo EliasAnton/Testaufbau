@@ -1,0 +1,3 @@
+|                      Method |     Mean |     Error |    StdDev |
+|---------------------------- |---------:|----------:|----------:|
+| GraphQlAllArticlesRoundtrip | 1.242 ms | 0.0239 ms | 0.0265 ms |
