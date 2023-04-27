@@ -1,0 +1,4 @@
+|          Method |     Mean |   Error |  StdDev |
+|---------------- |---------:|--------:|--------:|
+|   SerializeGrpc | 315.3 ns | 6.33 ns | 5.92 ns |
+| DeserializeGrpc | 489.7 ns | 7.69 ns | 6.82 ns |
