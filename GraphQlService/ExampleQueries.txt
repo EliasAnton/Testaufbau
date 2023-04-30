@@ -35,3 +35,14 @@ query{
     quantity
   }
 }
+
+query{
+  getArticles(amount:20){
+    id
+    name
+    articleCategory
+    description
+    price
+    sku
+  }
+}

@@ -1,0 +1,25 @@
+|             Method |       Mean |    Error |   StdDev |
+|------------------- |-----------:|---------:|---------:|
+|   SerializeJsonSTJ |   345.5 ns |  5.37 ns |  5.03 ns |
+|   SerializeJsonNSJ |   685.9 ns |  9.65 ns |  8.55 ns |
+| DeserializeJsonSTJ |   586.7 ns | 11.61 ns | 11.40 ns |
+| DeserializeJsonNSJ | 1,101.5 ns | 21.86 ns | 29.93 ns |
+
+|             Method |       Mean |    Error |   StdDev |
+|------------------- |-----------:|---------:|---------:|
+|   SerializeJsonSTJ |   370.9 ns |  7.20 ns |  8.00 ns |
+|   SerializeJsonNSJ |   662.2 ns | 11.13 ns | 10.41 ns |
+| DeserializeJsonSTJ |   597.3 ns | 11.03 ns | 10.32 ns |
+| DeserializeJsonNSJ | 1,130.4 ns | 22.34 ns | 41.96 ns |
+
+
+System.Text.Json is faster than Newtonsoft.Json in both serialization and deserialization.
+
+Ergebnisse auf meinem Laptop:
+
+|             Method |       Mean |    Error |   StdDev |
+|------------------- |-----------:|---------:|---------:|
+|   SerializeJsonStj |   370.8 ns |  4.79 ns |  4.48 ns |
+|   SerializeJsonNsj |   724.3 ns |  8.44 ns |  7.90 ns |
+| DeserializeJsonSTJ |   584.2 ns |  6.03 ns |  5.34 ns |
+| DeserializeJsonNSJ | 1,200.9 ns | 21.44 ns | 20.05 ns |

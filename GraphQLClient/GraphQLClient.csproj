@@ -20,9 +20,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
       <PackageReference Include="GraphQL.Client" Version="6.0.0" />
       <PackageReference Include="GraphQL.Client.Abstractions" Version="6.0.0" />
-      <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.0" />
       <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     </ItemGroup>

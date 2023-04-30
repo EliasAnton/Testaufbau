@@ -12,6 +12,8 @@
       MYSQL_DATABASE: TestaufbauDB
       MYSQL_USER: Elias
       MYSQL_PASSWORD: SuperSecretPassword1234
-    restart: always
     ports:
       - "3306:3306"
+    #volumes:
+    #  - ./data:/var/lib/mysql
+  

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Performance Comparison</title>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+	<div id="myPlot"></div>
+
+	<script>
+		var grpcData = {
+			x: [1, 10, 100, 1000, 10000, 100000],
+			y: [1.772, 1.829, 2.36, 18.901, 46.145, 461.898],
+			name: "gRPC",
+			type: "scatter"
+		};
+
+		var restData = {
+			x: [1, 10, 100, 1000, 10000, 100000],
+			y: [1.715, 1.814, 2.445, 7.165, 52.925, 516.572],
+			name: "REST",
+			type: "scatter"
+		};
+
+		var graphqlData = {
+			x: [1, 10, 100, 1000, 10000, 100000],
+			y: [2.704, 2.759, 3.515, 16.766, 69.247, 513.332],
+			name: "GraphQL",
+			type: "scatter"
+		};
+		var graphqlDataOnlyIds = {
+			x: [1, 10, 100, 1000, 10000, 100000],
+			y: [2.418, 2.539, 2.920, 17.305, 25.920, 194.368],
+			name: "GraphQLOnlyIds",
+			type: "scatter"
+		};
+
+		var layout = {
+			title: "Performance Comparison",
+			xaxis: {
+				title: "Number Of Articles (log10)",
+				type: "log",
+				exponentformat: "power"
+			},
+			yaxis: {
+				title: "Response Time (ms)",
+				type: "linear"
+			}
+		};
+
+		var data = [grpcData, restData, graphqlData, graphqlDataOnlyIds];
+		Plotly.newPlot('myPlot', data, layout);
+	</script>
+
+</body>
+</html>

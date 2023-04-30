@@ -13,6 +13,14 @@ public class GrpcService : IGrpcService
         _dbContext = dbContext;
     }
 
+    public Task<GrpcArticlesResponse> GetArticlesAsync(GrpcArticlesRequest request)
+    {
+        var articles = _dbContext.Articles!
+            .Take(request.Take).ToList();
+        var response = new GrpcArticlesResponse { Articles = articles };
+        return Task.FromResult(response);
+    }
+    
     public Task<GrpcArticlesResponse> GetAllArticlesAsync()
     {
         var articles = _dbContext.Articles!

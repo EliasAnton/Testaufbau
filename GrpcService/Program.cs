@@ -14,6 +14,7 @@ builder.Services.AddDbContext<MariaDbContext>(ServiceLifetime.Transient);
 builder.Services.AddCodeFirstGrpc(config =>
 {
     config.ResponseCompressionLevel = System.IO.Compression.CompressionLevel.Optimal;
+    config.MaxSendMessageSize = null;
 });
 
 builder.Services.AddCodeFirstGrpcReflection();
