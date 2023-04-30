@@ -12,3 +12,28 @@
 | GraphQlGetArticles |                 1000 |  16.766 ms |  2.4806 ms |  7.1967 ms |  19.626 ms |
 | GraphQlGetArticles |                10000 |  69.247 ms |  1.5137 ms |  4.3674 ms |  67.288 ms |
 | GraphQlGetArticles |               100000 | 513.332 ms | 10.2553 ms | 21.6318 ms | 504.754 ms |
+
+// * Warnings *
+MultimodalDistribution
+  GetArticlesBenchmark.GraphQlGetArticles: Default -> It seems that the distribution is bimodal (mValue = 4.04)
+  GetArticlesBenchmark.GraphQlGetArticles: Default -> It seems that the distribution can have several modes (mValue = 2.86)
+MinIterationTime
+  GetArticlesBenchmark.GraphQlGetArticles: Default -> The minimum observed iteration time is 64.3098 ms which is very small. It's recommended to increase it to at least 100.0000 ms using more operat
+ions.
+
+-------------------------------
+
+GetArticles aber in den Queries wurde immer nur die Id gefragt nicht der Rest
+
+|             Method |     NumberOfArticles |       Mean |     Error |    StdDev |
+|------------------- |--------------------- |-----------:|----------:|----------:|
+| GraphQlGetArticles |                    1 |   2.418 ms | 0.0348 ms | 0.0326 ms |
+| GraphQlGetArticles |                   10 |   2.539 ms | 0.0388 ms | 0.0363 ms |
+| GraphQlGetArticles |                  100 |   2.920 ms | 0.0333 ms | 0.0311 ms |
+| GraphQlGetArticles |                 1000 |  17.305 ms | 3.0964 ms | 8.8842 ms |
+| GraphQlGetArticles |                10000 |  25.920 ms | 0.3764 ms | 0.3697 ms |
+| GraphQlGetArticles |               100000 | 194.368 ms | 3.6711 ms | 9.4763 ms |
+
+// * Warnings *
+MultimodalDistribution
+  GetArticlesBenchmark.GraphQlGetArticles: Default -> It seems that the distribution is multimodal (mValue = 5)

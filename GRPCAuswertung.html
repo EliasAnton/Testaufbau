@@ -29,6 +29,12 @@
 			name: "GraphQL",
 			type: "scatter"
 		};
+		var graphqlDataOnlyIds = {
+			x: [1, 10, 100, 1000, 10000, 100000],
+			y: [2.418, 2.539, 2.920, 17.305, 25.920, 194.368],
+			name: "GraphQLOnlyIds",
+			type: "scatter"
+		};
 
 		var layout = {
 			title: "Performance Comparison",
@@ -43,7 +49,7 @@
 			}
 		};
 
-		var data = [grpcData, restData, graphqlData];
+		var data = [grpcData, restData, graphqlData, graphqlDataOnlyIds];
 		Plotly.newPlot('myPlot', data, layout);
 	</script>
 

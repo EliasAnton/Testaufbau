@@ -103,12 +103,76 @@ public class GetArticlesBenchmark
             }
         };
     
+    public List<GraphQLRequest> RequestForOnlyIdsList => new List<GraphQLRequest>
+        {
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:1){
+                    id
+                  }
+                }
+            "
+            },
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:10){
+                    id
+                  }
+                }
+               "
+            },
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:100){
+                    id
+                  }
+                }
+               "
+            },
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:1000){
+                    id
+                  }
+                }
+               "
+            },
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:10000){
+                    id
+                  }
+                }
+               "
+            },
+            new GraphQLRequest
+            {
+                Query = @"
+                query{
+                  getArticles(amount:100000){
+                    id
+                  }
+                }
+               "
+            }
+        };
+    
     public GetArticlesBenchmark()
     {
         _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new NewtonsoftJsonSerializer());
     }
     
-    [ParamsSource(nameof(RequestList))]
+    [ParamsSource(nameof(RequestForOnlyIdsList))]
     public GraphQLRequest Request { get; set; }
 
     [Benchmark]
