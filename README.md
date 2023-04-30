@@ -1,20 +1,23 @@
 # Testaufbau
 Database:
+- start the docker-compose file in the main Testaufbau folder
+- restore the empty db from one of the .sql files
 
-To start the db use:
-docker run --name maria_db -e MYSQL_ROOT_PASSWORD=mypass -p 3306:3306 -d mariadb
+Services:
+- den gewünschten Service per IDE ausführen
+- bei Rest und GraphQl öffnet sich der Browser zum testen
 
-danach reicht:
-docker container start -i maria_db
+Clients:
+- nachdem der Service gestartet wurde, kann der Client per IDE ausgeführt werden um ihn zu testen
+- hierbei ist eventuell vorher die Program.cs Datei anzupassen, da hier verschiedene Szenarios hinterlegt sind
 
-(oder docker-compose starten und dann den testaufbau beenden)
-
-Docker-Compose um alles in den Container zu bringen:
-Tutorial:
-https://www.twilio.com/blog/containerize-your-aspdotnet-core-application-and-sql-server-with-docker
-
-
-Man kann bei MariaDb auch volumes zwischen neustarts persistieren
-in yaml reinkopieren:
-volumes:
-  - data:/var/lib/mysql
+Benchmarking:
+- im Benchmarking Ordner liegt ein Vergleich zwischen System.Text.Json und Newtonsoft.Json
+- die anderen Benchmarks liegen in den jeweiligen Client Ordnern
+- die Benchmarks sollten nicht per IDE ausgeführt werden:
+  - Program.cs anpassen und das entsprechende Benchmark auswählen
+  - Rechtsklick auf das Client-Projekt dann publish auswählen
+  - win-x64 auswählen
+  - dann IDE schließen
+  - In der konsole in den Ordner navigieren (z.B. cd .\Testaufbau\RestClient\bin\Release\net6.0\win-x64\publish)
+  - Dann Benchmark ausführen mit ```dotnet .\RestClient.dll```

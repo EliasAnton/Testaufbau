@@ -21,7 +21,7 @@ public class LocalClient
             var skip = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
 
             // Send REST request and receive response
-            List<Article> response = await CallService(take, skip);
+            List<Article> response = await CallService(take);
 
             Console.WriteLine("Found " + response.Count + " results:");
             foreach (var article in response)
@@ -36,7 +36,7 @@ public class LocalClient
         } while (continuePrompt == "y");
     }
 
-    private static async Task<List<Article>> CallService(int take, int skip)
+    private static async Task<List<Article>> CallService(int take)
     {
         using HttpClient client = new();
         client.DefaultRequestHeaders.Accept.Clear();
