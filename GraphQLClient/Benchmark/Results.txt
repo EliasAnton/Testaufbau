@@ -1,3 +1,14 @@
 |                      Method |     Mean |     Error |    StdDev |
 |---------------------------- |---------:|----------:|----------:|
 | GraphQlAllArticlesRoundtrip | 1.242 ms | 0.0239 ms | 0.0265 ms |
+
+--------------------Get Articles Benchmark--------------------
+
+|             Method |    NumberOfArticles  |       Mean |      Error |     StdDev |     Median |
+|------------------- |--------------------- |-----------:|-----------:|-----------:|-----------:|
+| GraphQlGetArticles |                    1 |   2.704 ms |  0.0288 ms |  0.0270 ms |   2.710 ms |
+| GraphQlGetArticles |                   10 |   2.759 ms |  0.0171 ms |  0.0152 ms |   2.759 ms |
+| GraphQlGetArticles |                  100 |   3.515 ms |  0.0441 ms |  0.0391 ms |   3.515 ms |
+| GraphQlGetArticles |                 1000 |  16.766 ms |  2.4806 ms |  7.1967 ms |  19.626 ms |
+| GraphQlGetArticles |                10000 |  69.247 ms |  1.5137 ms |  4.3674 ms |  67.288 ms |
+| GraphQlGetArticles |               100000 | 513.332 ms | 10.2553 ms | 21.6318 ms | 504.754 ms |

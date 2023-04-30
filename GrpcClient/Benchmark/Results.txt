@@ -1,0 +1,36 @@
+Mit GrpcService normal gestartet. Letzte Antwort war zu groß
+
+|      Method | NumberOfArticles |      Mean |     Error |    StdDev |
+|------------ |----------------- |----------:|----------:|----------:|
+| GetArticles |                1 |  1.754 ms | 0.0291 ms | 0.0258 ms |
+| GetArticles |               10 |  1.832 ms | 0.0351 ms | 0.0328 ms |
+| GetArticles |              100 |  2.371 ms | 0.0451 ms | 0.0422 ms |
+| GetArticles |             1000 | 17.289 ms | 3.1345 ms | 9.1435 ms |
+| GetArticles |            10000 | 46.998 ms | 0.8687 ms | 1.8699 ms |
+| GetArticles |           100000 |        NA |        NA |        NA |
+
+Größe erhöht nur bei Service (wieder nicht geklappt):
+|      Method | NumberOfArticles |      Mean |     Error |     StdDev |    Median |
+|------------ |----------------- |----------:|----------:|-----------:|----------:|
+| GetArticles |                1 |  1.740 ms | 0.0282 ms |  0.0236 ms |  1.734 ms |
+| GetArticles |               10 |  1.828 ms | 0.0342 ms |  0.0320 ms |  1.808 ms |
+| GetArticles |              100 |  2.385 ms | 0.0461 ms |  0.0431 ms |  2.369 ms |
+| GetArticles |             1000 | 18.404 ms | 5.9002 ms | 17.3968 ms |  6.704 ms |
+| GetArticles |            10000 | 47.147 ms | 0.9425 ms |  1.8605 ms | 46.468 ms |
+| GetArticles |           100000 |        NA |        NA |         NA |        NA |
+
+Jetzt auch bei Client:
+|      Method | NumberOfArticles |       Mean |     Error |     StdDev |     Median |
+|------------ |----------------- |-----------:|----------:|-----------:|-----------:|
+| GetArticles |                1 |   1.772 ms | 0.0171 ms |  0.0152 ms |   1.774 ms |
+| GetArticles |               10 |   1.829 ms | 0.0206 ms |  0.0172 ms |   1.828 ms |
+| GetArticles |              100 |   2.360 ms | 0.0424 ms |  0.0376 ms |   2.353 ms |
+| GetArticles |             1000 |  18.901 ms | 5.6086 ms | 16.4492 ms |   6.693 ms |
+| GetArticles |            10000 |  46.145 ms | 0.8591 ms |  1.2044 ms |  46.324 ms |
+| GetArticles |           100000 | 461.898 ms | 9.2018 ms | 20.5811 ms | 454.725 ms |
+
+// * Warnings *
+MultimodalDistribution
+  GetArticlesBenchmark.GetArticles: Default -> It seems that the distribution is bimodal (mValue = 3.36)
+MinIterationTime
+  GetArticlesBenchmark.GetArticles: Default -> The minimum observed iteration time is 74.6374 ms which is very small. It's recommended to increase it to at least 100.0000 ms using more operations.

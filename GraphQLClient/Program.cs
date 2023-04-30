@@ -6,30 +6,31 @@ using GraphQLClient.Benchmark;
 using GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
 
 //TODO get it to work with System.Text.Json
-var graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new NewtonsoftJsonSerializer());
+// var graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new NewtonsoftJsonSerializer());
+//
+// var allArticleRequest = new GraphQLRequest
+// {
+//     Query = @"
+//         query{
+//           allArticles{
+//             id
+//             name
+//             articleCategory
+//             description
+//             price
+//             sku
+//           }
+//         }
+//     "
+// };
+//
+// var allArticleResponse = await graphQlClient.SendQueryAsync<ArticlesQueryResponse>(allArticleRequest);
+// foreach (var article in allArticleResponse.Data.Articles)
+// {
+//     Console.WriteLine(article.Id);
+//     Console.WriteLine(article.Name);
+//     Console.WriteLine("-----------------");
+// }
 
-var allArticleRequest = new GraphQLRequest
-{
-    Query = @"
-        query{
-          allArticles{
-            id
-            name
-            articleCategory
-            description
-            price
-            sku
-          }
-        }
-    "
-};
-
-var allArticleResponse = await graphQlClient.SendQueryAsync<AllArticlesQueryResponse>(allArticleRequest);
-foreach (var article in allArticleResponse.Data.Articles)
-{
-    Console.WriteLine(article.Id);
-    Console.WriteLine(article.Name);
-    Console.WriteLine("-----------------");
-}
-
-BenchmarkRunner.Run<RoundtripBenchmark>();
+//BenchmarkRunner.Run<RoundtripBenchmark>();
+BenchmarkRunner.Run<GetArticlesBenchmark>();

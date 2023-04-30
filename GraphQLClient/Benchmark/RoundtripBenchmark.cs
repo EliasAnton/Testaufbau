@@ -33,6 +33,12 @@ public class RoundtripBenchmark
     [Benchmark]
     public async Task GraphQlAllArticlesRoundtrip()
     {
-        var result = await _graphQlClient.SendQueryAsync<AllArticlesQueryResponse>(_allArticleRequest);
+        var result = await _graphQlClient.SendQueryAsync<ArticlesQueryResponse>(_allArticleRequest);
+    }
+    
+    [Benchmark]
+    public async Task GraphQlGetArticles()
+    {
+        var result = await _graphQlClient.SendQueryAsync<ArticlesQueryResponse>(_allArticleRequest);
     }
 }
