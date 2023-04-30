@@ -18,9 +18,9 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("articles")]
-    public ActionResult Get(int take = 10, int skip = 0)
+    public ActionResult Get(int take = 10)
     {
-        return Ok(_mariaDbContext.Articles!.OrderBy(a => a.Id).Skip(skip).Take(take));
+        return Ok(_mariaDbContext.Articles!.Take(take));
     }
 
     [HttpGet("articles/all")]

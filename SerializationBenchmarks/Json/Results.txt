@@ -14,3 +14,12 @@
 
 
 System.Text.Json is faster than Newtonsoft.Json in both serialization and deserialization.
+
+Ergebnisse auf meinem Laptop:
+
+|             Method |       Mean |    Error |   StdDev |
+|------------------- |-----------:|---------:|---------:|
+|   SerializeJsonStj |   370.8 ns |  4.79 ns |  4.48 ns |
+|   SerializeJsonNsj |   724.3 ns |  8.44 ns |  7.90 ns |
+| DeserializeJsonSTJ |   584.2 ns |  6.03 ns |  5.34 ns |
+| DeserializeJsonNSJ | 1,200.9 ns | 21.44 ns | 20.05 ns |

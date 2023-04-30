@@ -1,0 +1,10 @@
+Mit normalem REST-Service start über die IDE weil im publish modus wurde die connection abgelehnt
+
+|      Method | NumberOfArticles |       Mean |     Error |     StdDev |
+|------------ |----------------- |-----------:|----------:|-----------:|
+| GetArticles |                1 |   1.715 ms | 0.0226 ms |  0.0177 ms |
+| GetArticles |               10 |   1.814 ms | 0.0345 ms |  0.0323 ms |
+| GetArticles |              100 |   2.445 ms | 0.0475 ms |  0.0528 ms |
+| GetArticles |             1000 |   7.165 ms | 0.1336 ms |  0.1250 ms |
+| GetArticles |            10000 |  52.925 ms | 1.0440 ms |  1.0253 ms |
+| GetArticles |           100000 | 516.572 ms | 9.0392 ms | 12.0671 ms |
