@@ -1,11 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
-using Grpc.Net.Client;
-using Grpc.Net.ClientFactory;
 using GrpcClient.Benchmark;
-using ProtoBuf.Grpc.Client;
-using ProtoBuf.Grpc.Configuration;
-using Testaufbau.DataAccess.Grpc;
-using IGrpcService = Testaufbau.DataAccess.Grpc.IGrpcService;
 
 // using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
 // {

@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using GraphQL;
 using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
+using GraphQL.Client.Serializer.SystemTextJson;
 using GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
 
 namespace GraphQLClient.Benchmark;
@@ -169,7 +169,7 @@ public class GetArticlesBenchmark
     
     public GetArticlesBenchmark()
     {
-        _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new NewtonsoftJsonSerializer());
+        _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
     }
     
     [ParamsSource(nameof(RequestForOnlyIdsList))]
@@ -178,6 +178,6 @@ public class GetArticlesBenchmark
     [Benchmark]
     public async Task GraphQlGetArticles()
     {
-        var result = await _graphQlClient.SendQueryAsync<ArticlesQueryResponse>(Request);
+        var result = await _graphQlClient.SendQueryAsync<AllArticlesQueryResponse>(Request);
     }
 }

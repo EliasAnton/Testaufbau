@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using RestClient;
 using RestClient.Benchmark;
 
 // var client = new LocalClient();

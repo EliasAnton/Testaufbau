@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
 using BenchmarkDotNet.Attributes;
-using Testaufbau.DataAccess.Models;
 
 namespace RestClient.Benchmark;
 

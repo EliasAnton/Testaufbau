@@ -37,3 +37,6 @@ GetArticles aber in den Queries wurde immer nur die Id gefragt nicht der Rest
 // * Warnings *
 MultimodalDistribution
   GetArticlesBenchmark.GraphQlGetArticles: Default -> It seems that the distribution is multimodal (mValue = 5)
+  
+  
+-----Client-seitig war bis hiers alle mit NewtonsoftJson. Vlt retry mit System.Text.Json?-----
