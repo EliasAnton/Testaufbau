@@ -5,6 +5,7 @@ namespace Testaufbau.DataAccess.Models;
 
 [ProtoContract]
 [ProtoInclude(3, typeof(ArticleCategory))]
+[ProtoInclude(7, typeof(OrderItem))]
 public class Article
 {
     [Key]
@@ -25,4 +26,7 @@ public class Article
 
     [ProtoMember(6)]
     public string Sku { get; set; }
+
+    [ProtoMember(7)]
+    public List<OrderItem>? OrderItems { get; set; }
 }

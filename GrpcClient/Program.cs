@@ -7,7 +7,7 @@ using GrpcClient.Benchmark;
 // });
 //
 // var grpcService = channel.CreateGrpcService<IGrpcService>();
-// var result = await grpcService.GetArticlesAsync(new GrpcArticlesRequest() { Take = 100000 });
+// var result = await grpcService.GetArticlesAsync(new GrpcTakeRequest() { Take = 100000 });
 //
 //
 // Console.WriteLine("Moin");

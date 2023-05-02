@@ -4,7 +4,7 @@ using Testaufbau.DataAccess.Models;
 namespace Testaufbau.DataAccess.Grpc;
 
 [ProtoContract]
-public class GrpcOrderResponse
+public class GrpcOrdersResponse
 {
     [ProtoMember(1)]
     public List<Order> Orders { get; set; }

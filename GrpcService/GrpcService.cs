@@ -13,19 +13,11 @@ public class GrpcService : IGrpcService
         _dbContext = dbContext;
     }
 
-    public Task<GrpcArticlesResponse> GetArticlesAsync(GrpcArticlesRequest request)
+    public Task<GrpcArticlesResponse> GetArticlesAsync(GrpcTakeRequest request)
     {
         var articles = _dbContext.Articles!
             .Take(request.Take).ToList();
         var response = new GrpcArticlesResponse { Articles = articles };
-        return Task.FromResult(response);
-    }
-    
-    public Task<GrpcArticlesResponse> GetAllArticlesAsync()
-    {
-        var articles = _dbContext.Articles!
-            .ToList();
-        var response = new GrpcArticlesResponse() { Articles = articles };
         return Task.FromResult(response);
     }
 
@@ -36,21 +28,38 @@ public class GrpcService : IGrpcService
         return Task.FromResult(article);
     }
 
-    public Task<GrpcOrderResponse> GetAllOrdersAsync()
+    public Task<GrpcArticlesResponse> GetAllArticlesAsync()
     {
-        var orders = _dbContext.Orders!
-            .Include(o => o.CustomerAddress!)
-            .Include(o => o.OrderItems!)
-            .ThenInclude(oi => oi.Article)
+        var articles = _dbContext.Articles!
             .ToList();
-        var response = new GrpcOrderResponse() { Orders = orders };
+        var response = new GrpcArticlesResponse() { Articles = articles };
         return Task.FromResult(response);
     }
 
-    public Task<Address?> GetAddressByIdAsync(GrpcIdRequest idRequest)
+    public Task<GrpcOrdersResponse> GetOrdersAsync(GrpcTakeRequest request)
     {
-        var address = _dbContext.Addresses!
-            .FirstOrDefault(a => a.Id == idRequest.Id);
-        return Task.FromResult(address);
+        var orders = _dbContext.Orders!
+            .Take(request.Take)
+            .ToList();
+        var response = new GrpcOrdersResponse() { Orders = orders };
+        return Task.FromResult(response);
     }
+
+    public Task<GrpcOrdersResponse> GetOrderByIdAsync(GrpcIdRequest idRequest)
+    {
+        var order = _dbContext.Orders!
+            .FirstOrDefault(o => o.Id == idRequest.Id);
+        var response = new GrpcOrdersResponse() { Orders = new List<Order> { order } };
+        return Task.FromResult(response);
+    }
+
+    public Task<GrpcOrdersResponse> GetAllOrdersAsync()
+    {
+        var orders = _dbContext.Orders!
+            .ToList();
+        var response = new GrpcOrdersResponse() { Orders = orders };
+        return Task.FromResult(response);
+    }
+
+
 }

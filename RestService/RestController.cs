@@ -23,6 +23,13 @@ public class RestController : ControllerBase
         return Ok(_mariaDbContext.Articles!.Take(take));
     }
 
+    [HttpGet("articles/{id}")]
+    public ActionResult GetArticle(int id)
+    {
+        return Ok(_mariaDbContext.Articles!
+            .FirstOrDefault(a => a.Id == id));
+    }
+
     [HttpGet("articles/all")]
     public ActionResult GetAllArticles()
     {
@@ -30,22 +37,25 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("orders")]
-    public ActionResult GetOrders()
+    public ActionResult GetOrders(int take = 10)
     {
         return Ok(_mariaDbContext.Orders!
-            .Include(o => o.OrderItems)!
-            .ThenInclude(oi => oi.Article)
-            .Include(o => o.CustomerAddress)
-            .ToList());
+            .Take(take));
     }
 
 
-    [HttpPost("articles/update")]
-    public ActionResult UpdateArticle(Article article)
+    [HttpGet("orders/{id}")]
+    public ActionResult GetOrder(int id)
     {
-        _mariaDbContext.Articles!.Update(article);
-        _mariaDbContext.SaveChanges();
-        return Ok();
+        return Ok(_mariaDbContext.Orders!
+            .FirstOrDefault(o => o.Id == id));
+    }
+
+    [HttpGet("orders/all")]
+    public ActionResult GetAllOrders()
+    {
+        return Ok(_mariaDbContext.Orders!
+            .ToList());
     }
 
     [HttpGet("grpc/test")]

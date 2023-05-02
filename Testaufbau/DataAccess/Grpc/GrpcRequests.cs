@@ -10,7 +10,7 @@ public class GrpcIdRequest
 }
 
 [ProtoContract]
-public class GrpcArticlesRequest
+public class GrpcTakeRequest
 {
     [ProtoMember(1)]
     public int Take { get; set; }
