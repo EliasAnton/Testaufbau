@@ -58,6 +58,13 @@ public class RestController : ControllerBase
             .ToList());
     }
 
+    [HttpGet("addresses/{id}")]
+    public ActionResult GetAddress(int id)
+    {
+        return Ok(_mariaDbContext.Addresses!
+            .FirstOrDefault(a => a.Id == id));
+    }
+
     [HttpGet("grpc/test")]
     public ActionResult GrpcTest()
     {

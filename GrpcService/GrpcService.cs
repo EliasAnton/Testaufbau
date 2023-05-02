@@ -62,4 +62,12 @@ public class GrpcService : IGrpcService
     }
 
 
+
+    public Task<Address?> GetAddressByIdAsync(GrpcIdRequest idRequest)
+    {
+        var address = _dbContext.Addresses!
+            .FirstOrDefault(a => a.Id == idRequest.Id);
+        return Task.FromResult(address);
+    }
+
 }
