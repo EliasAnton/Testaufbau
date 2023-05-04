@@ -4,7 +4,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "ui/playground",
-      "applicationUrl": "https://localhost:7052",
+      "applicationUrl": "http://localhost:7052",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

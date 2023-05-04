@@ -40,7 +40,7 @@ public class LocalClient
         client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-        var requestUri = $"https://localhost:7123/Rest/Articles?take={take}";
+        var requestUri = $"http://localhost:7123/Rest/Articles?take={take}";
         var response = await client.GetAsync(requestUri);
         response.EnsureSuccessStatusCode();
 
