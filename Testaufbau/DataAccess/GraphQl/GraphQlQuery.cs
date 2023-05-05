@@ -23,7 +23,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var amount = context.GetArgument<int>("amount");
-                return await Queryable.Take(_dbContext.Articles!, (int)amount).ToListAsync();
+                return await _dbContext.Articles!.Take(amount).ToListAsync();
             }
         );
         FieldAsync<ArticleType>(
@@ -50,7 +50,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var amount = context.GetArgument<int>("amount");
-                return await Queryable.Take(_dbContext.Orders!, (int)amount)
+                return await _dbContext.Orders!.Take(amount)
                     .ToListAsync();
             }
         );
@@ -84,5 +84,4 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
                     .ToListAsync();
             });
     }
-
 }

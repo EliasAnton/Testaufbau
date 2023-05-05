@@ -1,6 +1,4 @@
-﻿using BenchmarkDotNet.Running;
-using RestClient;
-using RestClient.Benchmark;
+﻿using RestClient;
 
 var client = new LocalClient();
 await LocalClient.RunUserPrompts();

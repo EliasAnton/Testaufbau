@@ -6,14 +6,18 @@ namespace Testaufbau.DataAccess;
 public class MariaDbContext : DbContext, IMariaDbContext
 {
     private readonly IConfiguration _configuration;
+
     public MariaDbContext(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
+    public DbSet<Article>? Articles { get; set; }
+    public DbSet<Order>? Orders { get; set; }
+    public DbSet<OrderItem>? OrderItems { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         modelBuilder.Entity<OrderItem>()
             .HasOne(x => x.Order)
             .WithMany(x => x.OrderItems)
@@ -37,7 +41,6 @@ public class MariaDbContext : DbContext, IMariaDbContext
         modelBuilder.Entity<OrderItem>().HasData(
             new OrderItem { Id = 1, OrderId = 1, ArticleId = 5, Quantity = 2 }
         );
-
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,8 +48,4 @@ public class MariaDbContext : DbContext, IMariaDbContext
         var connectionString = _configuration.GetConnectionString("MariaDb");
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
-
-    public DbSet<Article>? Articles { get; set; }
-    public DbSet<Order>? Orders { get; set; }
-    public DbSet<OrderItem>? OrderItems { get; set; }
 }

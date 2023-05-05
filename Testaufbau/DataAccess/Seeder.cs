@@ -9,10 +9,10 @@ public static class Seeder
     {
         if (!mariaDbContext.Articles!.Any())
         {
-            Fixture fixture = new Fixture();
+            var fixture = new Fixture();
             fixture.Customize<Article>(article => article.Without(a => a.Id));
             //The next two lines add 100.000 rows to the database
-            List<Article> products = fixture.CreateMany<Article>(100000).ToList();
+            var products = fixture.CreateMany<Article>(100000).ToList();
             mariaDbContext.AddRange(products);
             mariaDbContext.SaveChanges();
             Console.WriteLine("Database seeded");

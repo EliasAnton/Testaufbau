@@ -6,7 +6,6 @@ namespace RestClient;
 
 public class LocalClient
 {
-
     public static async Task RunUserPrompts()
     {
         string continuePrompt;
@@ -18,7 +17,7 @@ public class LocalClient
             var take = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
 
             // Send REST request and receive response
-            List<Article> response = await CallService(take);
+            var response = await CallService(take);
 
             Console.WriteLine("Found " + response.Count + " results:");
             foreach (var article in response)
@@ -49,5 +48,4 @@ public class LocalClient
         var responseObject = await response.Content.ReadAsAsync<List<Article>>();
         return responseObject;
     }
-
 }

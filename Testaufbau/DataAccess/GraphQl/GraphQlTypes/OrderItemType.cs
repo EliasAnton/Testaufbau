@@ -12,12 +12,12 @@ public sealed class OrderItemType : ObjectGraphType<OrderItem>
         Field(x => x.ArticleId);
         Field(x => x.Quantity);
         Field<OrderType>(
-            name: "order",
-            resolve: context => Queryable.FirstOrDefault(dbContext.Orders!, x => x.Id == context.Source.OrderId)
+            "order",
+            resolve: context => dbContext.Orders!.FirstOrDefault(x => x.Id == context.Source.OrderId)
         );
         Field<ArticleType>(
-            name: "article",
-            resolve: context => Queryable.FirstOrDefault(dbContext.Articles!, x => x.Id == context.Source.ArticleId)
+            "article",
+            resolve: context => dbContext.Articles!.FirstOrDefault(x => x.Id == context.Source.ArticleId)
         );
     }
 }

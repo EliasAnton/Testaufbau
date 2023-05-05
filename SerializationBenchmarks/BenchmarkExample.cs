@@ -1,11 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
 
 namespace SerializationBenchmarks;
+
 public class SingleVsFirst
 {
-    private readonly List<string> _haystack = new List<string>();
+    private readonly List<string> _haystack = new();
     private readonly int _haystackSize = 1000000;
-    public List<string> _needles => new List<string> { "StartNeedle", "MiddleNeedle", "EndNeedle" };
 
     public SingleVsFirst()
     {
@@ -20,13 +20,19 @@ public class SingleVsFirst
         _haystack.Insert(_haystack.Count - 1, _needles[2]);
     }
 
-    [ParamsSource(nameof(_needles))]
-    public string Needle { get; set; }
+    public List<string> _needles => new() { "StartNeedle", "MiddleNeedle", "EndNeedle" };
+
+    [ParamsSource(nameof(_needles))] public string Needle { get; set; }
 
     [Benchmark]
-    public string Single() => _haystack.SingleOrDefault(x => x == Needle);
+    public string Single()
+    {
+        return _haystack.SingleOrDefault(x => x == Needle);
+    }
 
     [Benchmark]
-    public string First() => _haystack.FirstOrDefault(x => x == Needle);
-
+    public string First()
+    {
+        return _haystack.FirstOrDefault(x => x == Needle);
+    }
 }

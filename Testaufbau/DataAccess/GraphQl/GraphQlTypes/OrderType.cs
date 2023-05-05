@@ -14,8 +14,8 @@ public sealed class OrderType : ObjectGraphType<Order>
         Field(x => x.CustomerEmail, nullable: true);
         Field(x => x.CustomerPhone, nullable: true);
         Field<ListGraphType<OrderItemType>>(
-            name: "orderItems",
-            resolve: context => Queryable.Where(dbContext.OrderItems!, x => x.OrderId == context.Source.Id)
+            "orderItems",
+            resolve: context => dbContext.OrderItems!.Where(x => x.OrderId == context.Source.Id)
                 .ToList()
         );
     }

@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 using SerializationBenchmarks.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SerializationBenchmarks.Json;
 
@@ -27,14 +28,14 @@ public class JsonSerialDeserialBenchmark
         _serializedPersonNsj = JsonConvert.SerializeObject(_person);
 
         //System.Text.Json
-        _serializedPersonStj = System.Text.Json.JsonSerializer.Serialize(_person);
+        _serializedPersonStj = JsonSerializer.Serialize(_person);
     }
 
 
     [Benchmark]
     public void SerializeJsonStj()
     {
-        System.Text.Json.JsonSerializer.Serialize(_person);
+        JsonSerializer.Serialize(_person);
     }
 
     [Benchmark]
@@ -47,7 +48,7 @@ public class JsonSerialDeserialBenchmark
     [Benchmark]
     public void DeserializeJsonSTJ()
     {
-        System.Text.Json.JsonSerializer.Deserialize<Person>(_serializedPersonStj);
+        JsonSerializer.Deserialize<Person>(_serializedPersonStj);
     }
 
 
@@ -56,5 +57,4 @@ public class JsonSerialDeserialBenchmark
     {
         JsonConvert.DeserializeObject<Person>(_serializedPersonNsj);
     }
-
 }

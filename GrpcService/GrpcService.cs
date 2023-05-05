@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Testaufbau.DataAccess;
+﻿using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Grpc;
 using Testaufbau.DataAccess.Models;
 
@@ -8,6 +7,7 @@ namespace GrpcService;
 public class GrpcService : IGrpcService
 {
     private readonly MariaDbContext _dbContext;
+
     public GrpcService(MariaDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -32,7 +32,7 @@ public class GrpcService : IGrpcService
     {
         var articles = _dbContext.Articles!
             .ToList();
-        var response = new GrpcArticlesResponse() { Articles = articles };
+        var response = new GrpcArticlesResponse { Articles = articles };
         return Task.FromResult(response);
     }
 
@@ -41,7 +41,7 @@ public class GrpcService : IGrpcService
         var orders = _dbContext.Orders!
             .Take(request.Take)
             .ToList();
-        var response = new GrpcOrdersResponse() { Orders = orders };
+        var response = new GrpcOrdersResponse { Orders = orders };
         return Task.FromResult(response);
     }
 
@@ -49,7 +49,7 @@ public class GrpcService : IGrpcService
     {
         var order = _dbContext.Orders!
             .FirstOrDefault(o => o.Id == idRequest.Id);
-        var response = new GrpcOrdersResponse() { Orders = new List<Order> { order } };
+        var response = new GrpcOrdersResponse { Orders = new List<Order> { order } };
         return Task.FromResult(response);
     }
 
@@ -57,7 +57,7 @@ public class GrpcService : IGrpcService
     {
         var orders = _dbContext.Orders!
             .ToList();
-        var response = new GrpcOrdersResponse() { Orders = orders };
+        var response = new GrpcOrdersResponse { Orders = orders };
         return Task.FromResult(response);
     }
 
@@ -66,8 +66,7 @@ public class GrpcService : IGrpcService
         var orderItems = _dbContext.OrderItems!
             .Where(oi => oi.OrderId == idRequest.Id)
             .ToList();
-        var response = new GrpcOrderItemsResponse() { OrderItems = orderItems };
+        var response = new GrpcOrderItemsResponse { OrderItems = orderItems };
         return Task.FromResult(response);
     }
-
 }

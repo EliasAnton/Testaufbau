@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProtoBuf;
 using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
@@ -57,7 +56,7 @@ public class RestController : ControllerBase
         return Ok(_mariaDbContext.Orders!
             .ToList());
     }
-    
+
     [HttpGet("orderItems/{orderId:int}")]
     public ActionResult GetOrderItems(int orderId)
     {
