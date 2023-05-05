@@ -21,7 +21,7 @@ public class GrpcService : IGrpcService
         return Task.FromResult(response);
     }
 
-    public Task<Article?> GetArticleByIdAsync(GrpcIdRequest idRequest)
+    public Task<Article?> GetArticleAsync(GrpcIdRequest idRequest)
     {
         var article = _dbContext.Articles!
             .FirstOrDefault(a => a.Id == idRequest.Id);
@@ -45,7 +45,7 @@ public class GrpcService : IGrpcService
         return Task.FromResult(response);
     }
 
-    public Task<GrpcOrdersResponse> GetOrderByIdAsync(GrpcIdRequest idRequest)
+    public Task<GrpcOrdersResponse> GetOrderAsync(GrpcIdRequest idRequest)
     {
         var order = _dbContext.Orders!
             .FirstOrDefault(o => o.Id == idRequest.Id);
@@ -61,7 +61,14 @@ public class GrpcService : IGrpcService
         return Task.FromResult(response);
     }
 
-
+    public Task<GrpcOrderItemsResponse> GetOrderItemsAsync(GrpcIdRequest idRequest)
+    {
+        var orderItems = _dbContext.OrderItems!
+            .Where(oi => oi.OrderId == idRequest.Id)
+            .ToList();
+        var response = new GrpcOrderItemsResponse() { OrderItems = orderItems };
+        return Task.FromResult(response);
+    }
 
     public Task<Address?> GetAddressByIdAsync(GrpcIdRequest idRequest)
     {

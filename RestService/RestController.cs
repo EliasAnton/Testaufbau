@@ -18,12 +18,12 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("articles")]
-    public ActionResult Get(int take = 10)
+    public ActionResult GetArticles(int take = 10)
     {
         return Ok(_mariaDbContext.Articles!.Take(take));
     }
 
-    [HttpGet("articles/{id}")]
+    [HttpGet("articles/{id:int}")]
     public ActionResult GetArticle(int id)
     {
         return Ok(_mariaDbContext.Articles!
@@ -44,7 +44,7 @@ public class RestController : ControllerBase
     }
 
 
-    [HttpGet("orders/{id}")]
+    [HttpGet("orders/{id:int}")]
     public ActionResult GetOrder(int id)
     {
         return Ok(_mariaDbContext.Orders!
@@ -57,8 +57,15 @@ public class RestController : ControllerBase
         return Ok(_mariaDbContext.Orders!
             .ToList());
     }
+    
+    [HttpGet("orderItems/{orderId:int}")]
+    public ActionResult GetOrderItems(int orderId)
+    {
+        return Ok(_mariaDbContext.OrderItems!
+            .Where(o => o.OrderId == orderId));
+    }
 
-    [HttpGet("addresses/{id}")]
+    [HttpGet("addresses/{id:int}")]
     public ActionResult GetAddress(int id)
     {
         return Ok(_mariaDbContext.Addresses!

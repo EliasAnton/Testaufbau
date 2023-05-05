@@ -7,9 +7,9 @@ namespace Testaufbau.DataAccess.Grpc;
 public interface IGrpcService
 {
     Task<GrpcArticlesResponse> GetArticlesAsync(GrpcTakeRequest request);
-    Task<Article?> GetArticleByIdAsync(GrpcIdRequest idRequest);
+    Task<Article?> GetArticleAsync(GrpcIdRequest idRequest);
     Task<GrpcArticlesResponse> GetAllArticlesAsync();
     Task<GrpcOrdersResponse> GetOrdersAsync(GrpcTakeRequest request);
-    Task<GrpcOrdersResponse> GetOrderByIdAsync(GrpcIdRequest idRequest);
+    Task<GrpcOrdersResponse> GetOrderAsync(GrpcIdRequest idRequest);
     Task<GrpcOrdersResponse> GetAllOrdersAsync();
 }

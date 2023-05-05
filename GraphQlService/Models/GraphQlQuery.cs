@@ -28,7 +28,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             }
         );
         FieldAsync<ArticleType>(
-            "getArticleById",
+            "getArticle",
             arguments: new QueryArguments(
                 new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
             ),
@@ -57,7 +57,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             }
         );
         FieldAsync<OrderType>(
-            "getOrderById",
+            "getOrder",
             arguments: new QueryArguments(
                 new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
             ),
@@ -74,9 +74,17 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
         );
 
         FieldAsync<ListGraphType<OrderItemType>>(
-            "allOrderItems",
-            resolve: async context => await _dbContext.OrderItems!.ToListAsync()
-        );
+            "getOrderItems",
+            arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "orderId" }
+            ),
+            resolve: async context =>
+            {
+                var id = context.GetArgument<int>("id");
+                return await _dbContext.OrderItems!
+                    .Where(oi => oi.OrderId == id)
+                    .ToListAsync();
+            });
 
 
         FieldAsync<AddressType>(
