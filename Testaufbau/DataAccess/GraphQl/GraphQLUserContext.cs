@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace GraphQlService.Models;
+namespace Testaufbau.DataAccess.GraphQl;
 
 public class GraphQlUserContext : Dictionary<string, object>
 {

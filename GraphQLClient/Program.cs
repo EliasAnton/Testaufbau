@@ -1,7 +1,7 @@
 ﻿using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
-using GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
+using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 var graphQlClient = new GraphQLHttpClient("http://localhost:7052/graphql", new SystemTextJsonSerializer());
 

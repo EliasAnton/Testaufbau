@@ -1,8 +1,7 @@
 using GraphQL.Types;
-using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
 
-namespace GraphQlService.Models.GraphQlTypes;
+namespace Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 public sealed class OrderType : ObjectGraphType<Order>
 {
@@ -16,8 +15,7 @@ public sealed class OrderType : ObjectGraphType<Order>
         Field(x => x.CustomerPhone, nullable: true);
         Field<ListGraphType<OrderItemType>>(
             name: "orderItems",
-            resolve: context => dbContext.OrderItems!
-                .Where(x => x.OrderId == context.Source.Id)
+            resolve: context => Queryable.Where(dbContext.OrderItems!, x => x.OrderId == context.Source.Id)
                 .ToList()
         );
     }

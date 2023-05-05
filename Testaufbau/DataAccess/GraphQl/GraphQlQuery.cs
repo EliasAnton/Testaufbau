@@ -1,10 +1,9 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using GraphQlService.Models.GraphQlTypes;
 using Microsoft.EntityFrameworkCore;
-using Testaufbau.DataAccess;
+using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
-namespace GraphQlService.Models;
+namespace Testaufbau.DataAccess.GraphQl;
 
 public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
 {
@@ -24,7 +23,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var amount = context.GetArgument<int>("amount");
-                return await _dbContext.Articles!.Take(amount).ToListAsync();
+                return await Queryable.Take(_dbContext.Articles!, (int)amount).ToListAsync();
             }
         );
         FieldAsync<ArticleType>(
@@ -51,8 +50,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var amount = context.GetArgument<int>("amount");
-                return await _dbContext.Orders!
-                    .Take(amount)
+                return await Queryable.Take(_dbContext.Orders!, (int)amount)
                     .ToListAsync();
             }
         );

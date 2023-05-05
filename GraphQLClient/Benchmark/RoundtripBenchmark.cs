@@ -2,7 +2,7 @@
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
-using GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
+using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 namespace GraphQLClient.Benchmark;
 

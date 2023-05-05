@@ -1,7 +1,7 @@
 using GraphQL.Types;
 using Testaufbau.DataAccess.Models;
 
-namespace GraphQlService.Models.GraphQlTypes;
+namespace Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 public sealed class ArticleType : ObjectGraphType<Article>
 {
