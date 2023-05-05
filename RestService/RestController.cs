@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProtoBuf;
 using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
@@ -18,9 +17,16 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("articles")]
-    public ActionResult Get(int take = 10)
+    public ActionResult GetArticles(int take = 10)
     {
         return Ok(_mariaDbContext.Articles!.Take(take));
+    }
+
+    [HttpGet("articles/{id:int}")]
+    public ActionResult GetArticle(int id)
+    {
+        return Ok(_mariaDbContext.Articles!
+            .FirstOrDefault(a => a.Id == id));
     }
 
     [HttpGet("articles/all")]
@@ -30,22 +36,32 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("orders")]
-    public ActionResult GetOrders()
+    public ActionResult GetOrders(int take = 10)
     {
         return Ok(_mariaDbContext.Orders!
-            .Include(o => o.OrderItems)!
-            .ThenInclude(oi => oi.Article)
-            .Include(o => o.CustomerAddress)
-            .ToList());
+            .Take(take));
     }
 
 
-    [HttpPost("articles/update")]
-    public ActionResult UpdateArticle(Article article)
+    [HttpGet("orders/{id:int}")]
+    public ActionResult GetOrder(int id)
     {
-        _mariaDbContext.Articles!.Update(article);
-        _mariaDbContext.SaveChanges();
-        return Ok();
+        return Ok(_mariaDbContext.Orders!
+            .FirstOrDefault(o => o.Id == id));
+    }
+
+    [HttpGet("orders/all")]
+    public ActionResult GetAllOrders()
+    {
+        return Ok(_mariaDbContext.Orders!
+            .ToList());
+    }
+
+    [HttpGet("orderItems/{orderId:int}")]
+    public ActionResult GetOrderItems(int orderId)
+    {
+        return Ok(_mariaDbContext.OrderItems!
+            .Where(o => o.OrderId == orderId));
     }
 
     [HttpGet("grpc/test")]

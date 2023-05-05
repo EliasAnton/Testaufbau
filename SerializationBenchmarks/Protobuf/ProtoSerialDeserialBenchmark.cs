@@ -41,5 +41,4 @@ public class ProtoSerialDeserialBenchmark
     {
         Serializer.Deserialize<Person>(new MemoryStream(_serializedPerson));
     }
-
 }

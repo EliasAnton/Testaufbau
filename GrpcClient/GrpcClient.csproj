@@ -9,22 +9,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GrpcService\GrpcService.csproj" />
+        <ProjectReference Include="..\GrpcService\GrpcService.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
-      <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
-      <PackageReference Include="Grpc.Tools" Version="2.54.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.5"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.52.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.54.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 </Project>

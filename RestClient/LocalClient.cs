@@ -6,7 +6,6 @@ namespace RestClient;
 
 public class LocalClient
 {
-
     public static async Task RunUserPrompts()
     {
         string continuePrompt;
@@ -17,11 +16,8 @@ public class LocalClient
             Console.WriteLine("Take:");
             var take = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
 
-            Console.WriteLine("Skip:");
-            var skip = int.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
             // Send REST request and receive response
-            List<Article> response = await CallService(take);
+            var response = await CallService(take);
 
             Console.WriteLine("Found " + response.Count + " results:");
             foreach (var article in response)
@@ -30,7 +26,7 @@ public class LocalClient
                 Console.WriteLine(article.Name);
                 Console.WriteLine("--------------------");
             }
-            
+
             Console.WriteLine("Continue? (y/n)");
             continuePrompt = Console.ReadLine()!;
         } while (continuePrompt == "y");
@@ -43,12 +39,13 @@ public class LocalClient
         client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-        var requestUri = $"https://localhost:7123/Rest/Articles?take={take}";
+        var requestUri = $"http://localhost:7123/Rest/Articles?take={take}";
         var response = await client.GetAsync(requestUri);
         response.EnsureSuccessStatusCode();
+
+        Console.WriteLine("Size of response: " + response.Content.Headers.ContentLength + " bytes");
 
         var responseObject = await response.Content.ReadAsAsync<List<Article>>();
         return responseObject;
     }
-
 }

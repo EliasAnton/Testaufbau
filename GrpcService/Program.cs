@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using System.IO.Compression;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MySqlConnector;
-using Testaufbau.DataAccess;
 using ProtoBuf.Grpc.Server;
+using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<MariaDbContext>(ServiceLifetime.Transient);
 
 builder.Services.AddCodeFirstGrpc(config =>
 {
-    config.ResponseCompressionLevel = System.IO.Compression.CompressionLevel.Optimal;
+    config.ResponseCompressionLevel = CompressionLevel.Optimal;
     config.MaxSendMessageSize = null;
 });
 

@@ -2,9 +2,9 @@
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
 using GraphQL.SystemTextJson;
-using GraphQlService.Models;
 using MySqlConnector;
 using Testaufbau.DataAccess;
+using Testaufbau.DataAccess.GraphQl;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -6,51 +6,71 @@
 </head>
 <body>
 
-	<div id="myPlot"></div>
+	<div id="myPlot1"></div>
+	<div id="myPlot2"></div>
+	<div id="myPlot3"></div>
+	<div id="myPlot4"></div>
+	<div id="myPlot5"></div>
+	<div id="myPlot6"></div>
 
 	<script>
 		var grpcData = {
-			x: [1, 10, 100, 1000, 10000, 100000],
-			y: [1.772, 1.829, 2.36, 18.901, 46.145, 461.898],
-			name: "gRPC",
-			type: "scatter"
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [1.772, 1.715, 2.704],
+			name: "1",
+			type: "bar"
 		};
 
 		var restData = {
-			x: [1, 10, 100, 1000, 10000, 100000],
-			y: [1.715, 1.814, 2.445, 7.165, 52.925, 516.572],
-			name: "REST",
-			type: "scatter"
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [1.829, 1.814, 2.759],
+			name: "10",
+			type: "bar"
 		};
 
 		var graphqlData = {
-			x: [1, 10, 100, 1000, 10000, 100000],
-			y: [2.704, 2.759, 3.515, 16.766, 69.247, 513.332],
-			name: "GraphQL",
-			type: "scatter"
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [2.36, 2.445, 3.515],
+			name: "100",
+			type: "bar"
 		};
-		var graphqlDataOnlyIds = {
-			x: [1, 10, 100, 1000, 10000, 100000],
-			y: [2.418, 2.539, 2.920, 17.305, 25.920, 194.368],
-			name: "GraphQLOnlyIds",
-			type: "scatter"
+		
+		var grpcData1k = {
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [18.901, 7.165, 16.766],
+			name: "1,000",
+			type: "bar"
+		};
+
+		var restData10k = {
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [46.145, 52.925, 69.247],
+			name: "10,000",
+			type: "bar"
+		};
+
+		var graphqlData100k = {
+			x: ["gRPC", "REST", "GraphQL"],
+			y: [461.898, 516.572, 513.332],
+			name: "100,000",
+			type: "bar"
 		};
 
 		var layout = {
-			title: "Performance Comparison",
-			xaxis: {
-				title: "Number Of Articles (log10)",
-				type: "log",
-				exponentformat: "power"
-			},
 			yaxis: {
 				title: "Response Time (ms)",
 				type: "linear"
-			}
+			},
+			bargap: 0.2,
+			bargroupgap: 0.1
 		};
 
-		var data = [grpcData, restData, graphqlData, graphqlDataOnlyIds];
-		Plotly.newPlot('myPlot', data, layout);
+		Plotly.newPlot('myPlot1', [grpcData], Object.assign({}, layout, {title: "1"}));
+		Plotly.newPlot('myPlot2', [restData], Object.assign({}, layout, {title: "10"}));
+		Plotly.newPlot('myPlot3', [graphqlData], Object.assign({}, layout, {title: "100"}));
+		Plotly.newPlot('myPlot4', [grpcData1k], Object.assign({}, layout, {title: "1,000"}));
+		Plotly.newPlot('myPlot5', [restData10k], Object.assign({}, layout, {title: "10,000"}));
+		Plotly.newPlot('myPlot6', [graphqlData100k], Object.assign({}, layout, {title: "100,000"}));
 	</script>
 
 </body>

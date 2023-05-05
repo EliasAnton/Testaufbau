@@ -9,18 +9,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
-        <PackageReference Include="Google.Protobuf" Version="3.22.3" />
-        <PackageReference Include="Google.Protobuf.Tools" Version="3.22.3" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="protobuf-net" Version="3.2.16" />
-        <PackageReference Include="System.Text.Json" Version="7.0.2" />
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.5"/>
+        <PackageReference Include="Google.Protobuf" Version="3.22.3"/>
+        <PackageReference Include="Google.Protobuf.Tools" Version="3.22.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="protobuf-net" Version="3.2.16"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.2"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

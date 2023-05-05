@@ -1,7 +1,7 @@
 ﻿using GraphQL.Instrumentation;
 using GraphQL.Types;
 
-namespace GraphQlService.Models;
+namespace Testaufbau.DataAccess.GraphQl;
 
 public class GraphQlSchema : Schema
 {

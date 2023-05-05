@@ -2,14 +2,15 @@
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
-using GraphQlService.Models.GraphQlTypes.ResponseGraphQlTypes;
+using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 namespace GraphQLClient.Benchmark;
 
 public class RoundtripBenchmark
 {
-    private readonly GraphQLHttpClient _graphQlClient;
     private readonly GraphQLRequest _allArticleRequest;
+    private readonly GraphQLHttpClient _graphQlClient;
+
     public RoundtripBenchmark()
     {
         _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
@@ -35,7 +36,7 @@ public class RoundtripBenchmark
     {
         var result = await _graphQlClient.SendQueryAsync<AllArticlesQueryResponse>(_allArticleRequest);
     }
-    
+
     [Benchmark]
     public async Task GraphQlGetArticles()
     {
