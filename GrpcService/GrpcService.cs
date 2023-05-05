@@ -70,11 +70,4 @@ public class GrpcService : IGrpcService
         return Task.FromResult(response);
     }
 
-    public Task<Address?> GetAddressByIdAsync(GrpcIdRequest idRequest)
-    {
-        var address = _dbContext.Addresses!
-            .FirstOrDefault(a => a.Id == idRequest.Id);
-        return Task.FromResult(address);
-    }
-
 }

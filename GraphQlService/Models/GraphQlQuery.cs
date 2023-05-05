@@ -85,20 +85,6 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
                     .Where(oi => oi.OrderId == id)
                     .ToListAsync();
             });
-
-
-        FieldAsync<AddressType>(
-            "getAddressById",
-            arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
-            ),
-            resolve: async context =>
-            {
-                var id = context.GetArgument<int>("id");
-                return await _dbContext.Addresses!
-                    .FirstOrDefaultAsync(a => a.Id == id);
-            }
-        );
     }
 
 }

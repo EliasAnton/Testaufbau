@@ -65,13 +65,6 @@ public class RestController : ControllerBase
             .Where(o => o.OrderId == orderId));
     }
 
-    [HttpGet("addresses/{id:int}")]
-    public ActionResult GetAddress(int id)
-    {
-        return Ok(_mariaDbContext.Addresses!
-            .FirstOrDefault(a => a.Id == id));
-    }
-
     [HttpGet("grpc/test")]
     public ActionResult GrpcTest()
     {

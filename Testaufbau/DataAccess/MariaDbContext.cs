@@ -31,15 +31,11 @@ public class MariaDbContext : DbContext, IMariaDbContext
         );
 
         modelBuilder.Entity<Order>().HasData(
-            new Order { Id = 1, OrderDate = DateTime.Now, TotalPrice = 1.0m, CustomerName = "Test1", CustomerAddressId = 1, CustomerEmail = "", CustomerPhone = "" }
+            new Order { Id = 1, OrderDate = DateTime.Now, TotalPrice = 1.0m, CustomerName = "Test1", CustomerEmail = "", CustomerPhone = "" }
         );
 
         modelBuilder.Entity<OrderItem>().HasData(
             new OrderItem { Id = 1, OrderId = 1, ArticleId = 5, Quantity = 2 }
-        );
-
-        modelBuilder.Entity<Address>().HasData(
-            new Address { Id = 1, Street = "Hauptstr.", HouseNumber = 1, City = "Leipzig", ZipCode = "04107", Country = "Germany" }
         );
 
     }
@@ -53,5 +49,4 @@ public class MariaDbContext : DbContext, IMariaDbContext
     public DbSet<Article>? Articles { get; set; }
     public DbSet<Order>? Orders { get; set; }
     public DbSet<OrderItem>? OrderItems { get; set; }
-    public DbSet<Address>? Addresses { get; set; }
 }
