@@ -33,7 +33,6 @@ using (var scope = app.Services.CreateScope())
 {
     var mariaDbContext = scope.ServiceProvider.GetRequiredService<MariaDbContext>();
     mariaDbContext.Database.EnsureCreated();
-    //mariaDbContext.Seed();
 }
 
 app.UseEndpoints(endpoints =>

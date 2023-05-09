@@ -20,25 +20,33 @@ public static class Seeder
         }
     }
 
-    public static void SeedForOrderTest(MariaDbContext mariaDbContext)
+    public static void SeedForOrderTest(this MariaDbContext mariaDbContext)
     {
         if (!mariaDbContext.Orders!.Any())
         {
             var fixture = new Fixture();
+            //Remove the standard throw on recursion behaviour
+            fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
+                .ForEach(b => fixture.Behaviors.Remove(b));
+            fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+
             CustomizeModel(fixture);
 
             AddOrders(mariaDbContext, fixture);
             AddOrderItemsWithOrderReference(mariaDbContext, fixture);
         }
     }
-    
+
 
     private static void CustomizeModel(Fixture fixture)
     {
-        fixture.Customize<Order>(order => order.Without(o => o.Id));
+        fixture.Customize<Order>(order => order
+            .Without(o => o.Id)
+            .Without(o => o.OrderItems));
         fixture.Customize<OrderItem>(orderItem => orderItem
             .Without(oi => oi.Id)
             .Without(oi => oi.OrderId)
+            .Without(oi => oi.Order)
         );
         fixture.Customize<Article>(article => article.Without(a => a.Id));
     }
@@ -49,7 +57,7 @@ public static class Seeder
         var products = fixture.CreateMany<Order>(100000).ToList();
         mariaDbContext.Orders?.AddRange(products);
         mariaDbContext.SaveChanges();
-        
+
         Console.WriteLine("Database seeded with 100.000 Orders");
     }
 
@@ -66,10 +74,9 @@ public static class Seeder
                 orderItem.OrderId = order.Id;
             }
             mariaDbContext.OrderItems!.AddRange(orderItems);
-            
-            mariaDbContext.SaveChanges();
-        
-            Console.WriteLine("Database seeded with OrderItems");
         }
+        var changes = mariaDbContext.SaveChanges();
+
+        Console.WriteLine("Database seeded with " + changes + " OrderItems");
     }
 }
