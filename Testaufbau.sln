@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarking", "Benchmarkin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationBenchmarks", "SerializationBenchmarks\SerializationBenchmarks.csproj", "{064D0B3E-48DA-4AA9-8B07-0B506444BAFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessBenchmarks", "DataAccessBenchmarks\DataAccessBenchmarks.csproj", "{636C0DD4-FA95-448E-857C-92E9751672B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{064D0B3E-48DA-4AA9-8B07-0B506444BAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064D0B3E-48DA-4AA9-8B07-0B506444BAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{064D0B3E-48DA-4AA9-8B07-0B506444BAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{636C0DD4-FA95-448E-857C-92E9751672B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{636C0DD4-FA95-448E-857C-92E9751672B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636C0DD4-FA95-448E-857C-92E9751672B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{636C0DD4-FA95-448E-857C-92E9751672B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5D0CB724-67EA-4574-9DE3-62FD7FD902A1} = {2A4D2E39-7BD0-432C-9D8A-B4EED1EFF634}
@@ -70,5 +76,6 @@ Global
 		{F977CDBC-0D96-4B23-B0C0-FF7CA8B39BDE} = {2A4D2E39-7BD0-432C-9D8A-B4EED1EFF634}
 		{E09BEA7A-A60E-4884-929D-B73C15C355A3} = {FB103A1E-B86F-4BCC-8A32-85E5D1A8DF89}
 		{064D0B3E-48DA-4AA9-8B07-0B506444BAFE} = {F7433E1D-A897-4710-8045-F74A5F3558C9}
+		{636C0DD4-FA95-448E-857C-92E9751672B5} = {F7433E1D-A897-4710-8045-F74A5F3558C9}
 	EndGlobalSection
 EndGlobal
