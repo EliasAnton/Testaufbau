@@ -8,3 +8,28 @@ Mit normalem REST-Service start über die IDE weil im publish modus wurde die co
 | GetArticles |             1000 |   7.165 ms | 0.1336 ms |  0.1250 ms |
 | GetArticles |            10000 |  52.925 ms | 1.0440 ms |  1.0253 ms |
 | GetArticles |           100000 | 516.572 ms | 9.0392 ms | 12.0671 ms |
+
+
+Orders mit OrderItems
+|      Method | NumberOfOrders |          Mean |       Error |      StdDev |
+|------------ |--------------- |--------------:|------------:|------------:|
+| GetOrders   |              1 |      3.825 ms |   0.0865 ms |   0.2549 ms |
+| GetOrders   |             10 |     20.052 ms |   0.3963 ms |   0.8530 ms |
+| GetOrders   |            100 |    185.486 ms |   3.6882 ms |  10.5226 ms |
+| GetOrders   |           1000 |  1,821.298 ms |  36.3202 ms |  53.2377 ms |
+| GetOrders   |          10000 | 18,325.204 ms | 221.0948 ms | 195.9948 ms |
+| GetOrders   |         100000 |            NA |          NA |          NA |
+
+// * Hints *
+Outliers
+  GetOrdersWithOrderItemsBenchmark.GetArticles: Default -> 1 outlier  was  removed (22.88 ms)
+  GetOrdersWithOrderItemsBenchmark.GetArticles: Default -> 2 outliers were removed (215.78 ms, 218.49 ms)
+  GetOrdersWithOrderItemsBenchmark.GetArticles: Default -> 1 outlier  was  removed (2.03 s)
+  GetOrdersWithOrderItemsBenchmark.GetArticles: Default -> 1 outlier  was  removed (19.21 s)
+
+// * Legends *
+  NumberOfOrders : Value of the 'NumberOfOrders' parameter
+  Mean           : Arithmetic mean of all measurements
+  Error          : Half of 99.9% confidence interval
+  StdDev         : Standard deviation of all measurements
+  1 ms           : 1 Millisecond (0.001 sec)

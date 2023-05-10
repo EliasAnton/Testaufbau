@@ -12,4 +12,5 @@ public interface IGrpcService
     Task<GrpcOrdersResponse> GetOrdersAsync(GrpcTakeRequest request);
     Task<GrpcOrdersResponse> GetOrderAsync(GrpcIdRequest idRequest);
     Task<GrpcOrdersResponse> GetAllOrdersAsync();
+    Task<GrpcOrderItemsResponse> GetOrderItemsAsync(GrpcIdRequest idRequest);
 }

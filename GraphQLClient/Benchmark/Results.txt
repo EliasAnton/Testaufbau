@@ -40,3 +40,14 @@ MultimodalDistribution
   
   
 -----Client-seitig war bis hiers alle mit NewtonsoftJson. Vlt retry mit System.Text.Json?-----
+
+
+---------------------Get Orders Benchmark---------------------
+
+|           Method |       NumberOfOrders |         Mean |      Error |     StdDev |
+|----------------- |--------------------- |-------------:|-----------:|-----------:|
+| GraphQlGetOrders |                    1 |     2.035 ms |  0.0280 ms |  0.0233 ms |
+| GraphQlGetOrders |                   10 |     9.563 ms |  0.1111 ms |  0.0928 ms |
+| GraphQlGetOrders |                  100 |    84.705 ms |  1.2177 ms |  1.1390 ms |
+| GraphQlGetOrders |                 1000 |   833.404 ms | 13.6015 ms | 12.0574 ms |
+| GraphQlGetOrders |                10000 | 8,326.908 ms | 53.8828 ms | 50.4020 ms |
