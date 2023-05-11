@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database Context settings
 builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("MariaDb")));
+    new MySqlConnection(builder.Configuration.GetConnectionString("ArticleDb")));
 builder.Services.AddDbContext<MariaDbContext>(ServiceLifetime.Transient);
 
 builder.Services.AddCodeFirstGrpc(config =>

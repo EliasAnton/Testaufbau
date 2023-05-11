@@ -16,7 +16,7 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 
 // Database Context settings
 builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("MariaDb")));
+    new MySqlConnection(builder.Configuration.GetConnectionString("ArticleDb")));
 builder.Services.AddDbContext<MariaDbContext>();
 
 
