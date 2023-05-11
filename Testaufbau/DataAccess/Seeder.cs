@@ -7,6 +7,7 @@ public static class Seeder
 {
     public static void SeedForArticleTest(this ArticleDbContext articleDbContext, OrderDbContext orderDbContext)
     {
+        Console.WriteLine("Seeding articles started");
         if (!articleDbContext.Articles!.Any())
         {
             var fixture = new Fixture();
@@ -17,13 +18,7 @@ public static class Seeder
             fixture.Customize<Price>(price => price.Without(p => p.Id));
             
             AddArticles(articleDbContext, orderDbContext, fixture);
-            AddPricesToArticles(articleDbContext, fixture);
-            //The next two lines add 100.000 rows to the database
-            var products = fixture.CreateMany<Article>(100000).ToList();
-            articleDbContext.AddRange(products);
-            articleDbContext.SaveChanges();
-            Console.WriteLine("Database seeded with 100.000 articles");
-
+            //AddPricesToArticles(articleDbContext, fixture);
         }
     }
 
@@ -35,11 +30,12 @@ public static class Seeder
         {
             var articleToInsert = fixture.Create<Article>();
             articleToInsert.Sku = sku;
+            articleToInsert.Price = fixture.Create<Price>();
             articlesToInsert.Add(articleToInsert);
         }
         articleDbContext.Articles!.AddRange(articlesToInsert);
         articleDbContext.SaveChanges();
-        Console.WriteLine("Database seeded with " + articlesToInsert.Count + " articles");
+        Console.WriteLine("Database seeded with " + articlesToInsert.Count + " articles with prices");
     }
 
     private static void AddPricesToArticles(ArticleDbContext articleDbContext, Fixture fixture)
@@ -48,7 +44,7 @@ public static class Seeder
         foreach (var article in articles)
         {
             var price = fixture.Create<Price>();
-            //article.PriceId = price.Id;
+            //article.PriceId = price.IntToProcess;
             article.Price = price;
         }
         articleDbContext.SaveChanges();
@@ -60,6 +56,7 @@ public static class Seeder
     
     public static void SeedForOrderTest(this OrderDbContext orderDbContext)
     {
+        Console.WriteLine("Seeding orders started");
         if (!orderDbContext.Orders!.Any())
         {
             var fixture = new Fixture();
@@ -92,6 +89,7 @@ public static class Seeder
     {
         //The next two lines add 100.000 rows to the database
         var products = fixture.CreateMany<Order>(100000).ToList();
+
         orderDbContext.Orders?.AddRange(products);
         orderDbContext.SaveChanges();
 

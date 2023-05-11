@@ -23,15 +23,29 @@ public class RestController : ControllerBase
     }
 
     [HttpGet("articles/{id:int}")]
-    public ActionResult GetArticle(int id)
+    public ActionResult GetArticleById(int id)
     {
         return Ok(_articleDbContext.Articles!
             .FirstOrDefault(a => a.Id == id));
+    }
+    
+    [HttpGet("articles/sku/{sku:int}")]
+    public ActionResult GetArticleBySku(int sku)
+    {
+        return Ok(_articleDbContext.Articles!
+            .FirstOrDefault(a => a.Sku == sku));
     }
 
     [HttpGet("articles/all")]
     public ActionResult GetAllArticles()
     {
         return Ok(_articleDbContext.Articles!.ToList());
+    }
+
+    [HttpGet("prices/{id:int}")]
+    public ActionResult GetPrice(int id)
+    {
+        return Ok(_articleDbContext.Prices!
+            .FirstOrDefault(p => p.Id == id));
     }
 }

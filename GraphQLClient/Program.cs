@@ -26,7 +26,7 @@ var allArticleRequest = new GraphQLRequest
 // var allArticleResponse = await graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(allArticleRequest);
 // foreach (var article in allArticleResponse.Data.Articles)
 // {
-//     Console.WriteLine(article.Id);
+//     Console.WriteLine(article.IntToProcess);
 //     Console.WriteLine(article.Name);
 //     Console.WriteLine("-----------------");
 // }

@@ -38,7 +38,7 @@ public class GetOrdersWithOrderItemsBenchmark
         // var response = await _grpcService.GetOrdersAsync(new GrpcTakeRequest { Take = NumberOfOrders });
         // foreach (var order in response.Orders)
         // {
-        //     var orderItemResponse = await _grpcService.GetOrderItemsAsync(new GrpcIdRequest { Id = order.Id });
+        //     var orderItemResponse = await _grpcService.GetOrderItemsAsync(new GrpcIntRequest { IntToProcess = order.IntToProcess });
         //     order.OrderItems!.AddRange(orderItemResponse.OrderItems);
         // }
         //

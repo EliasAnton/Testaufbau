@@ -38,15 +38,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Seed Database
 using (var scope = app.Services.CreateScope())
 {
     var articleDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
     articleDbContext.Database.EnsureCreated();
-    //articleDbContext.SeedForArticleTest();
     var orderDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
     orderDbContext.Database.EnsureCreated();
+    
+    //Seed Database
     //orderDbContext.SeedForOrderTest();
+    //articleDbContext.SeedForArticleTest(orderDbContext);
 }
 
 app.UseHttpsRedirection();
