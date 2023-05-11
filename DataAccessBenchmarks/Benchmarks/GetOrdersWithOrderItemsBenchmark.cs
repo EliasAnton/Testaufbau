@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Models;
 
@@ -10,9 +11,13 @@ public class GetOrdersWithOrderItemsBenchmark
 {
     private readonly OrderDbContext _orderDbContext;
 
-    public GetOrdersWithOrderItemsBenchmark(OrderDbContext orderDbContext)
+    private static readonly string ConnectionString = "Server=localhost;Port=3307;Database=OrderDb;Uid=root;Pwd=SuperSecretRootPassword1234;";
+    public GetOrdersWithOrderItemsBenchmark()
     {
-        _orderDbContext = orderDbContext;
+        var options = new DbContextOptionsBuilder<OrderDbContext>()
+                .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
+                .Options;
+        _orderDbContext = new OrderDbContext(options);
     }
 
     public static List<int> AmountList => new()

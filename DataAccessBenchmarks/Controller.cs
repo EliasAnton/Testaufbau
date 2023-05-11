@@ -2,6 +2,7 @@ using BenchmarkDotNet.Running;
 using DataAccessBenchmarks.Benchmarks;
 using Microsoft.AspNetCore.Mvc;
 using Testaufbau.DataAccess;
+using Testaufbau.DataAccess.Models;
 
 namespace DataAccessBenchmarks;
 
@@ -9,16 +10,17 @@ namespace DataAccessBenchmarks;
 [Route("[controller]")]
 public class Controller : ControllerBase
 {
-    private readonly ArticleDbContext _articleDbContext;
+    private readonly OrderDbContext _orderDbContext;
 
-    public Controller(ArticleDbContext articleDbContext)
+    public Controller(OrderDbContext orderDbContext)
     {
-        _articleDbContext = articleDbContext;
+        _orderDbContext = orderDbContext;
     }
 
     [HttpPost("BenchmarkGetOrdersWithOrderIds")]
     public ActionResult BenchmarkGetOrdersWithOrderIds()
     {
-        return Ok(BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>());
+        var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
+        return Ok();
     }
 }

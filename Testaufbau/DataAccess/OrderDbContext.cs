@@ -7,10 +7,20 @@ public class OrderDbContext : DbContext, IOrderDbContext
 {
     private readonly IConfiguration _configuration;
 
-    public OrderDbContext(IConfiguration configuration)
+    public OrderDbContext(DbContextOptions<OrderDbContext> options)
+        : base(options)
     {
-        _configuration = configuration;
+        //Necessary to do it like this instead of the constructor below to be able to create
+        //instances of OrderDbContext during benchmarking
+        _configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
     }
+    
+    // public OrderDbContext(IConfiguration configuration)
+    // {
+    //     _configuration = configuration;
+    // }
 
     public DbSet<Order>? Orders { get; set; }
     public DbSet<OrderItem>? OrderItems { get; set; }

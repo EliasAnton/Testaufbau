@@ -18,9 +18,8 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 
 // Database Context settings
 builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("MariaDb")));
-builder.Services.AddDbContext<ArticleDbContext>();
-
+    new MySqlConnection(builder.Configuration.GetConnectionString("OrderDb")));
+builder.Services.AddDbContext<OrderDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,9 +37,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction() || app.Env
 //Seed Database
 using (var scope = app.Services.CreateScope())
 {
-    var mariaDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
+    var mariaDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
     mariaDbContext.Database.EnsureCreated();
-    //mariaDbContext.SeedForOrderTest();
 }
 
 app.UseHttpsRedirection();
