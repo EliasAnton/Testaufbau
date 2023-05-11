@@ -4,8 +4,7 @@ using ProtoBuf;
 namespace Testaufbau.DataAccess.Models;
 
 [ProtoContract]
-[ProtoInclude(3, typeof(ArticleCategory))]
-[ProtoInclude(7, typeof(OrderItem))]
+[ProtoInclude(5, typeof(Price))]
 public class Article
 {
     [Key]
@@ -15,18 +14,12 @@ public class Article
     [ProtoMember(2)]
     public string Name { get; set; }
 
-    [ProtoMember(3)]
-    public ArticleCategory ArticleCategory { get; set; }
-
     [ProtoMember(4)]
     public string? Description { get; set; }
 
     [ProtoMember(5)]
-    public decimal Price { get; set; }
+    public Price Price { get; set; }
 
     [ProtoMember(6)]
     public string Sku { get; set; }
-
-    [ProtoMember(7)]
-    public List<OrderItem>? OrderItems { get; set; }
 }

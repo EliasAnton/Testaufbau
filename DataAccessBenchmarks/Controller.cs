@@ -9,11 +9,11 @@ namespace DataAccessBenchmarks;
 [Route("[controller]")]
 public class Controller : ControllerBase
 {
-    private readonly MariaDbContext _mariaDbContext;
+    private readonly ArticleDbContext _articleDbContext;
 
-    public Controller(MariaDbContext mariaDbContext)
+    public Controller(ArticleDbContext articleDbContext)
     {
-        _mariaDbContext = mariaDbContext;
+        _articleDbContext = articleDbContext;
     }
 
     [HttpPost("BenchmarkGetOrdersWithOrderIds")]

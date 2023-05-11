@@ -9,7 +9,6 @@ public sealed class ArticleType : ObjectGraphType<Article>
     {
         Field(x => x.Id);
         Field(x => x.Name);
-        Field(x => x.ArticleCategory);
         Field(x => x.Description, true);
         Field(x => x.Price);
         Field(x => x.Sku);

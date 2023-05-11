@@ -7,11 +7,11 @@ namespace Testaufbau.DataAccess.GraphQl;
 
 public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
 {
-    private readonly MariaDbContext _dbContext;
+    private readonly ArticleDbContext _articleDbContext;
 
-    public GraphQlQuery(MariaDbContext dbContext)
+    public GraphQlQuery(ArticleDbContext articleDbContext)
     {
-        _dbContext = dbContext;
+        _articleDbContext = articleDbContext;
 
         Name = "Query";
 
@@ -23,7 +23,7 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var amount = context.GetArgument<int>("amount");
-                return await _dbContext.Articles!.Take(amount).ToListAsync();
+                return await _articleDbContext.Articles!.Take(amount).ToListAsync();
             }
         );
         FieldAsync<ArticleType>(
@@ -34,54 +34,12 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             resolve: async context =>
             {
                 var id = context.GetArgument<int>("id");
-                return await _dbContext.Articles!.FirstOrDefaultAsync(a => a.Id == id);
+                return await _articleDbContext.Articles!.FirstOrDefaultAsync(a => a.Id == id);
             }
         );
         FieldAsync<ListGraphType<ArticleType>>(
             "allArticles",
-            resolve: async context => await _dbContext.Articles!.ToListAsync()
+            resolve: async context => await _articleDbContext.Articles!.ToListAsync()
         );
-
-        FieldAsync<ListGraphType<OrderType>>(
-            "getOrders",
-            arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "amount" }
-            ),
-            resolve: async context =>
-            {
-                var amount = context.GetArgument<int>("amount");
-                return await _dbContext.Orders!.Take(amount)
-                    .ToListAsync();
-            }
-        );
-        FieldAsync<OrderType>(
-            "getOrder",
-            arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
-            ),
-            resolve: async context =>
-            {
-                var id = context.GetArgument<int>("id");
-                return await _dbContext.Orders!
-                    .FirstOrDefaultAsync(o => o.Id == id);
-            }
-        );
-        FieldAsync<ListGraphType<OrderType>>(
-            "allOrders",
-            resolve: async context => await _dbContext.Orders!.ToListAsync()
-        );
-
-        FieldAsync<ListGraphType<OrderItemType>>(
-            "getOrderItems",
-            arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "orderId" }
-            ),
-            resolve: async context =>
-            {
-                var id = context.GetArgument<int>("id");
-                return await _dbContext.OrderItems!
-                    .Where(oi => oi.OrderId == id)
-                    .ToListAsync();
-            });
     }
 }

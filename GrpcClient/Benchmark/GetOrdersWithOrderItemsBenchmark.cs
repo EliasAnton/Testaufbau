@@ -35,13 +35,14 @@ public class GetOrdersWithOrderItemsBenchmark
     [Benchmark]
     public async Task<List<Order>> GetOrders()
     {
-        var response = await _grpcService.GetOrdersAsync(new GrpcTakeRequest { Take = NumberOfOrders });
-        foreach (var order in response.Orders)
-        {
-            var orderItemResponse = await _grpcService.GetOrderItemsAsync(new GrpcIdRequest { Id = order.Id });
-            order.OrderItems!.AddRange(orderItemResponse.OrderItems);
-        }
-
-        return response.Orders;
+        // var response = await _grpcService.GetOrdersAsync(new GrpcTakeRequest { Take = NumberOfOrders });
+        // foreach (var order in response.Orders)
+        // {
+        //     var orderItemResponse = await _grpcService.GetOrderItemsAsync(new GrpcIdRequest { Id = order.Id });
+        //     order.OrderItems!.AddRange(orderItemResponse.OrderItems);
+        // }
+        //
+        // return response.Orders;
+        return new List<Order>();
     }
 }

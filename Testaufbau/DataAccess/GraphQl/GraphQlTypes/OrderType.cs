@@ -5,7 +5,7 @@ namespace Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 public sealed class OrderType : ObjectGraphType<Order>
 {
-    public OrderType(MariaDbContext dbContext)
+    public OrderType(OrderDbContext dbContext)
     {
         Field(x => x.Id);
         Field(x => x.OrderDate);

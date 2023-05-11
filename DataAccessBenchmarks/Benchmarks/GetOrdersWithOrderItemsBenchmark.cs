@@ -8,11 +8,11 @@ namespace DataAccessBenchmarks.Benchmarks;
 
 public class GetOrdersWithOrderItemsBenchmark
 {
-    private readonly MariaDbContext _dbContext;
+    private readonly OrderDbContext _orderDbContext;
 
-    public GetOrdersWithOrderItemsBenchmark(MariaDbContext dbContext)
+    public GetOrdersWithOrderItemsBenchmark(OrderDbContext orderDbContext)
     {
-        _dbContext = dbContext;
+        _orderDbContext = orderDbContext;
     }
 
     public static List<int> AmountList => new()
@@ -31,7 +31,7 @@ public class GetOrdersWithOrderItemsBenchmark
     [Benchmark]
     public async Task<List<Order>> GetOrdersWithOrderItems()
     {
-        var orders = await _dbContext.Orders!
+        var orders = await _orderDbContext.Orders!
             .Include(o => o.OrderItems)
             .Take(NumberOfOrders)
             .ToListAsync();

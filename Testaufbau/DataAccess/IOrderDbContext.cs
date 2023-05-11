@@ -3,9 +3,8 @@ using Testaufbau.DataAccess.Models;
 
 namespace Testaufbau.DataAccess;
 
-public interface IMariaDbContext
+public interface IOrderDbContext
 {
-    DbSet<Article>? Articles { get; set; }
     DbSet<Order>? Orders { get; set; }
     DbSet<OrderItem>? OrderItems { get; set; }
 }

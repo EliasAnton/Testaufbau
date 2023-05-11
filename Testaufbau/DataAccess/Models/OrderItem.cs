@@ -21,13 +21,9 @@ public class OrderItem
     [ProtoIgnore]
     public Order? Order { get; set; }
 
-    [ForeignKey(nameof(Article))]
     [ProtoMember(3)]
-    public int ArticleId { get; set; }
+    public int ArticleSku { get; set; }
 
     [ProtoMember(4)]
-    public Article? Article { get; set; }
-
-    [ProtoMember(5)]
     public int Quantity { get; set; }
 }

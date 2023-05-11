@@ -3,26 +3,20 @@ using Testaufbau.DataAccess.Models;
 
 namespace Testaufbau.DataAccess;
 
-public class MariaDbContext : DbContext, IMariaDbContext
+public class ArticleDbContext : DbContext, IArticleDbContext
 {
     private readonly IConfiguration _configuration;
 
-    public MariaDbContext(IConfiguration configuration)
+    public ArticleDbContext(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
     public DbSet<Article>? Articles { get; set; }
-    public DbSet<Order>? Orders { get; set; }
-    public DbSet<OrderItem>? OrderItems { get; set; }
+    public DbSet<Price>? Prices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<OrderItem>()
-            .HasOne(x => x.Order)
-            .WithMany(x => x.OrderItems)
-            .HasForeignKey(x => x.OrderId);
-
         // modelBuilder.Entity<Article>().HasData(
         //     new Article { Id = 1, Name = "Test1", Price = 1.0m, Sku = "Test1", ArticleCategory = ArticleCategory.Clothing },
         //     new Article { Id = 2, Name = "Test2", Price = 2.0m, Sku = "Test2", ArticleCategory = ArticleCategory.Clothing },
@@ -45,7 +39,7 @@ public class MariaDbContext : DbContext, IMariaDbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = _configuration.GetConnectionString("MariaDb");
+        var connectionString = _configuration.GetConnectionString("ArticleDb");
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 }
