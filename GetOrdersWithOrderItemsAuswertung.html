@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="plot"></div>
+
+    <script>
+      // data for REST
+      const restData = {
+        x: [1, 10, 100, 1000, 10000],
+        y: [3.825, 20.052, 185.486, 1821.298, 18325.204],
+        type: "scatter",
+        mode: "lines+markers",
+        name: "REST",
+        error_y: {
+          type: "data",
+          array: [0.0865, 0.3963, 3.6882, 36.3202, 221.0948],
+          visible: true,
+        },
+      };
+
+      // data for GraphQL
+      const graphqlData = {
+        x: [1, 10, 100, 1000, 10000],
+        y: [2.035, 9.563, 84.705, 833.404, 8326.908],
+        type: "scatter",
+        mode: "lines+markers",
+        name: "GraphQL",
+        error_y: {
+          type: "data",
+          array: [0.0280, 0.1111, 1.2177, 13.6015, 53.8828],
+          visible: true,
+        },
+      };
+
+      // layout for the graph
+      const layout = {
+        title: "REST vs GraphQL (GetOrders)",
+        xaxis: {
+          title: "Number of Orders",
+          type: "log",
+          exponentformat: "power",
+          showexponent: "all",
+          ticks: "outside",
+          ticklen: 5,
+          tickwidth: 1,
+          tickcolor: "#000",
+          autorange: true,
+        },
+        yaxis: {
+          title: "Response Time (ms)",
+          autorange: true,
+        },
+      };
+
+      // create a new plot
+      Plotly.newPlot("plot", [restData, graphqlData], layout);
+    </script>
+  </body>
+</html>

@@ -34,3 +34,14 @@ MultimodalDistribution
   GetArticlesBenchmark.GetArticles: Default -> It seems that the distribution is bimodal (mValue = 3.36)
 MinIterationTime
   GetArticlesBenchmark.GetArticles: Default -> The minimum observed iteration time is 74.6374 ms which is very small. It's recommended to increase it to at least 100.0000 ms using more operations.
+
+GetOrders Benchmark
+
+|      Method | NumberOfArticles |       Mean |     Error |     StdDev |     Median |
+|------------ |----------------- |-----------:|----------:|-----------:|-----------:|
+| GetArticles |                1 |   1.811 ms | 0.0266 ms |  0.0249 ms |   1.803 ms |
+| GetArticles |               10 |   1.760 ms | 0.0351 ms |  0.0967 ms |   1.734 ms |
+| GetArticles |              100 |   2.156 ms | 0.0415 ms |  0.0445 ms |   2.140 ms |
+| GetArticles |             1000 |  15.040 ms | 2.0060 ms |  5.8517 ms |  14.060 ms |
+| GetArticles |            10000 |  43.879 ms | 0.8661 ms |  1.5170 ms |  43.463 ms |
+| GetArticles |           100000 | 421.743 ms | 8.3900 ms | 19.9398 ms | 412.956 ms |
