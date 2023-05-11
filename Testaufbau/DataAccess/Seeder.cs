@@ -5,12 +5,19 @@ namespace Testaufbau.DataAccess;
 
 public static class Seeder
 {
-    public static void SeedForArticleTest(this ArticleDbContext articleDbContext)
+    public static void SeedForArticleTest(this ArticleDbContext articleDbContext, OrderDbContext orderDbContext)
     {
         if (!articleDbContext.Articles!.Any())
         {
             var fixture = new Fixture();
-            fixture.Customize<Article>(article => article.Without(a => a.Id));
+            fixture.Customize<Article>(article => article
+                .Without(a => a.Id)
+                .Without(a => a.Price)
+                .Without(a => a.Sku));
+            fixture.Customize<Price>(price => price.Without(p => p.Id));
+            
+            AddArticles(articleDbContext, orderDbContext, fixture);
+            AddPricesToArticles(articleDbContext, fixture);
             //The next two lines add 100.000 rows to the database
             var products = fixture.CreateMany<Article>(100000).ToList();
             articleDbContext.AddRange(products);
@@ -20,6 +27,37 @@ public static class Seeder
         }
     }
 
+    private static void AddArticles(ArticleDbContext articleDbContext, OrderDbContext orderDbContext, Fixture fixture)
+    {
+        var allSkusReferencedByOrderItems = orderDbContext.OrderItems!.Select(oi => oi.ArticleSku).Distinct().ToList();
+        var articlesToInsert = new List<Article>();
+        foreach (var sku in allSkusReferencedByOrderItems)
+        {
+            var articleToInsert = fixture.Create<Article>();
+            articleToInsert.Sku = sku;
+            articlesToInsert.Add(articleToInsert);
+        }
+        articleDbContext.Articles!.AddRange(articlesToInsert);
+        articleDbContext.SaveChanges();
+        Console.WriteLine("Database seeded with " + articlesToInsert.Count + " articles");
+    }
+
+    private static void AddPricesToArticles(ArticleDbContext articleDbContext, Fixture fixture)
+    {
+        var articles = articleDbContext.Articles!.ToList();
+        foreach (var article in articles)
+        {
+            var price = fixture.Create<Price>();
+            //article.PriceId = price.Id;
+            article.Price = price;
+        }
+        articleDbContext.SaveChanges();
+        Console.WriteLine("Database seeded with prices");
+    }
+    
+    
+    
+    
     public static void SeedForOrderTest(this OrderDbContext orderDbContext)
     {
         if (!orderDbContext.Orders!.Any())
@@ -48,7 +86,6 @@ public static class Seeder
             .Without(oi => oi.OrderId)
             .Without(oi => oi.Order)
         );
-        fixture.Customize<Article>(article => article.Without(a => a.Id));
     }
 
     private static void AddOrders(OrderDbContext orderDbContext, Fixture fixture)
@@ -75,8 +112,8 @@ public static class Seeder
             }
             orderDbContext.OrderItems!.AddRange(orderItems);
         }
-        var changes = orderDbContext.SaveChanges();
+        orderDbContext.SaveChanges();
 
-        Console.WriteLine("Database seeded with " + changes + " OrderItems");
+        Console.WriteLine("Database seeded with OrderItems");
     }
 }

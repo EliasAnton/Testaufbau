@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ProtoBuf;
 
 namespace Testaufbau.DataAccess.Models;
@@ -17,9 +18,13 @@ public class Article
     [ProtoMember(4)]
     public string? Description { get; set; }
 
+    [ForeignKey(nameof(Price))]
     [ProtoMember(5)]
-    public Price Price { get; set; }
-
+    public int PriceId { get; set; }
+    
     [ProtoMember(6)]
-    public string Sku { get; set; }
+    public Price? Price { get; set; }
+
+    [ProtoMember(7)]
+    public int Sku { get; set; }
 }

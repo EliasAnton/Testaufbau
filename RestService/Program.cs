@@ -19,6 +19,11 @@ builder.Services.AddTransient<MySqlConnection>(_ =>
     new MySqlConnection(builder.Configuration.GetConnectionString("ArticleDb")));
 builder.Services.AddDbContext<ArticleDbContext>();
 
+//only for seeding
+builder.Services.AddTransient<MySqlConnection>(_ =>
+    new MySqlConnection(builder.Configuration.GetConnectionString("OrderDb")));
+builder.Services.AddDbContext<OrderDbContext>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -36,9 +41,12 @@ if (app.Environment.IsDevelopment())
 //Seed Database
 using (var scope = app.Services.CreateScope())
 {
-    var mariaDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
-    mariaDbContext.Database.EnsureCreated();
-    //mariaDbContext.SeedForOrderTest();
+    var articleDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
+    articleDbContext.Database.EnsureCreated();
+    //articleDbContext.SeedForArticleTest();
+    var orderDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+    orderDbContext.Database.EnsureCreated();
+    //orderDbContext.SeedForOrderTest();
 }
 
 app.UseHttpsRedirection();

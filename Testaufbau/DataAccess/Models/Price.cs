@@ -18,5 +18,5 @@ public class Price
     
     [ProtoMember(4)]
     public string Country { get; set; }
-    
+
 }
