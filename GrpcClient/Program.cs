@@ -1,42 +1,36 @@
 ﻿using BenchmarkDotNet.Running;
+using Grpc.Net.Client;
 using GrpcClient.Benchmark;
+using ProtoBuf.Grpc.Client;
+using Testaufbau.DataAccess.Grpc;
 
-// using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
-// {
-//     MaxReceiveMessageSize = null
-// });
-//
-// var grpcService = channel.CreateGrpcService<IGrpcService>();
-// var result = await grpcService.GetArticlesAsync(new GrpcTakeRequest() { Take = 100000 });
-//
-//
-// Console.WriteLine("Moin");
-//
-// var address = await grpcService.GetAddressByIdAsync(new GrpcIntRequest() { IntToProcess = 1 });
-// Console.WriteLine("Land von Adresse 1: " + address!.Country);
-//
-// var response = await grpcService.GetAllOrdersAsync();
-// foreach (var order in response.Orders)
-// {
-//     Console.WriteLine("IntToProcess: " + order.IntToProcess);
-//     Console.WriteLine("Datum: " + order.OrderDate);
-//     Console.WriteLine("Anzahl Positionen: " + order.OrderItems!.Count);
-//     Console.WriteLine(order.OrderItems.First().Quantity + " mal Artikel: " + order.OrderItems.First().Article!.Name);
-//     Console.WriteLine("--------------------------------");
-// }
-//
-// var article = await grpcService.GetArticleByIdAsync(new GrpcIntRequest() { IntToProcess = 1 });
-// Console.WriteLine("Artikel 1: " + article!.Name);
-//
-// var articles = await grpcService.GetAllArticlesAsync();
-// foreach (var art in articles.Articles)
-// {
-//     Console.WriteLine("Artikel " + art.IntToProcess + ": " + art.Name);
-// }
-//
-// Console.WriteLine("Shutting down");
-// Console.WriteLine("Press any key to exit...");
-// Console.ReadKey();
+using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
+{
+    MaxReceiveMessageSize = null
+});
+
+var grpcService = channel.CreateGrpcService<IGrpcService>();
+var result = await grpcService.GetArticlesAsync(new GrpcTakeRequest() { Take = 10 });
+var article = result.Articles.First();
+Console.WriteLine("Erster Artikel Id und Sku und Name:");
+Console.WriteLine(article.Id);
+Console.WriteLine(article.Sku);
+Console.WriteLine(article.Name);
+
+var article1 = await grpcService.GetArticleByIdAsync(new GrpcIntRequest() { IntToProcess = article.Id });
+var article2 = await grpcService.GetArticleBySkuAsync(new GrpcIntRequest() { IntToProcess = article.Sku });
+
+Console.WriteLine("Vergleich der Artikel Id und Sku und Name:");
+Console.WriteLine(article1.Id == article2.Id);
+Console.WriteLine(article1.Sku == article2.Sku);
+Console.WriteLine(article1.Name == article2.Name);
+
+var price = await grpcService.GetPriceByIdAsync(new GrpcIntRequest() { IntToProcess = article1.PriceId });
+Console.WriteLine("Preis Id und Amount und Currency und Country:");
+Console.WriteLine(price.Id);
+Console.WriteLine(price.Amount);
+Console.WriteLine(price.Currency);
+Console.WriteLine(price.Country);
 
 //Run benchmark
-var summary = BenchmarkRunner.Run<GetArticlesBenchmark>();
+//var summary = BenchmarkRunner.Run<GetArticlesBenchmark>();
