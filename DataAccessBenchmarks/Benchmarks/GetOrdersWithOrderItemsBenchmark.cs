@@ -10,9 +10,9 @@ public class GetOrdersWithOrderItemsBenchmark
 {
     private readonly MariaDbContext _dbContext;
 
-    public GetOrdersWithOrderItemsBenchmark(MariaDbContext DbContext)
+    public GetOrdersWithOrderItemsBenchmark(MariaDbContext dbContext)
     {
-        _dbContext = DbContext;
+        _dbContext = dbContext;
     }
 
     public static List<int> AmountList => new()

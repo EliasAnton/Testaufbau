@@ -49,6 +49,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
-
 app.Run();
