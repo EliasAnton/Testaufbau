@@ -2,6 +2,7 @@
 using Grpc.Net.Client;
 using ProtoBuf.Grpc.Client;
 using Testaufbau.DataAccess.Grpc;
+using Testaufbau.DataAccess.Models;
 
 namespace GrpcClient.Benchmark;
 
@@ -18,7 +19,7 @@ public class GetArticlesBenchmark
         _grpcService = channel.CreateGrpcService<IGrpcService>();
     }
 
-    public List<int> _numberOfArticles => new()
+    public List<int> AmountList => new()
     {
         1,
         10,
@@ -28,12 +29,27 @@ public class GetArticlesBenchmark
         100000
     };
 
-    [ParamsSource(nameof(_numberOfArticles))]
+    [ParamsSource(nameof(AmountList))]
     public int NumberOfArticles { get; set; }
 
     [Benchmark]
-    public async Task<GrpcArticlesResponse> GetArticles()
+    public async Task<List<Article>> GetArticles()
     {
-        return await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles =  await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        return articles.Articles;
+
+    }
+    
+    [Benchmark]
+    public async Task<List<Article>> GetArticlesWithPrice()
+    {
+        var articles = await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        foreach (var article in articles.Articles!)
+        {
+            var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article.PriceId });
+            article.Price = price;
+        }
+
+        return articles.Articles;
     }
 }

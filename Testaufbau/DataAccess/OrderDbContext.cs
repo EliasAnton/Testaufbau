@@ -5,16 +5,11 @@ namespace Testaufbau.DataAccess;
 
 public class OrderDbContext : DbContext, IOrderDbContext
 {
-    private readonly IConfiguration _configuration;
-
     public OrderDbContext(DbContextOptions<OrderDbContext> options)
         : base(options)
     {
         //Necessary to do it like this instead of the constructor below to be able to create
         //instances of OrderDbContext during benchmarking
-        _configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build();
     }
     
     // public OrderDbContext(IConfiguration configuration)
@@ -54,7 +49,8 @@ public class OrderDbContext : DbContext, IOrderDbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = _configuration.GetConnectionString("OrderDb");
+
+        var connectionString = "Server=localhost;Port=3307;Database=OrderDb;Uid=root;Pwd=SuperSecretRootPassword1234;";
         optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 }

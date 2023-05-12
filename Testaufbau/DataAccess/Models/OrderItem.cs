@@ -27,5 +27,10 @@ public class OrderItem
     [ProtoMember(4)]
     public int Quantity { get; set; }
 
-    [ProtoMember(5)] public Article? Article { get; set; }
+    //wenn ich es hier hinzufüge muss es auch in die DB mit null, da ich es sonst später nicht mit Werten füllen kann
+    //Beim zusammenfügen mit den Artikeln würde ich sie gerne hier anfügen.
+    //[ProtoMember(5)] public int? ArticleId { get; set; }
+    [NotMapped]
+    [ProtoIgnore]
+    public Article? Article { get; set; }
 }

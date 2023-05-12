@@ -20,7 +20,10 @@ public class Controller : ControllerBase
     [HttpPost("BenchmarkGetOrdersWithOrderIds")]
     public ActionResult BenchmarkGetOrdersWithOrderIds()
     {
-        var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
-        return Ok();
+        //var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
+        var benchmarkClass = new GetOrdersWithOrderItemsBenchmark();
+        benchmarkClass.NumberOfOrders = 10;
+        var result = benchmarkClass.GetOrdersWithOrderItems().Result;
+        return Ok(result);
     }
 }
