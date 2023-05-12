@@ -15,26 +15,20 @@ public class GetArticlesQueryResponse
     public List<Article> Articles { get; set; }
 }
 
-public class GetArticleQueryResponse
+public class GetArticleByIdQueryResponse
 {
-    [JsonPropertyName("getArticle")]
+    [JsonPropertyName("getArticleById")]
     public Article Article { get; set; }
 }
 
-public class GetOrdersQueryResponse
+public class GetArticleBySkuQueryResponse
 {
-    [JsonPropertyName("getOrders")]
-    public List<Order> Orders { get; set; }
+    [JsonPropertyName("getArticleBySku")]
+    public Article Article { get; set; }
 }
 
-public class GetOrderQueryResponse
+public class GetPriceQueryResponse
 {
-    [JsonPropertyName("getOrder")]
-    public Order Order { get; set; }
-}
-
-public class getOrderItemsQueryResponse
-{
-    [JsonPropertyName("getOrderItems")]
-    public List<OrderItem> OrderItems { get; set; }
+    [JsonPropertyName("getPriceById")]
+    public Price Price { get; set; }
 }

@@ -33,13 +33,17 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 // Console.WriteLine(price.Country);
 
 //Run benchmark
-//var summary = BenchmarkRunner.Run<GetArticlesBenchmark>();
-var benchmark = new GetArticlesBenchmark();
-benchmark.NumberOfArticles = 10;
-var result = await benchmark.GetArticlesWithPrice();
-Console.WriteLine(result.Count);
+var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
 
-var benchmark2 = new GetOrdersWithArticlesBenchmark();
-benchmark2.NumberOfOrders = 10;
-var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
-Console.WriteLine(result2.Count);
+var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
+
+
+// var benchmark = new GetArticlesBenchmark();
+// benchmark.NumberOfArticles = 10;
+// var result = await benchmark.GetArticlesWithPrice();
+// Console.WriteLine(result.Count);
+//
+// var benchmark2 = new GetOrdersWithArticlesBenchmark();
+// benchmark2.NumberOfOrders = 10;
+// var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
+// Console.WriteLine(result2.Count);
