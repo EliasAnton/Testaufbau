@@ -1,0 +1,7 @@
+|                  Method | NumberOfOrders |      Mean |     Error |    StdDev |
+|------------------------ |--------------- |----------:|----------:|----------:|
+| GetOrdersWithOrderItems |              1 |  2.077 ms | 0.0410 ms | 0.0472 ms |
+| GetOrdersWithOrderItems |             10 |  2.138 ms | 0.0321 ms | 0.0285 ms |
+| GetOrdersWithOrderItems |            100 |  2.708 ms | 0.0504 ms | 0.0472 ms |
+| GetOrdersWithOrderItems |           1000 |  8.294 ms | 0.1562 ms | 0.1461 ms |
+| GetOrdersWithOrderItems |          10000 | 50.045 ms | 0.9303 ms | 0.8702 ms |

@@ -9,85 +9,43 @@ namespace RestService;
 [Route("[controller]")]
 public class RestController : ControllerBase
 {
-    private readonly MariaDbContext _mariaDbContext;
+    private readonly ArticleDbContext _articleDbContext;
 
-    public RestController(MariaDbContext mariaDbContext)
+    public RestController(ArticleDbContext articleDbContext)
     {
-        _mariaDbContext = mariaDbContext;
+        _articleDbContext = articleDbContext;
     }
 
     [HttpGet("articles")]
     public ActionResult GetArticles(int take = 10)
     {
-        return Ok(_mariaDbContext.Articles!.Take(take));
+        return Ok(_articleDbContext.Articles!.Take(take));
     }
 
     [HttpGet("articles/{id:int}")]
-    public ActionResult GetArticle(int id)
+    public ActionResult GetArticleById(int id)
     {
-        return Ok(_mariaDbContext.Articles!
+        return Ok(_articleDbContext.Articles!
             .FirstOrDefault(a => a.Id == id));
+    }
+    
+    [HttpGet("articles/sku/{sku:int}")]
+    public ActionResult GetArticleBySku(int sku)
+    {
+        return Ok(_articleDbContext.Articles!
+            .FirstOrDefault(a => a.Sku == sku));
     }
 
     [HttpGet("articles/all")]
     public ActionResult GetAllArticles()
     {
-        return Ok(_mariaDbContext.Articles!.ToList());
+        return Ok(_articleDbContext.Articles!.ToList());
     }
 
-    [HttpGet("orders")]
-    public ActionResult GetOrders(int take = 10)
+    [HttpGet("prices/{id:int}")]
+    public ActionResult GetPrice(int id)
     {
-        return Ok(_mariaDbContext.Orders!
-            .Take(take));
-    }
-
-
-    [HttpGet("orders/{id:int}")]
-    public ActionResult GetOrder(int id)
-    {
-        return Ok(_mariaDbContext.Orders!
-            .FirstOrDefault(o => o.Id == id));
-    }
-
-    [HttpGet("orders/all")]
-    public ActionResult GetAllOrders()
-    {
-        return Ok(_mariaDbContext.Orders!
-            .ToList());
-    }
-
-    [HttpGet("orderItems/{orderId:int}")]
-    public ActionResult GetOrderItems(int orderId)
-    {
-        return Ok(_mariaDbContext.OrderItems!
-            .Where(o => o.OrderId == orderId));
-    }
-
-    [HttpGet("grpc/test")]
-    public ActionResult GrpcTest()
-    {
-        using (var file = System.IO.File.Create("test.buf"))
-        {
-            Serializer.Serialize(file,
-                new Article
-                {
-                    Id = 1,
-                    Name = "Rankobelisk",
-                    ArticleCategory = ArticleCategory.Clothing,
-                    Description = "Test",
-                    Price = 1,
-                    Sku = "Test"
-                });
-            Console.WriteLine("Serialized");
-        }
-
-        using (var fileStream = System.IO.File.OpenRead("test.buf"))
-        {
-            var article = Serializer.Deserialize<Article>(fileStream);
-            Console.WriteLine("Deserialized " + article.Name);
-        }
-
-        return Ok();
+        return Ok(_articleDbContext.Prices!
+            .FirstOrDefault(p => p.Id == id));
     }
 }

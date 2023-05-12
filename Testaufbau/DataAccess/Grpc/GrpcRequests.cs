@@ -3,10 +3,10 @@
 namespace Testaufbau.DataAccess.Grpc;
 
 [ProtoContract]
-public class GrpcIdRequest
+public class GrpcIntRequest
 {
     [ProtoMember(1)]
-    public int Id { get; set; }
+    public int IntToProcess { get; set; }
 }
 
 [ProtoContract]

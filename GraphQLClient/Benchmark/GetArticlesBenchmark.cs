@@ -3,6 +3,7 @@ using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
+using Testaufbau.DataAccess.Models;
 
 namespace GraphQLClient.Benchmark;
 
@@ -14,171 +15,73 @@ public class GetArticlesBenchmark
     {
         _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
     }
-
-    public List<GraphQLRequest> RequestList => new()
+    
+    public List<int> AmountList => new()
     {
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:1){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-            "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:10){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:100){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:1000){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:10000){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:100000){
-                    id
-                    name
-                    articleCategory
-                    description
-                    price
-                    sku
-                  }
-                }
-               "
-        }
+        1,
+        10,
+        100,
+        1000,
+        10000,
+        //100000
     };
 
-    public List<GraphQLRequest> RequestForOnlyIdsList => new()
+    [ParamsSource(nameof(AmountList))]
+    public int NumberOfArticles { get; set; }
+    
+    [Benchmark]
+    public async Task<List<Article>> GetArticles()
     {
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:1){
-                    id
-                  }
-                }
-            "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:10){
-                    id
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:100){
-                    id
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:1000){
-                    id
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:10000){
-                    id
-                  }
-                }
-               "
-        },
-        new()
-        {
-            Query = @"
-                query{
-                  getArticles(amount:100000){
-                    id
-                  }
-                }
-               "
-        }
-    };
-
-    [ParamsSource(nameof(RequestForOnlyIdsList))]
-    public GraphQLRequest Request { get; set; }
+        var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateGetArticlesRequest(NumberOfArticles));
+        return articleResponse.Data.Articles;
+    }
 
     [Benchmark]
-    public async Task GraphQlGetArticles()
+    public async Task<List<Article>> GetArticlesWithPrice()
     {
-        var result = await _graphQlClient.SendQueryAsync<AllArticlesQueryResponse>(Request);
+        var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateGetArticlesWithPriceRequest(NumberOfArticles));
+        return articleResponse.Data.Articles;
+    }
+    
+    private GraphQLRequest CreateGetArticlesRequest(int amount)
+    {
+        return new()
+        {
+            Query = $@"
+                query{{
+                  getArticles(amount:{amount}){{
+                    id
+                    name
+                    description
+                    sku
+                    priceId
+                  }}
+                }}
+            "
+        };
+    }
+    
+    private GraphQLRequest CreateGetArticlesWithPriceRequest(int amount)
+    {
+        return new()
+        {
+            Query = $@"
+                query{{
+                  getArticles(amount:{amount}){{
+                    id
+                    name
+                    description
+                    sku
+                    priceId
+                    price{{
+                      id
+                      amount
+                      currency
+                      country
+                    }}
+                  }}
+                }}
+            "
+        };
     }
 }

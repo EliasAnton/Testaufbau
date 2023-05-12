@@ -2,6 +2,7 @@ using BenchmarkDotNet.Running;
 using DataAccessBenchmarks.Benchmarks;
 using Microsoft.AspNetCore.Mvc;
 using Testaufbau.DataAccess;
+using Testaufbau.DataAccess.Models;
 
 namespace DataAccessBenchmarks;
 
@@ -9,16 +10,20 @@ namespace DataAccessBenchmarks;
 [Route("[controller]")]
 public class Controller : ControllerBase
 {
-    private readonly MariaDbContext _mariaDbContext;
+    private readonly OrderDbContext _orderDbContext;
 
-    public Controller(MariaDbContext mariaDbContext)
+    public Controller(OrderDbContext orderDbContext)
     {
-        _mariaDbContext = mariaDbContext;
+        _orderDbContext = orderDbContext;
     }
 
     [HttpPost("BenchmarkGetOrdersWithOrderIds")]
     public ActionResult BenchmarkGetOrdersWithOrderIds()
     {
-        return Ok(BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>());
+        //var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
+        var benchmarkClass = new GetOrdersWithOrderItemsBenchmark();
+        benchmarkClass.NumberOfOrders = 10;
+        var result = benchmarkClass.GetOrdersWithOrderItems().Result;
+        return Ok(result);
     }
 }

@@ -5,24 +5,59 @@ namespace Testaufbau.DataAccess;
 
 public static class Seeder
 {
-    public static void SeedForArticleTest(this MariaDbContext mariaDbContext)
+    public static void SeedForArticleTest(this ArticleDbContext articleDbContext, OrderDbContext orderDbContext)
     {
-        if (!mariaDbContext.Articles!.Any())
+        Console.WriteLine("Seeding articles started");
+        if (!articleDbContext.Articles!.Any())
         {
             var fixture = new Fixture();
-            fixture.Customize<Article>(article => article.Without(a => a.Id));
-            //The next two lines add 100.000 rows to the database
-            var products = fixture.CreateMany<Article>(100000).ToList();
-            mariaDbContext.AddRange(products);
-            mariaDbContext.SaveChanges();
-            Console.WriteLine("Database seeded with 100.000 articles");
-
+            fixture.Customize<Article>(article => article
+                .Without(a => a.Id)
+                .Without(a => a.Price)
+                .Without(a => a.Sku));
+            fixture.Customize<Price>(price => price.Without(p => p.Id));
+            
+            AddArticles(articleDbContext, orderDbContext, fixture);
+            //AddPricesToArticles(articleDbContext, fixture);
         }
     }
 
-    public static void SeedForOrderTest(this MariaDbContext mariaDbContext)
+    private static void AddArticles(ArticleDbContext articleDbContext, OrderDbContext orderDbContext, Fixture fixture)
     {
-        if (!mariaDbContext.Orders!.Any())
+        var allSkusReferencedByOrderItems = orderDbContext.OrderItems!.Select(oi => oi.ArticleSku).Distinct().ToList();
+        var articlesToInsert = new List<Article>();
+        foreach (var sku in allSkusReferencedByOrderItems)
+        {
+            var articleToInsert = fixture.Create<Article>();
+            articleToInsert.Sku = sku;
+            articleToInsert.Price = fixture.Create<Price>();
+            articlesToInsert.Add(articleToInsert);
+        }
+        articleDbContext.Articles!.AddRange(articlesToInsert);
+        articleDbContext.SaveChanges();
+        Console.WriteLine("Database seeded with " + articlesToInsert.Count + " articles with prices");
+    }
+
+    private static void AddPricesToArticles(ArticleDbContext articleDbContext, Fixture fixture)
+    {
+        var articles = articleDbContext.Articles!.ToList();
+        foreach (var article in articles)
+        {
+            var price = fixture.Create<Price>();
+            //article.PriceId = price.IntToProcess;
+            article.Price = price;
+        }
+        articleDbContext.SaveChanges();
+        Console.WriteLine("Database seeded with prices");
+    }
+    
+    
+    
+    
+    public static void SeedForOrderTest(this OrderDbContext orderDbContext)
+    {
+        Console.WriteLine("Seeding orders started");
+        if (!orderDbContext.Orders!.Any())
         {
             var fixture = new Fixture();
             //Remove the standard throw on recursion behaviour
@@ -32,8 +67,8 @@ public static class Seeder
 
             CustomizeModel(fixture);
 
-            AddOrders(mariaDbContext, fixture);
-            AddOrderItemsWithOrderReference(mariaDbContext, fixture);
+            AddOrders(orderDbContext, fixture);
+            AddOrderItemsWithOrderReference(orderDbContext, fixture);
         }
     }
 
@@ -48,23 +83,23 @@ public static class Seeder
             .Without(oi => oi.OrderId)
             .Without(oi => oi.Order)
         );
-        fixture.Customize<Article>(article => article.Without(a => a.Id));
     }
 
-    private static void AddOrders(MariaDbContext mariaDbContext, Fixture fixture)
+    private static void AddOrders(OrderDbContext orderDbContext, Fixture fixture)
     {
         //The next two lines add 100.000 rows to the database
         var products = fixture.CreateMany<Order>(100000).ToList();
-        mariaDbContext.Orders?.AddRange(products);
-        mariaDbContext.SaveChanges();
+
+        orderDbContext.Orders?.AddRange(products);
+        orderDbContext.SaveChanges();
 
         Console.WriteLine("Database seeded with 100.000 Orders");
     }
 
     //fetches all orders from db and adds between 1 and 2 orderItems to them
-    private static void AddOrderItemsWithOrderReference(MariaDbContext mariaDbContext, Fixture fixture)
+    private static void AddOrderItemsWithOrderReference(OrderDbContext orderDbContext, Fixture fixture)
     {
-        var orders = mariaDbContext.Orders!.ToList();
+        var orders = orderDbContext.Orders!.ToList();
         foreach (var order in orders)
         {
             Random rnd = new Random();
@@ -73,10 +108,10 @@ public static class Seeder
             {
                 orderItem.OrderId = order.Id;
             }
-            mariaDbContext.OrderItems!.AddRange(orderItems);
+            orderDbContext.OrderItems!.AddRange(orderItems);
         }
-        var changes = mariaDbContext.SaveChanges();
+        orderDbContext.SaveChanges();
 
-        Console.WriteLine("Database seeded with " + changes + " OrderItems");
+        Console.WriteLine("Database seeded with OrderItems");
     }
 }

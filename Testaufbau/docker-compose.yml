@@ -1,14 +1,23 @@
 ﻿services:
-  database:
+  articleDatabase:
     image: "mariadb"
-    container_name: maria_db
+    container_name: article_db
     environment:
       MYSQL_ROOT_PASSWORD: SuperSecretRootPassword1234
-      MYSQL_DATABASE: TestaufbauDB
+      MYSQL_DATABASE: ArticleDb
       MYSQL_USER: Elias
       MYSQL_PASSWORD: SuperSecretPassword1234
     ports:
       - "3306:3306"
     #volumes:
     #  - ./data:/var/lib/mysql
-  
+  orderDatabase:
+    image: "mariadb"
+    container_name: order_db
+    environment:
+      MYSQL_ROOT_PASSWORD: SuperSecretRootPassword1234
+      MYSQL_DATABASE: OrderDb
+      MYSQL_USER: Elias
+      MYSQL_PASSWORD: SuperSecretPassword1234
+    ports:
+      - "3307:3306"

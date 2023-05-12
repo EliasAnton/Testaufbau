@@ -21,3 +21,10 @@ public class GrpcOrderItemsResponse
     [ProtoMember(1)]
     public List<OrderItem> OrderItems { get; set; } = new();
 }
+
+[ProtoContract]
+public class GrpcPricesResponse
+{
+    [ProtoMember(1)]
+    public List<Price> Prices { get; set; } = new();
+}

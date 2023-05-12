@@ -16,8 +16,13 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 
 // Database Context settings
 builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("MariaDb")));
-builder.Services.AddDbContext<MariaDbContext>();
+    new MySqlConnection(builder.Configuration.GetConnectionString("ArticleDb")));
+builder.Services.AddDbContext<ArticleDbContext>();
+
+//only for seeding
+builder.Services.AddTransient<MySqlConnection>(_ =>
+    new MySqlConnection(builder.Configuration.GetConnectionString("OrderDb")));
+builder.Services.AddDbContext<OrderDbContext>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,12 +38,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Seed Database
 using (var scope = app.Services.CreateScope())
 {
-    var mariaDbContext = scope.ServiceProvider.GetRequiredService<MariaDbContext>();
-    mariaDbContext.Database.EnsureCreated();
-    //mariaDbContext.SeedForOrderTest();
+    var articleDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
+    articleDbContext.Database.EnsureCreated();
+    var orderDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+    orderDbContext.Database.EnsureCreated();
+    
+    //Seed Database
+    //orderDbContext.SeedForOrderTest();
+    //articleDbContext.SeedForArticleTest(orderDbContext);
 }
 
 app.UseHttpsRedirection();

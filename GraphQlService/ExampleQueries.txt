@@ -1,48 +1,50 @@
 query{
-  allArticles{
-    id
-    name
-    articleCategory
-    description
-    price
-    sku
-  }
-}
-
-query{
-  allOrderItems{
-    id
-    orderId
-    order{
-      id
-      customerName
-      customerAddress{
-        id
-        street
-        houseNumber
-        zipCode
-        city
-        country
-      }
-    }
-  	articleId
-    article{
-      id
-      name
-      articleCategory
-      price
-    }
-    quantity
-  }
-}
-
-query{
   getArticles(amount:20){
     id
     name
-    articleCategory
     description
-    price
     sku
+    priceId
+    price{
+      id
+      amount
+      currency
+      country
+    }
+  }
+}
+
+query{
+  getArticleById(id:666){
+    id
+    name
+    sku
+    price{
+      id
+      amount
+    }
+  }
+}
+
+query{
+  getArticleBySku(sku:40370026){
+    id
+    name
+    description
+    sku
+    priceId
+    price{
+      id
+      amount
+      currency
+      country
+    }
+  }
+}
+
+query{
+  getPriceById(id:666){
+      id
+      amount
   }
 }

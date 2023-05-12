@@ -6,67 +6,50 @@ namespace GrpcService;
 
 public class GrpcService : IGrpcService
 {
-    private readonly MariaDbContext _dbContext;
+    private readonly ArticleDbContext _articleDbContext;
 
-    public GrpcService(MariaDbContext dbContext)
+    public GrpcService(ArticleDbContext articleDbContext)
     {
-        _dbContext = dbContext;
+        _articleDbContext = articleDbContext;
     }
 
     public Task<GrpcArticlesResponse> GetArticlesAsync(GrpcTakeRequest request)
     {
-        var articles = _dbContext.Articles!
+        var articles = _articleDbContext.Articles!
             .Take(request.Take).ToList();
         var response = new GrpcArticlesResponse { Articles = articles };
         return Task.FromResult(response);
     }
 
-    public Task<Article?> GetArticleAsync(GrpcIdRequest idRequest)
+    public Task<Article?> GetArticleByIdAsync(GrpcIntRequest idRequest)
     {
-        var article = _dbContext.Articles!
-            .FirstOrDefault(a => a.Id == idRequest.Id);
+        var article = _articleDbContext.Articles!
+            .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
+        return Task.FromResult(article);
+    }
+    
+    //Get article by sku
+    public Task<Article?> GetArticleBySkuAsync(GrpcIntRequest skuRequest)
+    {
+        var article = _articleDbContext.Articles!
+            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
         return Task.FromResult(article);
     }
 
     public Task<GrpcArticlesResponse> GetAllArticlesAsync()
     {
-        var articles = _dbContext.Articles!
+        var articles = _articleDbContext.Articles!
             .ToList();
         var response = new GrpcArticlesResponse { Articles = articles };
         return Task.FromResult(response);
     }
-
-    public Task<GrpcOrdersResponse> GetOrdersAsync(GrpcTakeRequest request)
+    
+    //get price by id
+    public Task<Price?> GetPriceByIdAsync(GrpcIntRequest idRequest)
     {
-        var orders = _dbContext.Orders!
-            .Take(request.Take)
-            .ToList();
-        var response = new GrpcOrdersResponse { Orders = orders };
-        return Task.FromResult(response);
-    }
-
-    public Task<GrpcOrdersResponse> GetOrderAsync(GrpcIdRequest idRequest)
-    {
-        var order = _dbContext.Orders!
-            .FirstOrDefault(o => o.Id == idRequest.Id);
-        var response = new GrpcOrdersResponse { Orders = new List<Order> { order } };
-        return Task.FromResult(response);
-    }
-
-    public Task<GrpcOrdersResponse> GetAllOrdersAsync()
-    {
-        var orders = _dbContext.Orders!
-            .ToList();
-        var response = new GrpcOrdersResponse { Orders = orders };
-        return Task.FromResult(response);
-    }
-
-    public Task<GrpcOrderItemsResponse> GetOrderItemsAsync(GrpcIdRequest idRequest)
-    {
-        var orderItems = _dbContext.OrderItems!
-            .Where(oi => oi.OrderId == idRequest.Id)
-            .ToList();
-        var response = new GrpcOrderItemsResponse { OrderItems = orderItems };
-        return Task.FromResult(response);
+        var price = _articleDbContext.Prices!
+            .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
+        return Task.FromResult(price);
     }
 }
+
