@@ -26,4 +26,6 @@ public class OrderItem
 
     [ProtoMember(4)]
     public int Quantity { get; set; }
+
+    [ProtoMember(5)] public Article? Article { get; set; }
 }

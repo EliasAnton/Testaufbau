@@ -6,4 +6,14 @@ using RestClient.Benchmark;
 // await LocalClient.RunUserPrompts();
 
 //var summary = BenchmarkRunner.Run<GetArticlesBenchmark>();
-var summary = BenchmarkRunner.Run<GetOrdersWithOrderItemsBenchmark>();
+//var summary = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
+
+var benchmarkClass = new GetArticlesBenchmark();
+benchmarkClass.NumberOfArticles = 10;
+var result = await benchmarkClass.GetArticlesWithPrice();
+Console.WriteLine(result.Count);
+
+var benchmarkClass2 = new GetOrdersWithArticlesBenchmark();
+benchmarkClass2.NumberOfOrders = 10;
+var result2 = await benchmarkClass2.GetOrdersWithArticlesAndPrices();
+Console.WriteLine(result2.Count);

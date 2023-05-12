@@ -15,12 +15,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="BenchmarkDotNet" Version="0.13.5"/>
-        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9"/>
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Testaufbau\Testaufbau.csproj"/>
+        <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
     </ItemGroup>
 
 </Project>
