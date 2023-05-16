@@ -18,7 +18,7 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 // Console.WriteLine(article.Name);
 //
 // var article1 = await grpcService.GetArticleByIdAsync(new GrpcIntRequest() { IntToProcess = article.Id });
-// var article2 = await grpcService.GetArticleBySkuAsync(new GrpcIntRequest() { IntToProcess = article.Sku });
+// var article2 = await grpcService.GetArticleBySku(new GrpcIntRequest() { IntToProcess = article.Sku });
 //
 // Console.WriteLine("Vergleich der Artikel Id und Sku und Name:");
 // Console.WriteLine(article1.Id == article2.Id);

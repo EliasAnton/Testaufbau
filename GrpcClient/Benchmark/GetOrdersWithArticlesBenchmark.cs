@@ -42,20 +42,20 @@ public class GetOrdersWithArticlesBenchmark
     public int NumberOfOrders { get; set; }
 
     [Benchmark]
-    public async Task<List<Order>> GetOrdersWithArticlesAndPrices()
+    public List<Order> GetOrdersWithArticlesAndPrices()
     {
-        var orders = await _orderDbContext.Orders!
+        var orders = _orderDbContext.Orders!
             .Include(o => o.OrderItems)
             .Take(NumberOfOrders)
-            .ToListAsync();
+            .ToList();
 
         foreach (var order in orders)
         {
             foreach (var orderItem in order.OrderItems!)
             {
                 var article =
-                    await _grpcService.GetArticleBySkuAsync(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
-                var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article!.PriceId });
+                    _grpcService.GetArticleBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
+                var price = _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article!.PriceId });
                 article!.Price = price;
                 orderItem.Article = article;
             }

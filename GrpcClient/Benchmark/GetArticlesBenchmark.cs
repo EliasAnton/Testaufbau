@@ -32,20 +32,20 @@ public class GetArticlesBenchmark
     public int NumberOfArticles { get; set; }
 
     [Benchmark]
-    public async Task<List<Article>> GetArticles()
+    public List<Article> GetArticles()
     {
-        var articles = await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles });
         return articles.Articles;
 
     }
 
     [Benchmark]
-    public async Task<List<Article>> GetArticlesWithPrice()
+    public List<Article> GetArticlesWithPrice()
     {
-        var articles = await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles });
         foreach (var article in articles.Articles!)
         {
-            var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article.PriceId });
+            var price = _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article.PriceId });
             article.Price = price;
         }
 

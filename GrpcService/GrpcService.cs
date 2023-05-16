@@ -13,43 +13,37 @@ public class GrpcService : IGrpcService
         _articleDbContext = articleDbContext;
     }
 
-    public Task<GrpcArticlesResponse> GetArticlesAsync(GrpcTakeRequest request)
+    public GrpcArticlesResponse GetArticles(GrpcTakeRequest request)
     {
         var articles = _articleDbContext.Articles!
             .Take(request.Take).ToList();
-        var response = new GrpcArticlesResponse { Articles = articles };
-        return Task.FromResult(response);
+        return new GrpcArticlesResponse { Articles = articles };
     }
 
-    public Task<Article?> GetArticleByIdAsync(GrpcIntRequest idRequest)
+    public Article? GetArticleById(GrpcIntRequest idRequest)
     {
-        var article = _articleDbContext.Articles!
+        return _articleDbContext.Articles!
             .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
-        return Task.FromResult(article);
-    }
-    
-    //Get article by sku
-    public Task<Article?> GetArticleBySkuAsync(GrpcIntRequest skuRequest)
-    {
-        var article = _articleDbContext.Articles!
-            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
-        return Task.FromResult(article);
     }
 
-    public Task<GrpcArticlesResponse> GetAllArticlesAsync()
+    //Get article by sku
+    public Article? GetArticleBySku(GrpcIntRequest skuRequest)
+    {
+        return _articleDbContext.Articles!
+            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
+    }
+
+    public GrpcArticlesResponse GetAllArticles()
     {
         var articles = _articleDbContext.Articles!
             .ToList();
-        var response = new GrpcArticlesResponse { Articles = articles };
-        return Task.FromResult(response);
+        return new GrpcArticlesResponse { Articles = articles };
     }
-    
+
     //get price by id
-    public Task<Price?> GetPriceByIdAsync(GrpcIntRequest idRequest)
+    public Price? GetPriceById(GrpcIntRequest idRequest)
     {
-        var price = _articleDbContext.Prices!
+        return _articleDbContext.Prices!
             .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
-        return Task.FromResult(price);
     }
 }
-
