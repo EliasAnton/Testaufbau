@@ -12,7 +12,7 @@ namespace GraphQLClient.Benchmark;
 public class GetOrdersWithArticlesBenchmark
 {
     private readonly GraphQLHttpClient _graphQlClient;
-    
+
     private readonly OrderDbContext _orderDbContext;
 
     private static readonly string ConnectionString = "Server=localhost;Port=3307;Database=OrderDb;Uid=root;Pwd=SuperSecretRootPassword1234;";
@@ -21,23 +21,22 @@ public class GetOrdersWithArticlesBenchmark
     public GetOrdersWithArticlesBenchmark()
     {
         _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
-        
+
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
             .Options;
         _orderDbContext = new OrderDbContext(options);
     }
 
-    
-    
+
+
     public static List<int> AmountList => new()
     {
         1,
         10,
         100,
         1000,
-        10000,
-        //100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]

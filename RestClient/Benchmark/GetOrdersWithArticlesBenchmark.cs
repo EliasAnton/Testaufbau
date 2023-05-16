@@ -10,7 +10,7 @@ namespace RestClient.Benchmark;
 public class GetOrdersWithArticlesBenchmark
 {
     private readonly HttpClient _client = new();
-    
+
     private readonly OrderDbContext _orderDbContext;
 
     private static readonly string ConnectionString = "Server=localhost;Port=3307;Database=OrderDb;Uid=root;Pwd=SuperSecretRootPassword1234;";
@@ -19,7 +19,7 @@ public class GetOrdersWithArticlesBenchmark
         _client.DefaultRequestHeaders.Accept.Clear();
         _client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
-        
+
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
             .Options;
@@ -32,8 +32,7 @@ public class GetOrdersWithArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]

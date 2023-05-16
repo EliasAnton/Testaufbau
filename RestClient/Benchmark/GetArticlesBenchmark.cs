@@ -1,4 +1,4 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using BenchmarkDotNet.Attributes;
 using Testaufbau.DataAccess.Models;
@@ -22,8 +22,7 @@ public class GetArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
@@ -36,7 +35,7 @@ public class GetArticlesBenchmark
         return (await articles.Content.ReadFromJsonAsync<List<Article>>())!;
 
     }
-    
+
     [Benchmark]
     public async Task<List<Article>> GetArticlesWithPrice()
     {

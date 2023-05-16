@@ -15,20 +15,19 @@ public class GetArticlesBenchmark
     {
         _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
     }
-    
+
     public List<int> AmountList => new()
     {
         1,
         10,
         100,
         1000,
-        10000,
-        //100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
     public int NumberOfArticles { get; set; }
-    
+
     [Benchmark]
     public async Task<List<Article>> GetArticles()
     {
@@ -42,7 +41,7 @@ public class GetArticlesBenchmark
         var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateGetArticlesWithPriceRequest(NumberOfArticles));
         return articleResponse.Data.Articles;
     }
-    
+
     private GraphQLRequest CreateGetArticlesRequest(int amount)
     {
         return new()
@@ -60,7 +59,7 @@ public class GetArticlesBenchmark
             "
         };
     }
-    
+
     private GraphQLRequest CreateGetArticlesWithPriceRequest(int amount)
     {
         return new()

@@ -22,7 +22,7 @@ public class GetOrdersWithArticlesBenchmark
             MaxReceiveMessageSize = null
         });
         _grpcService = channel.CreateGrpcService<IGrpcService>();
-        
+
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
             .Options;
@@ -35,8 +35,7 @@ public class GetOrdersWithArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        //100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
@@ -55,8 +54,8 @@ public class GetOrdersWithArticlesBenchmark
             foreach (var orderItem in order.OrderItems!)
             {
                 var article =
-                    await _grpcService.GetArticleBySkuAsync(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku});
-                var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article!.PriceId});
+                    await _grpcService.GetArticleBySkuAsync(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
+                var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article!.PriceId });
                 article!.Price = price;
                 orderItem.Article = article;
             }

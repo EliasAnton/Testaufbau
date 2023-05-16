@@ -25,8 +25,7 @@ public class GetArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
@@ -35,11 +34,11 @@ public class GetArticlesBenchmark
     [Benchmark]
     public async Task<List<Article>> GetArticles()
     {
-        var articles =  await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles = await _grpcService.GetArticlesAsync(new GrpcTakeRequest { Take = NumberOfArticles });
         return articles.Articles;
 
     }
-    
+
     [Benchmark]
     public async Task<List<Article>> GetArticlesWithPrice()
     {
