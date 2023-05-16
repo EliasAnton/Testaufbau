@@ -40,7 +40,16 @@ public class GetArticlesBenchmark
     }
 
     [Benchmark]
-    public List<Article> GetArticlesWithPrice()
+    public List<Article> GetReducedArticles()
+    {
+        //so werden alle attribute außer description und name zurück gegeben
+        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles }, "NoNullableAttributes");
+        return articles.Articles;
+
+    }
+
+    [Benchmark]
+    public List<Article> GetArticlesWithPriceChatty()
     {
         var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles });
         foreach (var article in articles.Articles!)
@@ -50,5 +59,11 @@ public class GetArticlesBenchmark
         }
 
         return articles.Articles;
+    }
+
+    [Benchmark]
+    public List<Article> GetArticlesWithPriceBulky()
+    {
+        return _grpcService.GetArticlesWithPrice(new GrpcTakeRequest { Take = NumberOfArticles }).Articles;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Testaufbau.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using Testaufbau.DataAccess;
 using Testaufbau.DataAccess.Grpc;
 using Testaufbau.DataAccess.Models;
 
@@ -13,10 +14,31 @@ public class GrpcService : IGrpcService
         _articleDbContext = articleDbContext;
     }
 
-    public GrpcArticlesResponse GetArticles(GrpcTakeRequest request)
+    public GrpcArticlesResponse GetArticles(GrpcTakeRequest request, string? filter = null)
     {
-        var articles = _articleDbContext.Articles!
-            .Take(request.Take).ToList();
+        IQueryable<Article> query = _articleDbContext.Articles!;
+
+        if (!string.IsNullOrEmpty(filter))
+        {
+            // Assuming filter is comma-separated list of property names to include
+            var propertiesToInclude = filter.Split(',');
+
+            query = query.Select(article => new Article
+            {
+                Name = propertiesToInclude.Contains("Name") ? article.Name : null,
+                Description = propertiesToInclude.Contains("Description") ? article.Description : null
+            });
+        }
+
+        query = query.Take(request.Take);
+
+        return new GrpcArticlesResponse { Articles = query.ToList() };
+    }
+
+    public GrpcArticlesResponse GetArticlesWithPrice(GrpcTakeRequest request)
+    {
+        var articles = _articleDbContext.Articles!.Include(a => a.Price).Take(request.Take).ToList();
+
         return new GrpcArticlesResponse { Articles = articles };
     }
 

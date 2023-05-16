@@ -13,7 +13,7 @@ public class Article
     public int Id { get; set; }
 
     [ProtoMember(2)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [ProtoMember(4)]
     public string? Description { get; set; }
@@ -21,7 +21,7 @@ public class Article
     [ForeignKey(nameof(Price))]
     [ProtoMember(5)]
     public int PriceId { get; set; }
-    
+
     [ProtoMember(6)]
     public Price? Price { get; set; }
 

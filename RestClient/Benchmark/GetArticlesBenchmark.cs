@@ -16,7 +16,7 @@ public class GetArticlesBenchmark
             new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public List<int> AmountList => new()
+    public static List<int> AmountList => new()
     {
         1,
         10,
@@ -33,11 +33,21 @@ public class GetArticlesBenchmark
     {
         var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}");
         return (await articles.Content.ReadFromJsonAsync<List<Article>>())!;
+    }
+
+    [Benchmark]
+    public async Task<List<Article>> GetReducedArticles()
+    {
+
+        //so werden alle attribute außer description und name zurück gegeben
+        var filter = "NoNullableAttributes";
+        var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}&filter={filter}");
+        return (await articles.Content.ReadFromJsonAsync<List<Article>>())!;
 
     }
 
     [Benchmark]
-    public async Task<List<Article>> GetArticlesWithPrice()
+    public async Task<List<Article>> GetArticlesWithPriceChatty()
     {
         var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}");
         var articleList = await articles.Content.ReadFromJsonAsync<List<Article>>();
@@ -48,5 +58,12 @@ public class GetArticlesBenchmark
         }
 
         return articleList;
+    }
+
+    [Benchmark]
+    public async Task<List<Article>> GetArticlesWithPriceBulky()
+    {
+        var articlesWithPrice = await _client.GetAsync($"https://localhost:7123/Rest/ArticlesWithPrice?take={NumberOfArticles}");
+        return (await articlesWithPrice.Content.ReadFromJsonAsync<List<Article>>())!;
     }
 }
