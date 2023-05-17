@@ -45,24 +45,11 @@ public class RestController : ControllerBase
         return Ok(_articleDbContext.Articles!.Include(a => a.Price).Take(take).ToList());
     }
 
-    [HttpGet("articles/{id:int}")]
-    public ActionResult GetArticleById(int id)
-    {
-        return Ok(_articleDbContext.Articles!
-            .FirstOrDefault(a => a.Id == id));
-    }
-
     [HttpGet("articles/sku/{sku:int}")]
     public ActionResult GetArticleBySku(int sku)
     {
         return Ok(_articleDbContext.Articles!
             .FirstOrDefault(a => a.Sku == sku));
-    }
-
-    [HttpGet("articles/all")]
-    public ActionResult GetAllArticles()
-    {
-        return Ok(_articleDbContext.Articles!.ToList());
     }
 
     [HttpGet("prices/{id:int}")]

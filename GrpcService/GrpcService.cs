@@ -42,27 +42,12 @@ public class GrpcService : IGrpcService
         return new GrpcArticlesResponse { Articles = articles };
     }
 
-    public Article? GetArticleById(GrpcIntRequest idRequest)
-    {
-        return _articleDbContext.Articles!
-            .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
-    }
-
-    //Get article by sku
     public Article? GetArticleBySku(GrpcIntRequest skuRequest)
     {
         return _articleDbContext.Articles!
             .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
     }
 
-    public GrpcArticlesResponse GetAllArticles()
-    {
-        var articles = _articleDbContext.Articles!
-            .ToList();
-        return new GrpcArticlesResponse { Articles = articles };
-    }
-
-    //get price by id
     public Price? GetPriceById(GrpcIntRequest idRequest)
     {
         return _articleDbContext.Prices!

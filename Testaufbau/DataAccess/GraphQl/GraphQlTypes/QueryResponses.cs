@@ -3,22 +3,10 @@ using Testaufbau.DataAccess.Models;
 
 namespace Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
-public class AllArticlesQueryResponse
-{
-    [JsonPropertyName("allArticles")]
-    public List<Article> Articles { get; set; }
-}
-
 public class GetArticlesQueryResponse
 {
     [JsonPropertyName("getArticles")]
     public List<Article> Articles { get; set; }
-}
-
-public class GetArticleByIdQueryResponse
-{
-    [JsonPropertyName("getArticleById")]
-    public Article Article { get; set; }
 }
 
 public class GetArticleBySkuQueryResponse

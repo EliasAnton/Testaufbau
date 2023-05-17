@@ -27,17 +27,6 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
             }
         );
         FieldAsync<ArticleType>(
-            "getArticleById",
-            arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
-            ),
-            resolve: async context =>
-            {
-                var id = context.GetArgument<int>("id");
-                return await _articleDbContext.Articles!.FirstOrDefaultAsync(a => a.Id == id);
-            }
-        );
-        FieldAsync<ArticleType>(
             "getArticleBySku",
             arguments: new QueryArguments(
                 new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "sku" }
@@ -47,10 +36,6 @@ public class GraphQlQuery : ObjectGraphType, IGraphQlQuery
                 var sku = context.GetArgument<int>("sku");
                 return await _articleDbContext.Articles!.FirstOrDefaultAsync(a => a.Sku == sku);
             }
-        );
-        FieldAsync<ListGraphType<ArticleType>>(
-            "allArticles",
-            resolve: async context => await _articleDbContext.Articles!.ToListAsync()
         );
         FieldAsync<PriceType>(
             "getPriceById",

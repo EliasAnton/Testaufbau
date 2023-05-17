@@ -18,7 +18,6 @@ public static class Seeder
             fixture.Customize<Price>(price => price.Without(p => p.Id));
             
             AddArticles(articleDbContext, orderDbContext, fixture);
-            //AddPricesToArticles(articleDbContext, fixture);
         }
     }
 
@@ -88,12 +87,12 @@ public static class Seeder
     private static void AddOrders(OrderDbContext orderDbContext, Fixture fixture)
     {
         //The next two lines add 100.000 rows to the database
-        var products = fixture.CreateMany<Order>(100000).ToList();
+        var products = fixture.CreateMany<Order>(10000).ToList();
 
         orderDbContext.Orders?.AddRange(products);
         orderDbContext.SaveChanges();
 
-        Console.WriteLine("Database seeded with 100.000 Orders");
+        Console.WriteLine("Database seeded with 10.000 Orders");
     }
 
     //fetches all orders from db and adds between 1 and 2 orderItems to them
