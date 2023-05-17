@@ -33,8 +33,11 @@ public class RestController : ControllerBase
 
             query = query.Select(article => new Article
             {
+                Id = article.Id,
                 Name = propertiesToInclude.Contains("Name") ? article.Name : null,
+                Sku = article.Sku,
                 Description = propertiesToInclude.Contains("Description") ? article.Description : null,
+                PriceId = article.PriceId,
                 IsActive = propertiesToInclude.Contains("IsActive") ? article.IsActive : null,
                 Color = propertiesToInclude.Contains("Color") ? article.Color : null,
                 Width = propertiesToInclude.Contains("Width") ? article.Width : null,
@@ -56,6 +59,14 @@ public class RestController : ControllerBase
         return Ok(_articleDbContext.Articles!.Include(a => a.Price).Take(take).ToList());
     }
 
+    [HttpGet("articleWithPrice/sku/{sku:int}")]
+    public ActionResult GetArticleWithPriceBySku(int sku)
+    {
+        return Ok(_articleDbContext.Articles!
+            .Include(a => a.Price)
+            .FirstOrDefault(a => a.Sku == sku));
+    }
+    
     [HttpGet("articles/sku/{sku:int}")]
     public ActionResult GetArticleBySku(int sku)
     {

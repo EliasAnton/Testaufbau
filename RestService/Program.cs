@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 {
     jsonOptions.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    jsonOptions.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    //jsonOptions.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     jsonOptions.JsonSerializerOptions.WriteIndented = true;
 });

@@ -29,8 +29,11 @@ public class GrpcService : IGrpcService
 
             query = query.Select(article => new Article
             {
+                Id = article.Id,
                 Name = propertiesToInclude.Contains("Name") ? article.Name : null,
+                Sku = article.Sku,
                 Description = propertiesToInclude.Contains("Description") ? article.Description : null,
+                PriceId = article.PriceId,
                 IsActive = propertiesToInclude.Contains("IsActive") ? article.IsActive : null,
                 Color = propertiesToInclude.Contains("Color") ? article.Color : null,
                 Width = propertiesToInclude.Contains("Width") ? article.Width : null,
