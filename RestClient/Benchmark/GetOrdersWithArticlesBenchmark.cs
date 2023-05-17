@@ -10,6 +10,9 @@ namespace RestClient.Benchmark;
 public class GetOrdersWithArticlesBenchmark
 {
     private readonly HttpClient _client = new();
+    
+    //Port 5001 wenn service unter publish läuft, 7123 wenn über IDE
+    private readonly string _port = "5001";
 
     private readonly OrderDbContext _orderDbContext;
 
@@ -52,9 +55,9 @@ public class GetOrdersWithArticlesBenchmark
             foreach (var orderItem in order.OrderItems!)
             {
                 var articleResponse =
-                    await _client.GetAsync($"https://localhost:7123/Rest/articles/sku/{orderItem.ArticleSku}");
+                    await _client.GetAsync($"https://localhost:{_port}/Rest/articles/sku/{orderItem.ArticleSku}");
                 var article = await articleResponse.Content.ReadFromJsonAsync<Article>();
-                var priceResponse = await _client.GetAsync($"https://localhost:7123/Rest/prices/{article!.PriceId}");
+                var priceResponse = await _client.GetAsync($"https://localhost:{_port}/Rest/prices/{article!.PriceId}");
                 article!.Price = await priceResponse.Content.ReadFromJsonAsync<Price>();
                 orderItem.Article = article;
             }

@@ -8,6 +8,8 @@ namespace RestClient.Benchmark;
 public class GetArticlesBenchmark
 {
     private readonly HttpClient _client = new();
+    //Port 5001 wenn service unter publish läuft, 7123 wenn über IDE
+    private readonly string _port = "5001";
 
     public GetArticlesBenchmark()
     {
@@ -31,7 +33,7 @@ public class GetArticlesBenchmark
     [Benchmark]
     public async Task<List<Article>> GetArticles()
     {
-        var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}");
+        var articles = await _client.GetAsync($"https://localhost:{_port}/Rest/Articles?take={NumberOfArticles}");
         return (await articles.Content.ReadFromJsonAsync<List<Article>>())!;
     }
 
@@ -39,9 +41,9 @@ public class GetArticlesBenchmark
     public async Task<List<Article>> GetReducedArticles()
     {
 
-        //so werden alle attribute außer description und name zurück gegeben
+        //so werden nur die not-nullable attribute zurück gegeben
         var filter = "NoNullableAttributes";
-        var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}&filter={filter}");
+        var articles = await _client.GetAsync($"https://localhost:{_port}/Rest/Articles?take={NumberOfArticles}&filter={filter}");
         return (await articles.Content.ReadFromJsonAsync<List<Article>>())!;
 
     }
@@ -49,11 +51,11 @@ public class GetArticlesBenchmark
     [Benchmark]
     public async Task<List<Article>> GetArticlesWithPriceChatty()
     {
-        var articles = await _client.GetAsync($"https://localhost:7123/Rest/Articles?take={NumberOfArticles}");
+        var articles = await _client.GetAsync($"https://localhost:{_port}/Rest/Articles?take={NumberOfArticles}");
         var articleList = await articles.Content.ReadFromJsonAsync<List<Article>>();
         foreach (var article in articleList!)
         {
-            var price = await _client.GetAsync($"https://localhost:7123/Rest/prices/{article.PriceId}");
+            var price = await _client.GetAsync($"https://localhost:{_port}/Rest/prices/{article.PriceId}");
             article.Price = await price.Content.ReadFromJsonAsync<Price>();
         }
 
@@ -63,7 +65,7 @@ public class GetArticlesBenchmark
     [Benchmark]
     public async Task<List<Article>> GetArticlesWithPriceBulky()
     {
-        var articlesWithPrice = await _client.GetAsync($"https://localhost:7123/Rest/ArticlesWithPrice?take={NumberOfArticles}");
+        var articlesWithPrice = await _client.GetAsync($"https://localhost:{_port}/Rest/ArticlesWithPrice?take={NumberOfArticles}");
         return (await articlesWithPrice.Content.ReadFromJsonAsync<List<Article>>())!;
     }
 }

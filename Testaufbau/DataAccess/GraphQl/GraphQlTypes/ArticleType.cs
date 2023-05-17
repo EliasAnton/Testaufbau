@@ -16,5 +16,12 @@ public sealed class ArticleType : ObjectGraphType<Article>
             "Price",
             resolve: context => articleDbContext.Prices!.FirstOrDefault(x => x.Id == context.Source.PriceId)
         );
+        Field(x => x.IsActive, true);
+        Field(x => x.Color, true);
+        Field(x => x.Width, true);
+        Field(x => x.Height, true);
+        Field(x => x.Depth, true);
+        Field(x => x.Weight, true);
+        Field(x => x.Material, true);
     }
 }

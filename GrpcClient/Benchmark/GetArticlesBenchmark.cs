@@ -42,7 +42,7 @@ public class GetArticlesBenchmark
     [Benchmark]
     public List<Article> GetReducedArticles()
     {
-        //so werden alle attribute außer description und name zurück gegeben
+        //so werden nur die not-nullable attribute zurück gegeben
         var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles }, "NoNullableAttributes");
         return articles.Articles;
 
