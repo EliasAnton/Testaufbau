@@ -19,13 +19,13 @@ public class GrpcService : IGrpcService
     /// only the specified properties are returned. Non nullable properties are always returned.
     /// </summary>
     /// <param name="filter">Comma seperated list of properties</param>
-    public GrpcArticlesResponse GetArticles(GrpcTakeRequest request, string? filter = null)
+    public GrpcArticlesResponse GetArticles(GrpcTakeRequestWithFilter request)
     {
         IQueryable<Article> query = _articleDbContext.Articles!;
 
-        if (!string.IsNullOrEmpty(filter))
+        if (!string.IsNullOrEmpty(request.Filter))
         {
-            var propertiesToInclude = filter.Split(',');
+            var propertiesToInclude = request.Filter.Split(',');
 
             query = query.Select(article => new Article
             {
@@ -44,9 +44,9 @@ public class GrpcService : IGrpcService
             });
         }
 
-        query = query.Take(request.Take);
+        var articles = query.Take(request.Take).ToList();
 
-        return new GrpcArticlesResponse { Articles = query.ToList() };
+        return new GrpcArticlesResponse { Articles = articles };
     }
 
     public GrpcArticlesResponse GetArticlesWithPrice(GrpcTakeRequest request)
@@ -54,6 +54,13 @@ public class GrpcService : IGrpcService
         var articles = _articleDbContext.Articles!.Include(a => a.Price).Take(request.Take).ToList();
 
         return new GrpcArticlesResponse { Articles = articles };
+    }
+    
+    public Article? GetArticleWithPriceBySku(GrpcIntRequest skuRequest)
+    {
+        return _articleDbContext.Articles!
+            .Include(a => a.Price)
+            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
     }
 
     public Article? GetArticleBySku(GrpcIntRequest skuRequest)

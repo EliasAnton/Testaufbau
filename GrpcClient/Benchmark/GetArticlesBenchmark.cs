@@ -12,7 +12,8 @@ public class GetArticlesBenchmark
 
     public GetArticlesBenchmark()
     {
-        var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
+        //port 7214 wenn service von ide ausgeführt wird, 5001 wenn über publish
+        var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
         {
             MaxReceiveMessageSize = null
         });
@@ -34,24 +35,22 @@ public class GetArticlesBenchmark
     [Benchmark]
     public List<Article> GetArticles()
     {
-        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
         return articles.Articles;
-
     }
 
     [Benchmark]
     public List<Article> GetReducedArticles()
     {
         //so werden nur die not-nullable attribute zurück gegeben
-        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles }, "NoNullableAttributes");
+        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles, Filter = "NoNullableAttributes"});
         return articles.Articles;
-
     }
 
     [Benchmark]
     public List<Article> GetArticlesWithPriceChatty()
     {
-        var articles = _grpcService.GetArticles(new GrpcTakeRequest { Take = NumberOfArticles });
+        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
         foreach (var article in articles.Articles!)
         {
             var price = _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article.PriceId });

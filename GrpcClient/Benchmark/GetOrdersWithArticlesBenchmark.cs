@@ -54,9 +54,7 @@ public class GetOrdersWithArticlesBenchmark
             foreach (var orderItem in order.OrderItems!)
             {
                 var article =
-                    _grpcService.GetArticleBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
-                var price = _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article!.PriceId });
-                article!.Price = price;
+                    _grpcService.GetArticleWithPriceBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
                 orderItem.Article = article;
             }
         }

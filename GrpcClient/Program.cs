@@ -4,12 +4,12 @@ using GrpcClient.Benchmark;
 using ProtoBuf.Grpc.Client;
 using Testaufbau.DataAccess.Grpc;
 
-using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
-{
-    MaxReceiveMessageSize = null
-});
+// using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
+// {
+//     MaxReceiveMessageSize = null
+// });
 
-var grpcService = channel.CreateGrpcService<IGrpcService>();
+// var grpcService = channel.CreateGrpcService<IGrpcService>();
 // var result = await grpcService.GetArticlesAsync(new GrpcTakeRequest() { Take = 10 });
 // var article = result.Articles.First();
 // Console.WriteLine("Erster Artikel Id und Sku und Name:");
@@ -34,13 +34,12 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 
 //Run benchmark
 var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
-
-var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
+//var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
 
 
 // var benchmark = new GetArticlesBenchmark();
 // benchmark.NumberOfArticles = 10;
-// var result = await benchmark.GetArticlesWithPrice();
+// var result = benchmark.GetArticles();
 // Console.WriteLine(result.Count);
 //
 // var benchmark2 = new GetOrdersWithArticlesBenchmark();
