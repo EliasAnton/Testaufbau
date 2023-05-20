@@ -17,6 +17,7 @@ public class GetOrdersWithArticlesBenchmark
 
     public GetOrdersWithArticlesBenchmark()
     {
+        //Port 5001 wenn service unter publish läuft, 7214 wenn über IDE
         var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
         {
             MaxReceiveMessageSize = null
@@ -42,12 +43,12 @@ public class GetOrdersWithArticlesBenchmark
     public int NumberOfOrders { get; set; }
 
     [Benchmark]
-    public List<Order> GetOrdersWithArticlesAndPrices()
+    public async Task<List<Order>> GetOrdersWithArticlesAndPrices()
     {
-        var orders = _orderDbContext.Orders!
+        var orders = await _orderDbContext.Orders!
             .Include(o => o.OrderItems)
             .Take(NumberOfOrders)
-            .ToList();
+            .ToListAsync();
 
         foreach (var order in orders)
         {

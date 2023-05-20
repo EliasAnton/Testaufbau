@@ -30,16 +30,16 @@ using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 //     Console.WriteLine("-----------------");
 // }
 
-var benchmarkClass = new GetArticlesBenchmark();
-benchmarkClass.NumberOfArticles = 10;
-var result = await benchmarkClass.GetArticlesWithPrice();
-Console.WriteLine(result.Count);
+// var benchmarkClass = new GetArticlesBenchmark();
+// benchmarkClass.NumberOfArticles = 10;
+// var result = await benchmarkClass.GetArticles();
+// Console.WriteLine(result.Count);
 
-var benchmarkClass2 = new GetOrdersWithArticlesBenchmark();
-benchmarkClass2.NumberOfOrders = 10;
-var result2 = await benchmarkClass2.GetOrdersWithArticlesAndPrices();
-Console.WriteLine(result2.Count);
+// var benchmarkClass2 = new GetOrdersWithArticlesBenchmark();
+// benchmarkClass2.NumberOfOrders = 10;
+// var result2 = await benchmarkClass2.GetOrdersWithArticlesAndPrices();
+// Console.WriteLine(result2.Count);
 
 
-//BenchmarkRunner.Run<GetArticlesBenchmark>();
-//BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
+// BenchmarkRunner.Run<GetArticlesBenchmark>();
+BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();

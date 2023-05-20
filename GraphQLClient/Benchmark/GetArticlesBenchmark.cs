@@ -13,7 +13,8 @@ public class GetArticlesBenchmark
 
     public GetArticlesBenchmark()
     {
-        _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
+        //5001 wenn service unter publish läuft, 7052 wenn über IDE
+        _graphQlClient = new GraphQLHttpClient("https://localhost:5001/graphql", new SystemTextJsonSerializer());
     }
 
     public List<int> AmountList => new()
@@ -34,6 +35,13 @@ public class GetArticlesBenchmark
         var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateGetArticlesRequest(NumberOfArticles));
         return articleResponse.Data.Articles;
     }
+    
+    [Benchmark]
+    public async Task<List<Article>> GetReducedArticles()
+    {
+        var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateReducedGetArticlesRequest(NumberOfArticles));
+        return articleResponse.Data.Articles;
+    }
 
     [Benchmark]
     public async Task<List<Article>> GetArticlesWithPrice()
@@ -51,8 +59,33 @@ public class GetArticlesBenchmark
                   getArticles(amount:{amount}){{
                     id
                     name
-                    description
                     sku
+                    description
+                    priceId
+                    isActive
+                    color
+                    width
+                    height
+                    depth
+                    weight
+                    material
+                  }}
+                }}
+            "
+        };
+    }
+
+    private GraphQLRequest CreateReducedGetArticlesRequest(int amount)
+    {
+        return new()
+        {
+            Query = $@"
+                query{{
+                  getArticles(amount:{amount}){{
+                    id
+                    name
+                    sku
+                    description
                     priceId
                   }}
                 }}
@@ -69,8 +102,8 @@ public class GetArticlesBenchmark
                   getArticles(amount:{amount}){{
                     id
                     name
-                    description
                     sku
+                    description
                     priceId
                     price{{
                       id
@@ -78,6 +111,13 @@ public class GetArticlesBenchmark
                       currency
                       country
                     }}
+                    isActive
+                    color
+                    width
+                    height
+                    depth
+                    weight
+                    material
                   }}
                 }}
             "

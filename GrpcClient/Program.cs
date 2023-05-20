@@ -33,7 +33,7 @@ using Testaufbau.DataAccess.Grpc;
 // Console.WriteLine(price.Country);
 
 //Run benchmark
-var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
+// var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
 //var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
 
 
@@ -42,7 +42,7 @@ var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
 // var result = benchmark.GetArticles();
 // Console.WriteLine(result.Count);
 //
-// var benchmark2 = new GetOrdersWithArticlesBenchmark();
-// benchmark2.NumberOfOrders = 10;
-// var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
-// Console.WriteLine(result2.Count);
+var benchmark2 = new GetOrdersWithArticlesBenchmark();
+benchmark2.NumberOfOrders = 10;
+var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
+Console.WriteLine(result2.Count);

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article Retrieval Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="chart1"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart2"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart3"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart4"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart5"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart6"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart7"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart8"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart9"></canvas>
+    </div>
+
+    <script>
+        // Data
+        const data1 = {
+            labels: ['1', '10', '100', '1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [1.702, 1.784, 2.773, 11.752, 91.895],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [1.724, 1.827, 2.535, 9.120, 68.935],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [1.084, 1.185, 2.165, 11.177, 100.656],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        const data2 = {
+            labels: ['1', '10', '100', '1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [3.575, 3.622, 3.946, 7.512, 34.602],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [3.678, 3.684, 3.860, 5.140, 15.177],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [1.058, 1.107, 1.557, 6.147, 52.337],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        const data3 = {
+            labels: ['1', '10', '100', '1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [3.363, 18.243, 167.197, 1725.205, 16987.004],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [3.505, 19.404, 175.584, 1747.136, 17406.282],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                }
+            ]
+        };
+
+        const data4 = {
+            labels: ['1', '10', '100', '1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [1.996, 2.191, 3.793, 18.098, 159.040],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [2.042, 2.285, 3.450, 15.707, 132.789],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [1.919, 9.371, 84.642, 820.182, 8402.723],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        // Chart options
+        const options = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Number of Articles'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Time (ms)'
+                    }
+                }
+            }
+        };
+
+        // Create charts
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: data1,
+        options: {
+            ...options,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'GetArticles'
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('chart2').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: data2,
+        options: {
+            ...options,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'GetReducedArticles'
+                }
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('chart3').getContext('2d');
+    new Chart(ctx3, {
+        type: 'line',
+        data: data3,
+        options: {
+            ...options,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'GetArticlesWithPriceChatty'
+                }
+            }
+        }
+    });
+
+    const ctx4 = document.getElementById('chart4').getContext('2d');
+    new Chart(ctx4, {
+        type: 'line',
+        data: data4,
+        options: {
+            ...options,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'GetArticlesWithPriceBulky'
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>

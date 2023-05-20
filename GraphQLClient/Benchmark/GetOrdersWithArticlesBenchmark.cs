@@ -20,7 +20,8 @@ public class GetOrdersWithArticlesBenchmark
 
     public GetOrdersWithArticlesBenchmark()
     {
-        _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
+        //Port 5001 wenn service unter publish läuft, 7052 wenn über IDE
+        _graphQlClient = new GraphQLHttpClient("https://localhost:5001/graphql", new SystemTextJsonSerializer());
 
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
@@ -71,8 +72,8 @@ public class GetOrdersWithArticlesBenchmark
                   getArticleBySku(sku:{articleSku}){{
                     id
                     name
-                    description
                     sku
+                    description
                     priceId
                     price{{
                       id
@@ -80,6 +81,13 @@ public class GetOrdersWithArticlesBenchmark
                       currency
                       country
                     }}
+                    isActive
+                    color
+                    width
+                    height
+                    depth
+                    weight
+                    material
                   }}
                 }}
             "
