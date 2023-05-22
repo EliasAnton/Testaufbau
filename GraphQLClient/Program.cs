@@ -41,5 +41,5 @@ using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 // Console.WriteLine(result2.Count);
 
 
-// BenchmarkRunner.Run<GetArticlesBenchmark>();
-BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
+BenchmarkRunner.Run<GetArticlesBenchmark>();
+// BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();

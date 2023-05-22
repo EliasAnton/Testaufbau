@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>GrpcClient.Benchmark.GetArticlesBenchmark-20230521-165739</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19044.2965/21H2/November2021Update)
+AMD Ryzen 7 5800H with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.402
+  [Host]     : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>              Method</th><th>NumberOfArticles</th><th>   Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>GetArticles</td><td>1</td><td>1.563 ms</td><td>0.0205 ms</td><td>0.0192 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>1</td><td>3.465 ms</td><td>0.0668 ms</td><td>0.0625 ms</td>
+</tr><tr><td>GetArticlesWithPriceChatty</td><td>1</td><td>3.139 ms</td><td>0.0586 ms</td><td>0.0548 ms</td>
+</tr><tr><td>GetArticlesWithPriceBulky</td><td>1</td><td>6.772 ms</td><td>0.0812 ms</td><td>0.0760 ms</td>
+</tr><tr><td>GetArticles</td><td>10</td><td>1.636 ms</td><td>0.0227 ms</td><td>0.0212 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>10</td><td>3.495 ms</td><td>0.0612 ms</td><td>0.0573 ms</td>
+</tr><tr><td>GetArticlesWithPriceChatty</td><td>10</td><td>17.508 ms</td><td>0.3443 ms</td><td>0.3381 ms</td>
+</tr><tr><td>GetArticlesWithPriceBulky</td><td>10</td><td>9.534 ms</td><td>0.0877 ms</td><td>0.0820 ms</td>
+</tr><tr><td>GetArticles</td><td>100</td><td>2.288 ms</td><td>0.0339 ms</td><td>0.0317 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>100</td><td>3.562 ms</td><td>0.0482 ms</td><td>0.0403 ms</td>
+</tr><tr><td>GetArticlesWithPriceChatty</td><td>100</td><td>156.752 ms</td><td>0.9636 ms</td><td>0.7523 ms</td>
+</tr><tr><td>GetArticlesWithPriceBulky</td><td>100</td><td>10.887 ms</td><td>0.2079 ms</td><td>0.2135 ms</td>
+</tr><tr><td>GetArticles</td><td>1000</td><td>8.722 ms</td><td>0.1742 ms</td><td>0.4037 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>1000</td><td>5.360 ms</td><td>0.1045 ms</td><td>0.0873 ms</td>
+</tr><tr><td>GetArticlesWithPriceChatty</td><td>1000</td><td>1,573.788 ms</td><td>20.3529 ms</td><td>19.0381 ms</td>
+</tr><tr><td>GetArticlesWithPriceBulky</td><td>1000</td><td>20.208 ms</td><td>0.3986 ms</td><td>0.3914 ms</td>
+</tr><tr><td>GetArticles</td><td>10000</td><td>66.749 ms</td><td>1.1103 ms</td><td>0.9843 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>10000</td><td>13.668 ms</td><td>0.0804 ms</td><td>0.0628 ms</td>
+</tr><tr><td>GetArticlesWithPriceChatty</td><td>10000</td><td>15,675.662 ms</td><td>34.3526 ms</td><td>28.6860 ms</td>
+</tr><tr><td>GetArticlesWithPriceBulky</td><td>10000</td><td>139.682 ms</td><td>2.7744 ms</td><td>4.4802 ms</td>
+</tr></tbody></table>
+</body>
+</html>
