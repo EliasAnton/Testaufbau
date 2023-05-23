@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Orders With Articles And Price Benchmarks</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div id="chart1"></div>
+    </div>
+
+    <script>
+        // Data
+        const data1 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.120, 32.531, 278.244, 3014.062, 66313.544],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data2 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.001, 32.059, 285.412, 4573.666, 226036.055],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data3 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.247, 36.664, 313.824, 3281.162, 64717.229],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL',
+            line: {
+                color: 'rgb(75, 192, 192)'
+            }
+        };
+
+        // Layout
+        const layout = {
+            width: 800,
+            height: 500,
+            title: 'GetOrdersWithArticlesAndPrice',
+            xaxis: {
+                title: 'Number of Articles',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Time (ms)'
+            }
+        };
+
+        // Create chart
+        Plotly.newPlot('chart1', [data1, data2, data3], layout);
+    </script>
+</body>
+</html>

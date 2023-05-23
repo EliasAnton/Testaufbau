@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Article Benchmarks</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div id="chart1"></div>
+    </div>
+
+    <div class="chart-container">
+        <div id="chart2"></div>
+    </div>
+
+    <div class="chart-container">
+        <div id="chart3"></div>
+    </div>
+
+    <div class="chart-container">
+        <div id="chart4"></div>
+    </div>
+    
+    <script>
+        // Data
+        const data1 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.702, 1.784, 2.773, 11.752, 91.895],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data2 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.724, 1.827, 2.535, 9.120, 68.935],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data3 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.084, 1.185, 2.165, 11.177, 100.656],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL',
+            line: {
+                color: 'rgb(75, 192, 192)'
+            }
+        };
+
+        const data4 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.575, 3.622, 3.946, 7.512, 34.602],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST mit Filter',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data5 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.678, 3.684, 3.860, 5.140, 15.177],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC mit Filter',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data6 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.058, 1.107, 1.557, 6.147, 52.337],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL',
+            line: {
+                color: 'rgb(75, 192, 192)'
+            }
+        };
+
+        const data7 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.363, 18.243, 167.197, 1725.205, 16987.004],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data8 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.139, 17.508, 156.752, 1573.788, 15675.662],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data9 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.996, 2.191, 3.793, 18.098, 159.040],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST mit Endpunkt',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data10 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [2.042, 2.285, 3.450, 15.707, 132.789],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC mit Endpunkt',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data11 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.919, 9.371, 84.642, 820.182, 8402.723],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL',
+            line: {
+                color: 'rgb(75, 192, 192)'
+            }
+        };
+
+        // Layout
+        const layout1 = {
+            width: 800,
+            height: 500,
+            title: 'GetArticles',
+            xaxis: {
+                title: 'Number of Articles',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Time (ms)'
+            }
+        };
+
+        const layout2 = {
+            width: 800,
+            height: 500,
+            title: 'GetReducedArticles',
+            xaxis: {
+                title: 'Number of Articles',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Time (ms)'
+            }
+        };
+
+        const layout3 = {
+            width: 800,
+            height: 500,
+            title: 'GetArticlesWithPriceChatty',
+            xaxis: {
+                title: 'Number of Articles',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Time (ms)'
+            }
+        };
+
+        const layout4 = {
+            width: 800,
+            height: 500,
+            title: 'GetArticlesWithPriceBulky',
+            xaxis: {
+                title: 'Number of Articles',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Time (ms)'
+            }
+        };
+
+        // Plot graphs
+        Plotly.newPlot('chart1', [data1, data2, data3], layout1);
+        Plotly.newPlot('chart2', [data4, data5, data6], layout2);
+        Plotly.newPlot('chart3', [data7, data8], layout3);
+        Plotly.newPlot('chart4', [data9, data10, data11], layout4);
+    </script>
+  </body>
+</html>

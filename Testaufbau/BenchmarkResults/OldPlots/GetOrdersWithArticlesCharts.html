@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article Retrieval Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="chart1"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart2"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart3"></canvas>
+    </div>
+
+    <script>
+        // Data
+        const data1 = {
+            labels: ['1', '10', '100', '1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [3.120, 32.531, 278.244, 3014.062, 66313.544],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [3.001, 32.059, 285.412, 4573.666, 226036.055],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [3.247, 36.664, 313.824, 3281.162, 64717.229],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        const data2 = {
+            labels: ['1', '10', '100'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [3.120, 32.531, 278.244],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [3.001, 32.059, 285.412],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [3.247, 36.664, 313.824],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        const data3 = {
+            labels: ['1000', '10000'],
+            datasets: [
+                {
+                    label: 'REST',
+                    data: [3014.062, 66313.544],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false
+                },
+                {
+                    label: 'gRPC',
+                    data: [4573.666, 226036.055],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: 'GraphQL',
+                    data: [3281.162, 64717.229],
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false
+                }
+            ]
+        };
+
+        // Chart options
+        const options = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Number of Articles'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Time (ms)'
+                    }
+                }
+            }
+        };
+
+        // Create charts
+        const ctx1 = document.getElementById('chart1').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: data1,
+            options: {
+                ...options,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'GetOrdersWithArticlesAndPrices - Vollständig'
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('chart2').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: data2,
+            options: {
+                ...options,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'GetOrdersWithArticlesAndPrices'
+                    }
+                }
+            }
+        });
+
+        const ctx3 = document.getElementById('chart3').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: data3,
+            options: {
+                ...options,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'GetOrdersWithArticlesAndPrices'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

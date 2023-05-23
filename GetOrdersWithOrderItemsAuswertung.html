@@ -37,14 +37,13 @@
 
       // layout for the graph
       const layout = {
+        width: 800,
+        height: 500,
         title: "REST vs GraphQL (GetOrders)",
         xaxis: {
           title: "Number of Orders",
           type: "log",
-          exponentformat: "power",
-          showexponent: "all",
-          ticks: "outside",
-          ticklen: 5,
+          dtick: 1,
           tickwidth: 1,
           tickcolor: "#000",
           autorange: true,
@@ -52,6 +51,7 @@
         yaxis: {
           title: "Response Time (ms)",
           autorange: true,
+          type: "log",
         },
       };
 

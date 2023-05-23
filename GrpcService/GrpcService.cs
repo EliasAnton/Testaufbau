@@ -51,7 +51,9 @@ public class GrpcService : IGrpcService
 
     public GrpcArticlesResponse GetArticlesWithPrice(GrpcTakeRequest request)
     {
-        var articles = _articleDbContext.Articles!.Include(a => a.Price).Take(request.Take).ToList();
+        var articles = _articleDbContext.Articles!
+            .Include(a => a.Price)
+            .Take(request.Take).ToList();
 
         return new GrpcArticlesResponse { Articles = articles };
     }

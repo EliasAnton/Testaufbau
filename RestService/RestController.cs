@@ -56,7 +56,9 @@ public class RestController : ControllerBase
     [HttpGet("articlesWithPrice")]
     public ActionResult ArticlesWithPrice(int take = 10)
     {
-        return Ok(_articleDbContext.Articles!.Include(a => a.Price).Take(take).ToList());
+        return Ok(_articleDbContext.Articles!
+            .Include(a => a.Price)
+            .Take(take).ToList());
     }
 
     [HttpGet("articleWithPrice/sku/{sku:int}")]
