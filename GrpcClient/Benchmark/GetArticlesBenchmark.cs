@@ -15,7 +15,11 @@ public class GetArticlesBenchmark
         //port 7214 wenn service von ide ausgeführt wird, 5001 wenn über publish
         var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
         {
-            MaxReceiveMessageSize = null
+            MaxReceiveMessageSize = null,
+            HttpHandler = new SocketsHttpHandler
+            {
+                EnableMultipleHttp2Connections = true
+            }
         });
         _grpcService = channel.CreateGrpcService<IGrpcService>();
     }
@@ -33,27 +37,27 @@ public class GetArticlesBenchmark
     public int NumberOfArticles { get; set; }
 
     [Benchmark]
-    public List<Article> GetArticles()
+    public async Task<List<Article>> GetArticles()
     {
-        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
+        var articles = await _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
         return articles.Articles;
     }
 
     [Benchmark]
-    public List<Article> GetReducedArticles()
+    public async Task<List<Article>> GetReducedArticles()
     {
         //so werden nur die not-nullable attribute zurück gegeben
-        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles, Filter = "NoNullableAttributes"});
+        var articles = await _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles, Filter = "NoNullableAttributes" });
         return articles.Articles;
     }
 
     [Benchmark]
-    public List<Article> GetArticlesWithPriceChatty()
+    public async Task<List<Article>> GetArticlesWithPriceChatty()
     {
-        var articles = _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
+        var articles = await _grpcService.GetArticles(new GrpcTakeRequestWithFilter { Take = NumberOfArticles });
         foreach (var article in articles.Articles!)
         {
-            var price = _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article.PriceId });
+            var price = await _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article.PriceId });
             article.Price = price;
         }
 
@@ -61,8 +65,9 @@ public class GetArticlesBenchmark
     }
 
     [Benchmark]
-    public List<Article> GetArticlesWithPriceBulky()
+    public async Task<List<Article>> GetArticlesWithPriceBulky()
     {
-        return _grpcService.GetArticlesWithPrice(new GrpcTakeRequest { Take = NumberOfArticles }).Articles;
+        var response = await _grpcService.GetArticlesWithPrice(new GrpcTakeRequest { Take = NumberOfArticles });
+        return response.Articles;
     }
 }

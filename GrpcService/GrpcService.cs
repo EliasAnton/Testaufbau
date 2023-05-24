@@ -18,8 +18,7 @@ public class GrpcService : IGrpcService
     /// Returns as many articles as specified by the take parameter. If a filter is specified,
     /// only the specified properties are returned. Non nullable properties are always returned.
     /// </summary>
-    /// <param name="filter">Comma seperated list of properties</param>
-    public GrpcArticlesResponse GetArticles(GrpcTakeRequestWithFilter request)
+    public Task<GrpcArticlesResponse> GetArticles(GrpcTakeRequestWithFilter request)
     {
         IQueryable<Article> query = _articleDbContext.Articles!;
 
@@ -46,34 +45,33 @@ public class GrpcService : IGrpcService
 
         var articles = query.Take(request.Take).ToList();
 
-        return new GrpcArticlesResponse { Articles = articles };
+        return Task.FromResult(new GrpcArticlesResponse { Articles = articles });
     }
 
-    public GrpcArticlesResponse GetArticlesWithPrice(GrpcTakeRequest request)
+    public Task<GrpcArticlesResponse> GetArticlesWithPrice(GrpcTakeRequest request)
     {
         var articles = _articleDbContext.Articles!
             .Include(a => a.Price)
             .Take(request.Take).ToList();
-
-        return new GrpcArticlesResponse { Articles = articles };
+        return Task.FromResult(new GrpcArticlesResponse { Articles = articles });
     }
-    
-    public Article? GetArticleWithPriceBySku(GrpcIntRequest skuRequest)
+
+    public Task<Article?> GetArticleWithPriceBySku(GrpcIntRequest skuRequest)
     {
-        return _articleDbContext.Articles!
+        return Task.FromResult(_articleDbContext.Articles!
             .Include(a => a.Price)
-            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
+            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess));
     }
 
-    public Article? GetArticleBySku(GrpcIntRequest skuRequest)
+    public Task<Article?> GetArticleBySku(GrpcIntRequest skuRequest)
     {
-        return _articleDbContext.Articles!
-            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess);
+        return Task.FromResult(_articleDbContext.Articles!
+            .FirstOrDefault(a => a.Sku == skuRequest.IntToProcess));
     }
 
-    public Price? GetPriceById(GrpcIntRequest idRequest)
+    public Task<Price?> GetPriceById(GrpcIntRequest idRequest)
     {
-        return _articleDbContext.Prices!
-            .FirstOrDefault(a => a.Id == idRequest.IntToProcess);
+        return Task.FromResult(_articleDbContext.Prices!
+            .FirstOrDefault(a => a.Id == idRequest.IntToProcess));
     }
 }

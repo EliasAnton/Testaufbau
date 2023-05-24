@@ -20,7 +20,11 @@ public class GetOrdersWithArticlesBenchmark
         //Port 5001 wenn service unter publish läuft, 7214 wenn über IDE
         var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
         {
-            MaxReceiveMessageSize = null
+            MaxReceiveMessageSize = null,
+            HttpHandler = new SocketsHttpHandler
+            {
+                EnableMultipleHttp2Connections = true
+            }
         });
         _grpcService = channel.CreateGrpcService<IGrpcService>();
 
@@ -54,8 +58,7 @@ public class GetOrdersWithArticlesBenchmark
         {
             foreach (var orderItem in order.OrderItems!)
             {
-                var article =
-                    _grpcService.GetArticleWithPriceBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
+                var article = await _grpcService.GetArticleWithPriceBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
                 orderItem.Article = article;
             }
         }
