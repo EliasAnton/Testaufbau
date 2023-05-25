@@ -46,3 +46,7 @@ var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
 // benchmark2.NumberOfOrders = 10;
 // var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
 // Console.WriteLine(result2.Count);
+// Console.WriteLine(result2.First().OrderItems!.Count);
+// Console.WriteLine(result2.First().OrderItems!.First().Article!.Price!.Amount);
+// Console.WriteLine(result2[1].OrderItems!.Count);
+// Console.WriteLine(result2[1].OrderItems!.First().Article!.Price!.Amount);

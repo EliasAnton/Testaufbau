@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Serialization and Deserialization Benchmarks</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <div id="chart3"></div>
+    </div>
+
+    <script>
+        // Data
+        const data1 = {
+            x: ['System.Text.Json', 'Newtonsoft.Json', 'Protobuf'],
+            y: [370.8, 724.3, 298.6],
+            type: 'bar'
+        };
+
+        const data2 = {
+            x: ['System.Text.Json', 'Newtonsoft.Json', 'Protobuf'],
+            y: [584.2, 1200.9, 524.7],
+            type: 'bar'
+        };
+
+        // Layout
+        const layout1 = {
+            width: 800,
+            height: 500,
+            title: 'Serialization',
+            xaxis: {
+                title: 'Serializer'
+            },
+            yaxis: {
+                title: 'Time (ns)'
+            }
+        };
+
+        const layout2 = {
+            width: 800,
+            height: 500,
+            title: 'Deserialization',
+            xaxis: {
+                title: 'Deserializer'
+            },
+            yaxis: {
+                title: 'Time (ns)'
+            }
+        };
+
+        const layout3 = {
+            width: 800,
+            height: 500,
+            title: 'Stacked',
+            xaxis: {
+                title: 'Technology'
+            },
+            yaxis: {
+                title: 'Time (ns)'
+            },
+            barmode: 'stack'
+        };
+
+        // Create chart
+        Plotly.newPlot('chart1', [data1], layout1);
+        Plotly.newPlot('chart2', [data2], layout2);
+        Plotly.newPlot('chart3', [data1, data2], layout3);
+    </script>
+</body>
+</html>
