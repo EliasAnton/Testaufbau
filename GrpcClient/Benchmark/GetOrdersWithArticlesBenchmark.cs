@@ -20,7 +20,11 @@ public class GetOrdersWithArticlesBenchmark
         //Port 5001 wenn service unter publish läuft, 7214 wenn über IDE
         var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
         {
-            MaxReceiveMessageSize = null
+            MaxReceiveMessageSize = null,
+            HttpHandler = new SocketsHttpHandler
+            {
+                EnableMultipleHttp2Connections = true
+            }
         });
         _grpcService = channel.CreateGrpcService<IGrpcService>();
 

@@ -33,7 +33,7 @@ using Testaufbau.DataAccess.Grpc;
 // Console.WriteLine(price.Country);
 
 //Run benchmark
-var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
+// var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
 var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
 
 
