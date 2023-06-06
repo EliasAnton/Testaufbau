@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>GraphQLClient.Benchmark.GetArticlesBenchmark-20230525-181250</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2965/22H2/2022Update)
+AMD Ryzen 7 5800H with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.402
+  [Host]     : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>        Method</th><th>NumberOfArticles</th><th>  Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>GetArticles</td><td>1</td><td>1.047 ms</td><td>0.0118 ms</td><td>0.0092 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>1</td><td>1.005 ms</td><td>0.0083 ms</td><td>0.0070 ms</td>
+</tr><tr><td>GetArticlesWithPrice</td><td>1</td><td>1.852 ms</td><td>0.0315 ms</td><td>0.0280 ms</td>
+</tr><tr><td>GetArticles</td><td>10</td><td>1.154 ms</td><td>0.0150 ms</td><td>0.0125 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>10</td><td>1.073 ms</td><td>0.0079 ms</td><td>0.0062 ms</td>
+</tr><tr><td>GetArticlesWithPrice</td><td>10</td><td>9.042 ms</td><td>0.0440 ms</td><td>0.0343 ms</td>
+</tr><tr><td>GetArticles</td><td>100</td><td>2.133 ms</td><td>0.0210 ms</td><td>0.0164 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>100</td><td>1.527 ms</td><td>0.0284 ms</td><td>0.0266 ms</td>
+</tr><tr><td>GetArticlesWithPrice</td><td>100</td><td>80.180 ms</td><td>0.6761 ms</td><td>0.5646 ms</td>
+</tr><tr><td>GetArticles</td><td>1000</td><td>11.245 ms</td><td>0.1319 ms</td><td>0.1169 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>1000</td><td>6.207 ms</td><td>0.1071 ms</td><td>0.0950 ms</td>
+</tr><tr><td>GetArticlesWithPrice</td><td>1000</td><td>792.642 ms</td><td>9.9559 ms</td><td>9.3127 ms</td>
+</tr><tr><td>GetArticles</td><td>10000</td><td>99.281 ms</td><td>1.4888 ms</td><td>1.3926 ms</td>
+</tr><tr><td>GetReducedArticles</td><td>10000</td><td>52.172 ms</td><td>0.8842 ms</td><td>0.8271 ms</td>
+</tr><tr><td>GetArticlesWithPrice</td><td>10000</td><td>8,430.205 ms</td><td>72.4358 ms</td><td>67.7565 ms</td>
+</tr></tbody></table>
+</body>
+</html>
