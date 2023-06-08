@@ -1,60 +1,67 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 using SerializationBenchmarks.Models;
+using Testaufbau.DataAccess.Models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SerializationBenchmarks.Json;
 
 public class JsonSerialDeserialBenchmark
 {
-    private readonly Person _person;
+    private readonly Article _article;
     private readonly string _serializedPersonNsj;
     private readonly string _serializedPersonStj;
 
     public JsonSerialDeserialBenchmark()
     {
-        _person = new Person
+        _article = new Article
         {
-            FirstName = "John",
-            LastName = "Doe",
-            Emails = new List<string>
-            {
-                "asdfghj",
-                "yxcvbnm"
-            }
+            Id = 1,
+            Name = "Chair",
+            Sku = 123456,
+            Description = "You can sit on it.",
+            PriceId = 1,
+            IsActive = true,
+            Color = "black",
+            Width = 0.3m,
+            Height = 1.5m,
+            Depth = 0.3m,
+            Weight = 2.5m,
+            Material = "Wood"
+            
         };
 
         //NewtonsoftJson
-        _serializedPersonNsj = JsonConvert.SerializeObject(_person);
+        _serializedPersonNsj = JsonConvert.SerializeObject(_article);
 
         //System.Text.Json
-        _serializedPersonStj = JsonSerializer.Serialize(_person);
+        _serializedPersonStj = JsonSerializer.Serialize(_article);
     }
 
 
     [Benchmark]
     public void SerializeJsonStj()
     {
-        JsonSerializer.Serialize(_person);
+        JsonSerializer.Serialize(_article);
     }
 
     [Benchmark]
     public void SerializeJsonNsj()
     {
-        JsonConvert.SerializeObject(_person);
+        JsonConvert.SerializeObject(_article);
     }
 
 
     [Benchmark]
-    public void DeserializeJsonSTJ()
+    public void DeserializeJsonStj()
     {
-        JsonSerializer.Deserialize<Person>(_serializedPersonStj);
+        JsonSerializer.Deserialize<Article>(_serializedPersonStj);
     }
 
 
     [Benchmark]
-    public void DeserializeJsonNSJ()
+    public void DeserializeJsonNsj()
     {
-        JsonConvert.DeserializeObject<Person>(_serializedPersonNsj);
+        JsonConvert.DeserializeObject<Article>(_serializedPersonNsj);
     }
 }

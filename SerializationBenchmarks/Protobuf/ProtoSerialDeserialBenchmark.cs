@@ -1,30 +1,36 @@
 ﻿using BenchmarkDotNet.Attributes;
 using ProtoBuf;
-using SerializationBenchmarks.Models;
+using Testaufbau.DataAccess.Models;
 
-namespace SerializationBenchmarks.Grpc;
+namespace SerializationBenchmarks.Protobuf;
 
 public class ProtoSerialDeserialBenchmark
 {
-    private readonly Person _person;
-    private readonly byte[] _serializedPerson;
+    private readonly Article _article;
+    private readonly byte[] _serializedArticle;
 
     public ProtoSerialDeserialBenchmark()
     {
-        _person = new Person
+        _article = new Article
         {
-            FirstName = "John",
-            LastName = "Doe",
-            Emails = new List<string>
-            {
-                "asdfghj",
-                "yxcvbnm"
-            }
+            Id = 1,
+            Name = "Chair",
+            Sku = 123456,
+            Description = "You can sit on it.",
+            PriceId = 1,
+            IsActive = true,
+            Color = "black",
+            Width = 0.3m,
+            Height = 1.5m,
+            Depth = 0.3m,
+            Weight = 2.5m,
+            Material = "Wood"
+            
         };
 
         using var memoryStream = new MemoryStream();
-        Serializer.Serialize(memoryStream, _person);
-        _serializedPerson = memoryStream.ToArray();
+        Serializer.Serialize(memoryStream, _article);
+        _serializedArticle = memoryStream.ToArray();
     }
 
     [Benchmark]
@@ -32,13 +38,13 @@ public class ProtoSerialDeserialBenchmark
     {
         using (var memoryStream = new MemoryStream())
         {
-            Serializer.Serialize(memoryStream, _person);
+            Serializer.Serialize(memoryStream, _article);
         }
     }
 
     [Benchmark]
     public void DeserializeGrpc()
     {
-        Serializer.Deserialize<Person>(new MemoryStream(_serializedPerson));
+        Serializer.Deserialize<Article>(new MemoryStream(_serializedArticle));
     }
 }

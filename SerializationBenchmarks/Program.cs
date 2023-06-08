@@ -1,8 +1,9 @@
 ﻿using BenchmarkDotNet.Running;
-using SerializationBenchmarks.Grpc;
+using SerializationBenchmarks.Json;
+using SerializationBenchmarks.Protobuf;
 
 BenchmarkRunner.Run<ProtoSerialDeserialBenchmark>();
-//BenchmarkRunner.Run<JsonSerialDeserialBenchmark>();
+BenchmarkRunner.Run<JsonSerialDeserialBenchmark>();
 
 
 //Examples:
