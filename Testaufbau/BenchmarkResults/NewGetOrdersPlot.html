@@ -23,7 +23,7 @@
             y: [3.120, 32.531, 278.244, 3014.062, 66313.544],
             type: 'scatter',
             mode: 'lines+markers',
-            name: 'REST',
+            name: 'REST - bulky',
             line: {
                 color: 'rgb(54, 162, 235)'
             }
@@ -31,10 +31,10 @@
 
         const data2 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.001, 32.059, 285.412, 4573.666, 226036.055],
+            y: [3.001, 32.059, 285.412, 4573.666, 84442.999],
             type: 'scatter',
             mode: 'lines+markers',
-            name: 'gRPC',
+            name: 'gRPC - 10000k Ergebnis kaputt',
             line: {
                 color: 'rgb(255, 99, 132)'
             }
@@ -42,7 +42,7 @@
 
         const data3 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.247, 36.664, 313.824, 3281.162, 64717.229],
+            y: [3.071, 35.698, 300.028, 3225.967, 65400.840],
             type: 'scatter',
             mode: 'lines+markers',
             name: 'GraphQL',
@@ -57,12 +57,12 @@
             height: 500,
             title: 'GetOrdersWithArticlesAndPrice',
             xaxis: {
-                title: 'Number of Articles',
+                title: 'Anzahl Artikel',
                 type: "log",
                 dtick: 1
             },
             yaxis: {
-                title: 'Time (ms)'
+                title: 'Zeit in ms'
             }
         };
 
