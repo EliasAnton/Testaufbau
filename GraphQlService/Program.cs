@@ -1,4 +1,5 @@
 ﻿using GraphQL;
+using GraphQL.DataLoader;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
 using GraphQL.SystemTextJson;
@@ -14,6 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<MySqlConnection>(_ =>
     new MySqlConnection(builder.Configuration.GetConnectionString("ArticleDb")));
 builder.Services.AddDbContext<ArticleDbContext>(ServiceLifetime.Transient);
+
+//Data Loader Options
+builder.Services.AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>();
+builder.Services.AddSingleton<DataLoaderDocumentListener>();
 
 // Add GraphQL-services to the container.
 builder.Services.AddGraphQL(b => b
@@ -44,5 +49,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseGraphQL<GraphQlSchema>();
 app.UseGraphQLPlayground();
+
+//DataLoader
+var listener = app.Services.GetRequiredService<DataLoaderDocumentListener>();
+
+var executer = new DocumentExecuter();
+var result = executer.ExecuteAsync(opts => {
+    opts.Listeners.Add(listener);
+});
+
 
 app.Run();

@@ -7,4 +7,5 @@ public interface IArticleDbContext
 {
     DbSet<Article>? Articles { get; set; }
     DbSet<Price>? Prices { get; set; }
+    Task<IDictionary<int, Price>> GetPricesByIdAsync(IEnumerable<int> priceIds);
 }

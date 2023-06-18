@@ -14,6 +14,7 @@
 <body>
     <div class="chart-container">
         <div id="chart1"></div>
+        <div id="chart2"></div>
     </div>
 
     <script>
@@ -23,7 +24,7 @@
             y: [3.120, 32.531, 278.244, 3014.062, 66313.544],
             type: 'scatter',
             mode: 'lines+markers',
-            name: 'REST - bulky',
+            name: 'REST',
             line: {
                 color: 'rgb(54, 162, 235)'
             }
@@ -31,10 +32,10 @@
 
         const data2 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.001, 32.059, 285.412, 4573.666, 84442.999],
+            y: [3.001, 32.059, 285.412, 4573.666, 226036.055],
             type: 'scatter',
             mode: 'lines+markers',
-            name: 'gRPC - 10000k Ergebnis kaputt',
+            name: 'gRPC',
             line: {
                 color: 'rgb(255, 99, 132)'
             }
@@ -51,11 +52,58 @@
             }
         };
 
+        const data4 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [4.214, 54.557, 465.059, 4813.997, 79859.155],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'REST - chatty',
+            line: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        const data5 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [4.498, 57.364, 490.691, 5076.201, 84442.999],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'gRPC - chatty',
+            line: {
+                color: 'rgb(255, 99, 132)'
+            }
+        };
+
+        const data6 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [3.071, 35.698, 300.028, 3225.967, 65400.840],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL - immer bulky',
+            line: {
+                color: 'rgb(75, 192, 192)'
+            }
+        };
+
         // Layout
         const layout = {
             width: 800,
             height: 500,
-            title: 'GetOrdersWithArticlesAndPrice',
+            //title: 'GetOrdersWithArticlesAndPrice(bulky)',
+            xaxis: {
+                title: 'Anzahl Artikel',
+                type: "log",
+                dtick: 1
+            },
+            yaxis: {
+                title: 'Zeit in ms'
+            }
+        };
+
+        const layout2 = {
+            width: 800,
+            height: 500,
+            title: 'GetOrdersWithArticlesAndPrice(chatty)',
             xaxis: {
                 title: 'Anzahl Artikel',
                 type: "log",
@@ -68,6 +116,7 @@
 
         // Create chart
         Plotly.newPlot('chart1', [data1, data2, data3], layout);
+        Plotly.newPlot('chart2', [data4, data5, data6], layout2);
     </script>
 </body>
 </html>

@@ -14,6 +14,10 @@ public class ArticleDbContext : DbContext, IArticleDbContext
 
     public DbSet<Article>? Articles { get; set; }
     public DbSet<Price>? Prices { get; set; }
+    public Task<IDictionary<int, Price>> GetPricesByIdAsync(IEnumerable<int> priceIds)
+    {
+         return Task.FromResult<IDictionary<int, Price>>(Prices!.Where(x => priceIds.Contains(x.Id)).ToDictionary(x => x.Id, x => x));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

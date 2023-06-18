@@ -145,9 +145,20 @@
             y: [1.919, 9.371, 84.642, 820.182, 8402.723],
             type: 'scatter',
             mode: 'lines+markers',
-            name: 'GraphQL',
+            name: 'GraphQL - ohne DataLoader',
             line: {
                 color: 'rgb(75, 192, 192)'
+            }
+        };
+
+        const data12 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: [1.206, 1.930, 8.952, 71.041, 725.548],
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'GraphQL - mit DataLoader',
+            line: {
+                color: 'rgb(255, 165, 0)'
             }
         };
 
@@ -197,7 +208,7 @@
         const layout4 = {
             width: 800,
             height: 500,
-            title: 'GetArticlesWithPriceBulky - Performance noch mal prüfen',
+            //title: 'GetArticlesWithPriceBulky - Performance noch mal prüfen',
             xaxis: {
                 title: 'Anzahl Artikel',
                 type: "log",
@@ -212,7 +223,7 @@
         Plotly.newPlot('chart1', [data1, data2, data3], layout1);
         Plotly.newPlot('chart2', [data4, data5, data6], layout2);
         Plotly.newPlot('chart3', [data7, data8], layout3);
-        Plotly.newPlot('chart4', [data9, data10, data11], layout4);
+        Plotly.newPlot('chart4', [data9, data10, data12], layout4);
     </script>
   </body>
 </html>
