@@ -18,27 +18,31 @@
 
     <script>
         // Data
+        var yValues1 = [2.077, 2.138, 2.708, 8.294, 50.045];
         const data1 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [2.077, 2.138, 2.708, 8.294, 50.045],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues1,
+            type: 'bar',
             name: 'OrdersWithOrderItems',
-            line: {
+            text: yValues1.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
         // Layout
         const layout = {
-            width: 800,
-            height: 500,
-            title: 'GetOrdersWithOrderItems',
+            width: 1000,
+            height: 600,
+            //title: 'GetOrdersWithOrderItems',
             xaxis: {
-                title: 'Number of Articles'
+                title: 'Anzahl Bestellungen',
+                type: 'category'
             },
             yaxis: {
-                title: 'Time (ms)'
+                title: 'Zeit in ms',
+                type: "log",
             }
         };
 

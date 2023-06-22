@@ -6,7 +6,7 @@
     <style>
         .chart-container {
             width: 1000px;
-            height: 500px;
+            height: auto;
             margin: 20px auto;
         }
     </style>
@@ -27,195 +27,228 @@
     <div class="chart-container">
         <div id="chart4"></div>
     </div>
+
+    <div class="chart-container">
+        <div id="chart5"></div>
+    </div>
     
     <script>
+
         // Data
+
+        var xValues = ['1', '10', '100', '1000', '10000'];
+
+
+        var yValues1 = [1.702, 1.784, 2.773, 11.752, 91.895];
         const data1 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.702, 1.784, 2.773, 11.752, 91.895],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues1,
+            type: 'bar',
             name: 'REST',
-            line: {
+            text: yValues1.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValues2 = [1.531, 1.602, 2.290, 8.420, 65.855];
         const data2 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.531, 1.602, 2.290, 8.420, 65.855],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues2,
+            type: 'bar',
             name: 'gRPC',
-            line: {
+            text: yValues2.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues3 = [1.084, 1.185, 2.165, 11.177, 100.656];
         const data3 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.084, 1.185, 2.165, 11.177, 100.656],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues3,
+            type: 'bar',
             name: 'GraphQL',
-            line: {
+            text: yValues3.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(75, 192, 192)'
             }
         };
 
+        var yValues4 = [3.575, 3.622, 3.946, 7.512, 34.602];
         const data4 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [3.575, 3.622, 3.946, 7.512, 34.602],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues4,
+            type: 'bar',
             name: 'REST mit Filter',
-            line: {
+            text: yValues4.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValues5 = [3.380, 3.420, 3.556, 4.799, 14.807];
         const data5 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [3.380, 3.420, 3.556, 4.799, 14.807],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues5,
+            type: 'bar',
             name: 'gRPC mit Filter',
-            line: {
+            text: yValues5.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues6 = [1.058, 1.107, 1.557, 6.147, 52.337];
         const data6 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.058, 1.107, 1.557, 6.147, 52.337],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues6,
+            type: 'bar',
             name: 'GraphQL',
-            line: {
+            text: yValues6.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(75, 192, 192)'
             }
         };
 
+        var yValues7 = [3.363, 18.243, 167.197, 1725.205, 16987.004];
         const data7 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [3.363, 18.243, 167.197, 1725.205, 16987.004],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues7,
+            type: 'bar',
             name: 'REST',
-            line: {
+            text: yValues7.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValues8 = [3.052, 16.754, 155.453, 1542.741, 15436.894];
         const data8 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [3.052, 16.754, 155.453, 1542.741, 15436.894],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues8,
+            type: 'bar',
             name: 'gRPC',
-            line: {
+            text: yValues8.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues9 = [1.996, 2.191, 3.793, 18.098, 159.040];
         const data9 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.996, 2.191, 3.793, 18.098, 159.040],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues9,
+            type: 'bar',
             name: 'REST mit Endpunkt',
-            line: {
+            text: yValues9.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValue10 = [2.042, 2.285, 3.450, 15.707, 132.789];
         const data10 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [2.042, 2.285, 3.450, 15.707, 132.789],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValue10,
+            type: 'bar',
             name: 'gRPC mit Endpunkt',
-            line: {
+            text: yValue10.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues11 = [1.919, 9.371, 84.642, 820.182, 8402.723];
         const data11 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.919, 9.371, 84.642, 820.182, 8402.723],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues11,
+            type: 'bar',
             name: 'GraphQL - ohne DataLoader',
-            line: {
+            text: yValues11.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(75, 192, 192)'
             }
         };
 
+        var yValues12 = [1.206, 1.930, 8.952, 71.041, 725.548];
         const data12 = {
-            x: ['1', '10', '100', '1000', '10000'],
-            y: [1.206, 1.930, 8.952, 71.041, 725.548],
-            type: 'scatter',
-            mode: 'lines+markers',
+            x: xValues,
+            y: yValues12,
+            type: 'bar',
             name: 'GraphQL - mit DataLoader',
-            line: {
-                color: 'rgb(255, 165, 0)'
+            text: yValues12.map(String),
+            textposition: 'inside',
+            marker: {
+                color: 'rgb(75, 192, 192)'//'rgb(255, 165, 0)'
             }
         };
 
         // Layout
         const layout1 = {
-            width: 800,
-            height: 500,
-            //title: 'GetArticles',
+            width: 1000,
+            height: 600,
+            title: 'GetArticles',
             xaxis: {
                 title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log"
             }
         };
 
         const layout2 = {
-            width: 800,
-            height: 500,
-            //title: 'GetReducedArticles',
+            width: 1000,
+            height: 600,
+            title: 'GetReducedArticles',
             xaxis: {
                 title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log"
             }
         };
 
         const layout3 = {
-            width: 800,
-            height: 500,
-            //title: 'GetArticlesWithPriceChatty',
+            width: 1000,
+            height: 600,
+            title: 'GetArticlesWithPriceChatty',
             xaxis: {
                 title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log"
             }
         };
 
         const layout4 = {
-            width: 800,
-            height: 500,
-            //title: 'GetArticlesWithPriceBulky - Performance noch mal prüfen',
+            width: 1000,
+            height: 600,
+            title: 'GetArticlesWithPriceBulky',
             xaxis: {
                 title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log"
             }
         };
 
@@ -223,7 +256,7 @@
         Plotly.newPlot('chart1', [data1, data2, data3], layout1);
         Plotly.newPlot('chart2', [data4, data5, data6], layout2);
         Plotly.newPlot('chart3', [data7, data8], layout3);
-        Plotly.newPlot('chart4', [data9, data10, data12], layout4);
+        Plotly.newPlot('chart4', [data9, data10, data11], layout4);
     </script>
   </body>
 </html>

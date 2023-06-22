@@ -6,7 +6,7 @@ namespace Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 
 public sealed class ArticleType : ObjectGraphType<Article>
 {
-    public ArticleType(ArticleDbContext articleDbContext, IDataLoaderContextAccessor accessor)
+    public ArticleType(ArticleDbContext articleDbContext, IDataLoaderContextAccessor dataLoader)
     {
         Field(x => x.Id);
         Field(x => x.Name);
@@ -18,14 +18,13 @@ public sealed class ArticleType : ObjectGraphType<Article>
         //     resolve: context => articleDbContext.Prices!.FirstOrDefault(x => x.Id == context.Source.PriceId)
         // );
         //Dies soll die Datenbankabfrage optimieren, indem die Preise aller Artikel in einem Batch geladen werden wenn viele Artikel angefragt werden
-        Field<PriceType, Price>()
-            .Name("Price")
-            .ResolveAsync(context =>
+        Field<PriceType>(
+            "Price",
+            resolve: context =>
             {
-                var loader = accessor.Context!.GetOrAddBatchLoader<int, Price>(
+                var loader = dataLoader.Context!.GetOrAddBatchLoader<int, Price>(
                     "GetPriceById",
-                    articleDbContext.GetPricesByIdAsync
-                );
+                    articleDbContext.GetPricesByIdAsync);
                 return loader.LoadAsync(context.Source.PriceId);
             });
         Field(x => x.IsActive, true);

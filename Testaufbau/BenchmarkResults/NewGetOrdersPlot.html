@@ -19,103 +19,116 @@
 
     <script>
         // Data
+        var yValues1 = [3.120, 32.531, 278.244, 3014.062, 66313.544];
         const data1 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.120, 32.531, 278.244, 3014.062, 66313.544],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues1,
+            type: 'bar',
             name: 'REST',
-            line: {
+            text: yValues1.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValues2 = [3.001, 32.059, 285.412, 4573.666, 226036.055];
         const data2 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.001, 32.059, 285.412, 4573.666, 226036.055],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues2,
+            type: 'bar',
             name: 'gRPC',
-            line: {
+            text: yValues2.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues3 = [3.071, 35.698, 300.028, 3225.967, 65400.840];
         const data3 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.071, 35.698, 300.028, 3225.967, 65400.840],
-            type: 'scatter',
+            y: yValues3,
+            type: 'bar',
             mode: 'lines+markers',
             name: 'GraphQL',
-            line: {
+            text: yValues3.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(75, 192, 192)'
             }
         };
 
+        var yValues4 = [4.214, 54.557, 465.059, 4813.997, 79859.155];
         const data4 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [4.214, 54.557, 465.059, 4813.997, 79859.155],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues4,
+            type: 'bar',
             name: 'REST - chatty',
-            line: {
+            text: yValues4.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(54, 162, 235)'
             }
         };
 
+        var yValues5 = [4.498, 57.364, 490.691, 5076.201, 84442.999];
         const data5 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [4.498, 57.364, 490.691, 5076.201, 84442.999],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues5,
+            type: 'bar',
             name: 'gRPC - chatty',
-            line: {
+            text: yValues5.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(255, 99, 132)'
             }
         };
 
+        var yValues6 = [3.071, 35.698, 300.028, 3225.967, 65400.840];
         const data6 = {
             x: ['1', '10', '100', '1000', '10000'],
-            y: [3.071, 35.698, 300.028, 3225.967, 65400.840],
-            type: 'scatter',
-            mode: 'lines+markers',
+            y: yValues6,
+            type: 'bar',
             name: 'GraphQL - immer bulky',
-            line: {
+            text: yValues6.map(String),
+            textposition: 'inside',
+            marker: {
                 color: 'rgb(75, 192, 192)'
             }
         };
 
         // Layout
-        const layout = {
-            width: 800,
-            height: 500,
+        const layout1 = {
+            width: 1000,
+            height: 600,
             //title: 'GetOrdersWithArticlesAndPrice(bulky)',
             xaxis: {
-                title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                title: 'Anzahl Bestellungen',
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log",
             }
         };
 
         const layout2 = {
-            width: 800,
-            height: 500,
+            width: 1000,
+            height: 600,
             title: 'GetOrdersWithArticlesAndPrice(chatty)',
             xaxis: {
-                title: 'Anzahl Artikel',
-                type: "log",
-                dtick: 1
+                title: 'Anzahl Bestellungen',
+                type: 'category'
             },
             yaxis: {
-                title: 'Zeit in ms'
+                title: 'Zeit in ms',
+                type: "log",
             }
         };
 
         // Create chart
-        Plotly.newPlot('chart1', [data1, data2, data3], layout);
+        Plotly.newPlot('chart1', [data1, data2, data3], layout1);
         Plotly.newPlot('chart2', [data4, data5, data6], layout2);
     </script>
 </body>
