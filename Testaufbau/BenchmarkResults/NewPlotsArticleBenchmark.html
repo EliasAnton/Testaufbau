@@ -35,7 +35,6 @@
     <script>
 
         // Data
-
         var xValues = ['1', '10', '100', '1000', '10000'];
 
 
@@ -182,7 +181,7 @@
             }
         };
 
-        var yValues12 = [1.206, 1.930, 8.952, 71.041, 725.548];
+        var yValues12 = [2.322, 6.465, 8.270, 98.144, 207.746];
         const data12 = {
             x: xValues,
             y: yValues12,
@@ -256,7 +255,8 @@
         Plotly.newPlot('chart1', [data1, data2, data3], layout1);
         Plotly.newPlot('chart2', [data4, data5, data6], layout2);
         Plotly.newPlot('chart3', [data7, data8], layout3);
-        Plotly.newPlot('chart4', [data9, data10, data11], layout4);
+        Plotly.newPlot('chart4', [data9, data10, data12], layout4);
+        Plotly.newPlot('chart5', [data11, data12], layout4);
     </script>
   </body>
 </html>

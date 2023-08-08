@@ -33,6 +33,9 @@ using Testaufbau.DataAccess.GraphQl.GraphQlTypes;
 var benchmarkClass = new GetArticlesBenchmark();
 benchmarkClass.NumberOfArticles = 10;
 var result = await benchmarkClass.GetArticlesWithPrice();
+Console.WriteLine(result.First().Id);
+Console.WriteLine(result.First().Color);
+Console.WriteLine(result.First().Description);
 Console.WriteLine(result.Count);
 
 // var benchmarkClass2 = new GetOrdersWithArticlesBenchmark();
