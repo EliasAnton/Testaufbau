@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Orders with Order-Itmes Benchmark</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div id="chart1"></div>
+    </div>
+
+    <script>
+        // Data
+        var yValues1 = [2.077, 2.138, 2.708, 8.294, 50.045];
+        const data1 = {
+            x: ['1', '10', '100', '1000', '10000'],
+            y: yValues1,
+            type: 'bar',
+            name: 'OrdersWithOrderItems',
+            text: yValues1.map(String),
+            textposition: 'inside',
+            marker: {
+                color: 'rgb(54, 162, 235)'
+            }
+        };
+
+        // Layout
+        const layout = {
+            width: 1000,
+            height: 600,
+            //title: 'GetOrdersWithOrderItems',
+            xaxis: {
+                title: 'Anzahl Bestellungen',
+                type: 'category'
+            },
+            yaxis: {
+                title: 'Zeit in ms',
+                type: "log",
+            }
+        };
+
+        // Create chart
+        Plotly.newPlot('chart1', [data1], layout);
+    </script>
+</body>
+</html>

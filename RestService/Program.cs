@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 {
     jsonOptions.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    jsonOptions.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    //jsonOptions.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     jsonOptions.JsonSerializerOptions.WriteIndented = true;
 });
@@ -20,9 +20,9 @@ builder.Services.AddTransient<MySqlConnection>(_ =>
 builder.Services.AddDbContext<ArticleDbContext>();
 
 //only for seeding
-builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("OrderDb")));
-builder.Services.AddDbContext<OrderDbContext>();
+//builder.Services.AddTransient<MySqlConnection>(_ =>
+//    new MySqlConnection(builder.Configuration.GetConnectionString("OrderDb")));
+//builder.Services.AddDbContext<OrderDbContext>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -42,8 +42,8 @@ using (var scope = app.Services.CreateScope())
 {
     var articleDbContext = scope.ServiceProvider.GetRequiredService<ArticleDbContext>();
     articleDbContext.Database.EnsureCreated();
-    var orderDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
-    orderDbContext.Database.EnsureCreated();
+    //var orderDbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+    //orderDbContext.Database.EnsureCreated();
     
     //Seed Database
     //orderDbContext.SeedForOrderTest();

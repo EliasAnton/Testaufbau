@@ -17,12 +17,17 @@ public class GetOrdersWithArticlesBenchmark
 
     public GetOrdersWithArticlesBenchmark()
     {
-        var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
+        //Port 5001 wenn service unter publish läuft, 7214 wenn über IDE
+        var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
         {
-            MaxReceiveMessageSize = null
+            MaxReceiveMessageSize = null,
+            HttpHandler = new SocketsHttpHandler
+            {
+                EnableMultipleHttp2Connections = true
+            }
         });
         _grpcService = channel.CreateGrpcService<IGrpcService>();
-        
+
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
             .Options;
@@ -35,8 +40,7 @@ public class GetOrdersWithArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        //100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
@@ -54,10 +58,8 @@ public class GetOrdersWithArticlesBenchmark
         {
             foreach (var orderItem in order.OrderItems!)
             {
-                var article =
-                    await _grpcService.GetArticleBySkuAsync(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku});
-                var price = await _grpcService.GetPriceByIdAsync(new GrpcIntRequest { IntToProcess = article!.PriceId});
-                article!.Price = price;
+                var article = await _grpcService.GetArticleBySku(new GrpcIntRequest { IntToProcess = orderItem.ArticleSku });
+                article!.Price = await _grpcService.GetPriceById(new GrpcIntRequest { IntToProcess = article.PriceId });
                 orderItem.Article = article;
             }
         }

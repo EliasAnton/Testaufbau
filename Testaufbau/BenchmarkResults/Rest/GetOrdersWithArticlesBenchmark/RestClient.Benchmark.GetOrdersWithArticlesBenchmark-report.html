@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>RestClient.Benchmark.GetOrdersWithArticlesBenchmark-20230517-152140</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19044.2965/21H2/November2021Update)
+AMD Ryzen 7 5800H with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=6.0.402
+  [Host]     : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+  DefaultJob : .NET 6.0.10 (6.0.1022.47605), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                  Method</th><th>NumberOfOrders</th><th>   Mean</th><th>Error</th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>GetOrdersWithArticlesAndPrices</td><td>1</td><td>3.120 ms</td><td>0.0505 ms</td><td>0.0448 ms</td>
+</tr><tr><td>GetOrdersWithArticlesAndPrices</td><td>10</td><td>32.531 ms</td><td>0.5344 ms</td><td>0.4463 ms</td>
+</tr><tr><td>GetOrdersWithArticlesAndPrices</td><td>100</td><td>278.244 ms</td><td>5.5178 ms</td><td>5.6664 ms</td>
+</tr><tr><td>GetOrdersWithArticlesAndPrices</td><td>1000</td><td>3,014.062 ms</td><td>25.4181 ms</td><td>23.7761 ms</td>
+</tr><tr><td>GetOrdersWithArticlesAndPrices</td><td>10000</td><td>66,313.544 ms</td><td>746.4333 ms</td><td>698.2142 ms</td>
+</tr></tbody></table>
+</body>
+</html>

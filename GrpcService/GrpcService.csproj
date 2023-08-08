@@ -8,17 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.40.0"/>
-        <PackageReference Include="MySqlConnector" Version="2.2.5"/>
-        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
+        <PackageReference Include="MySqlConnector" Version="2.2.5" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
         <PackageReference Include="protobuf-net.BuildTools" Version="3.2.12">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="protobuf-net.Grpc" Version="1.1.1"/>
-        <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1"/>
-        <PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.1.1"/>
-        <PackageReference Include="Protobuf.Grpc" Version="1.0.170"/>
+        <PackageReference Include="protobuf-net.Grpc" Version="1.1.1" />
+        <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1" />
+        <PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.1.1" />
+        <PackageReference Include="Protobuf.Grpc" Version="1.0.170" />
     </ItemGroup>
 
     <ItemGroup>
@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Testaufbau\Testaufbau.csproj"/>
+        <ProjectReference Include="..\Testaufbau\Testaufbau.csproj" />
     </ItemGroup>
 
 </Project>

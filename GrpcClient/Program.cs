@@ -4,12 +4,12 @@ using GrpcClient.Benchmark;
 using ProtoBuf.Grpc.Client;
 using Testaufbau.DataAccess.Grpc;
 
-using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
-{
-    MaxReceiveMessageSize = null
-});
+// using var channel = GrpcChannel.ForAddress("https://localhost:7214", new GrpcChannelOptions
+// {
+//     MaxReceiveMessageSize = null
+// });
 
-var grpcService = channel.CreateGrpcService<IGrpcService>();
+// var grpcService = channel.CreateGrpcService<IGrpcService>();
 // var result = await grpcService.GetArticlesAsync(new GrpcTakeRequest() { Take = 10 });
 // var article = result.Articles.First();
 // Console.WriteLine("Erster Artikel Id und Sku und Name:");
@@ -18,7 +18,7 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 // Console.WriteLine(article.Name);
 //
 // var article1 = await grpcService.GetArticleByIdAsync(new GrpcIntRequest() { IntToProcess = article.Id });
-// var article2 = await grpcService.GetArticleBySkuAsync(new GrpcIntRequest() { IntToProcess = article.Sku });
+// var article2 = await grpcService.GetArticleBySku(new GrpcIntRequest() { IntToProcess = article.Sku });
 //
 // Console.WriteLine("Vergleich der Artikel Id und Sku und Name:");
 // Console.WriteLine(article1.Id == article2.Id);
@@ -34,16 +34,19 @@ var grpcService = channel.CreateGrpcService<IGrpcService>();
 
 //Run benchmark
 var summary1 = BenchmarkRunner.Run<GetArticlesBenchmark>();
-
 var summary2 = BenchmarkRunner.Run<GetOrdersWithArticlesBenchmark>();
 
 
 // var benchmark = new GetArticlesBenchmark();
 // benchmark.NumberOfArticles = 10;
-// var result = await benchmark.GetArticlesWithPrice();
+// var result = benchmark.GetArticles();
 // Console.WriteLine(result.Count);
 //
 // var benchmark2 = new GetOrdersWithArticlesBenchmark();
 // benchmark2.NumberOfOrders = 10;
 // var result2 = await benchmark2.GetOrdersWithArticlesAndPrices();
 // Console.WriteLine(result2.Count);
+// Console.WriteLine(result2.First().OrderItems!.Count);
+// Console.WriteLine(result2.First().OrderItems!.First().Article!.Price!.Amount);
+// Console.WriteLine(result2[1].OrderItems!.Count);
+// Console.WriteLine(result2[1].OrderItems!.First().Article!.Price!.Amount);

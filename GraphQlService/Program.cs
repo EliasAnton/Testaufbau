@@ -1,4 +1,5 @@
 ﻿using GraphQL;
+using GraphQL.DataLoader;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
 using GraphQL.SystemTextJson;
@@ -22,7 +23,8 @@ builder.Services.AddGraphQL(b => b
     .AddSystemTextJson()
     .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
     .AddSchema<GraphQlSchema>()
-    .AddGraphTypes(typeof(GraphQlSchema).Assembly));
+    .AddGraphTypes(typeof(GraphQlSchema).Assembly)
+    .AddDataLoader());
 
 builder.Services.AddLogging(b => b.AddConsole());
 builder.Services.AddHttpContextAccessor();

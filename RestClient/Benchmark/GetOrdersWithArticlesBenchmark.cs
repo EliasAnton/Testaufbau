@@ -11,6 +11,9 @@ public class GetOrdersWithArticlesBenchmark
 {
     private readonly HttpClient _client = new();
     
+    //Port 5001 wenn service unter publish läuft, 7123 wenn über IDE
+    private readonly string _port = "5001";
+
     private readonly OrderDbContext _orderDbContext;
 
     private static readonly string ConnectionString = "Server=localhost;Port=3307;Database=OrderDb;Uid=root;Pwd=SuperSecretRootPassword1234;";
@@ -19,7 +22,7 @@ public class GetOrdersWithArticlesBenchmark
         _client.DefaultRequestHeaders.Accept.Clear();
         _client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
-        
+
         var options = new DbContextOptionsBuilder<OrderDbContext>()
             .UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
             .Options;
@@ -32,8 +35,7 @@ public class GetOrdersWithArticlesBenchmark
         10,
         100,
         1000,
-        10000,
-        100000
+        10000
     };
 
     [ParamsSource(nameof(AmountList))]
@@ -53,9 +55,9 @@ public class GetOrdersWithArticlesBenchmark
             foreach (var orderItem in order.OrderItems!)
             {
                 var articleResponse =
-                    await _client.GetAsync($"https://localhost:7123/Rest/articles/sku/{orderItem.ArticleSku}");
-                var article = await articleResponse.Content.ReadFromJsonAsync<Article>();
-                var priceResponse = await _client.GetAsync($"https://localhost:7123/Rest/prices/{article!.PriceId}");
+                    await _client.GetAsync($"https://localhost:{_port}/Rest/articles/sku/{orderItem.ArticleSku}");
+                var article = await articleResponse.Content.ReadFromJsonAsync<Article>()!;
+                var priceResponse = await _client.GetAsync($"https://localhost:{_port}/Rest/prices/{article!.PriceId}");
                 article!.Price = await priceResponse.Content.ReadFromJsonAsync<Price>();
                 orderItem.Article = article;
             }

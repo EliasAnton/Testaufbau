@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="GraphQL.DataLoader" Version="5.4.0" />
         <PackageReference Include="MySqlConnector" Version="2.2.5" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
         <PackageReference Include="protobuf-net" Version="3.2.16" />
