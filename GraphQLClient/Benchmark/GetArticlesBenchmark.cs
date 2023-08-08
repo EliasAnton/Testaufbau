@@ -14,7 +14,7 @@ public class GetArticlesBenchmark
     public GetArticlesBenchmark()
     {
         //5001 wenn service unter publish läuft, 7052 wenn über IDE
-        _graphQlClient = new GraphQLHttpClient("https://localhost:5001/graphql", new SystemTextJsonSerializer());
+        _graphQlClient = new GraphQLHttpClient("https://localhost:7052/graphql", new SystemTextJsonSerializer());
     }
 
     public List<int> AmountList => new()
@@ -29,14 +29,14 @@ public class GetArticlesBenchmark
     [ParamsSource(nameof(AmountList))]
     public int NumberOfArticles { get; set; }
 
-    [Benchmark]
+    //[Benchmark]
     public async Task<List<Article>> GetArticles()
     {
         var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateGetArticlesRequest(NumberOfArticles));
         return articleResponse.Data.Articles;
     }
     
-    [Benchmark]
+    //[Benchmark]
     public async Task<List<Article>> GetReducedArticles()
     {
         var articleResponse = await _graphQlClient.SendQueryAsync<GetArticlesQueryResponse>(CreateReducedGetArticlesRequest(NumberOfArticles));
